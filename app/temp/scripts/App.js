@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -93,19 +93,6 @@ module.exports = function(module) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _jquery = __webpack_require__(2);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2395,6 +2382,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)(module)))
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _jquery = __webpack_require__(1);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _weather = __webpack_require__(4);
+
+var _weather2 = _interopRequireDefault(_weather);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_weather2.default.weatherReport();
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -2402,6 +2408,122 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = __webpack_amd_options__;
 
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(1);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// convert fahrenheit to celsius
+function fToC(fahrenheit) {
+    var fTemp = fahrenheit,
+        fToCel = (fTemp - 32) * 5 / 9;
+    // rounding to nearest number after converting
+    return Math.round(fToCel);
+}
+// convert celsius to fahrenheit
+function cToF(celsius) {
+    var cTemp = parseFloat(celsius);
+    var cToFh = cTemp * (9 / 5) + 32;
+    return Math.round(cToFh);
+}
+// DarkSky API call
+function weatherAPI(latitude, longitude) {
+    // variables config for coordinates, url and api key
+    // latitude and longitude are accepted arguments and passed once a user has submitted the form.
+    var apiKey = '6a70ec8ed658efa9fb9cc968bc6c7a22',
+        url = 'https://api.darksky.net/forecast/',
+        lat = parseFloat(latitude),
+        lng = parseFloat(longitude),
+        api_call = url + apiKey + "/" + lat + "," + lng + "?extend=hourly&callback=?";
+
+    return _jquery2.default.getJSON(api_call, function (forecast) {
+        var skycons;
+        // console.log(forecast);
+        var currentCTemp = fToC(parseInt(forecast.currently.apparentTemperature));
+        // console.log(currentCTemp);
+        skycons = new Skycons({
+            "color": "#272a38",
+            "resizeClear": true
+        });
+        skycons.add(document.getElementById("icon"), forecast.currently.icon);
+        return currentCTemp;
+    });
+}
+
+// get User's current location(city, state)
+function getAddress(latitude, longitude) {
+    return new Promise(function (resolve, reject) {
+        var request = new XMLHttpRequest();
+        var method = 'GET';
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo';
+        var async = true;
+
+        request.open(method, url, async);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    var data = JSON.parse(request.responseText);
+                    // console.log(data);
+                    var address = data.results[2].formatted_address;
+                    resolve(address);
+                } else {
+                    reject(request.status);
+                }
+            }
+        };
+        request.send();
+    }).then(function (address) {
+        return address;
+    });
+};
+
+function weatherReport() {
+    // Check HTML5 geolocation.
+    if (!navigator.geolocation) {
+        console.error('Geolocation not enabled');
+    };
+    return new Promise(function (resolve, reject) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var currentTemp = weatherAPI(latitude, longitude);
+            var userAddress = getAddress(latitude, longitude);
+            var promised = Promise.all([currentTemp, userAddress]);
+
+            if (promised) {
+                // console.log(promised);
+                resolve(promised);
+                console.log('resolved');
+            } else reject('Error Happened');
+        });
+    }).then(function (result) {
+        console.log(result[0]);
+        console.log(result[1]);
+        (0, _jquery2.default)('.currentTemp').append('<p class="temp">' + result[0].currently.apparentTemperature + '<sup class="unit">&#8457;</sup></p>');
+        (0, _jquery2.default)('.location').append('<p class="loc">' + result[1] + '</p>');
+    });
+};
+
+// Object for exporting
+var func = {
+    weatherReport: weatherReport,
+    cToF: cToF,
+    fToC: fToC
+};
+exports.default = func;
 
 /***/ })
 /******/ ]);

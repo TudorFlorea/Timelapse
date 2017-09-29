@@ -2,7 +2,7 @@
         "manifest_version": 2,
         "name": "Momentum clone",
         "short_name": "Momentum",
-        "version": "0.0.1",
+        "version": "0.0.4",
         "description": "Replace new tab page with a personal dashboard featuring to-do, weather, and inspiration quote.",
         "icons": {
             "16": "icons/icon_16.png",
@@ -15,7 +15,7 @@
             "persistent": false
         },
         "chrome_url_overrides": {
-            "newtab": "dashboard.html"
+            "newtab": "index.html"
         },
         "offline_enabled": true,
         "browser_action": {
@@ -25,6 +25,7 @@
             "geolocation",
             "unlimitedStorage"
         ],
+        "content_security_policy": "script-src 'self' https://api.darksky.net/forecast/; object-src 'self'",
         "optional_permissions": [
             "bookmarks",
             "topSites",

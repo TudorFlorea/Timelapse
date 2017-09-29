@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
 
 <head>
-    <title>Momentum</title>
+    <title>New Tab</title>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,18 @@
 </head>
 
 <body>
+    <!-- Weather  -->
+        <section id="weather">
+            <canvas id="icon" width="100" height="100"></canvas>
+            <div class="currentTemp"></div>
+            <div class="location"></div>
+        </section>
+        <div class="clearfix"></div>
+    <!-- !Weather -->
 
-    <p>Hello world</p>
+
+
+    <script type="text/javascript" src="./assets/scripts/vendor/skycons.js"></script>        
     <!-- build:js assets/scripts/App.min.js -->
     <script type="text/javascript" src="./temp/scripts/App.js"></script>
     <!-- endbuild -->
