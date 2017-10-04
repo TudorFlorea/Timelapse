@@ -1,9 +1,68 @@
 import $ from '../vendor/jquery-3.2.1.min';
 
+var cSpeed=9;
+var cWidth=64;
+var cHeight=64;
+var cTotalFrames=30;
+var cFrameWidth=64;
+var cImageSrc='../images/sprites.gif';
+
+var cImageTimeout=false;
+var cIndex=0;
+var cXpos=0;
+var cPreloaderTimeout=false;
+var SECONDS_BETWEEN_FRAMES=0;
+
+function startAnimation(){
+    
+    document.getElementById('loaderImage').style.backgroundImage='url('+cImageSrc+')';
+    document.getElementById('loaderImage').style.width=cWidth+'px';
+    document.getElementById('loaderImage').style.height=cHeight+'px';
+    
+    //FPS = Math.round(100/(maxSpeed+2-speed));
+    FPS = Math.round(100/cSpeed);
+    SECONDS_BETWEEN_FRAMES = 1 / FPS;
+    
+    cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES/1000);
+    
+}
+
+function continueAnimation(){
+    
+    cXpos += cFrameWidth;
+    //increase the index so we know which frame of our animation we are currently on
+    cIndex += 1;
+     
+    //if our cIndex is higher than our total number of frames, we're at the end and should restart
+    if (cIndex >= cTotalFrames) {
+        cXpos =0;
+        cIndex=0;
+    }
+    
+    if(document.getElementById('loaderImage'))
+        document.getElementById('loaderImage').style.backgroundPosition=(-cXpos)+'px 0';
+    
+    cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES*1000);
+}
+
+function stopAnimation(){//stops animation
+    clearTimeout(cPreloaderTimeout);
+    cPreloaderTimeout=false;
+}
+
+function imageLoader(s, fun)//Pre-loads the sprites image
+{
+    clearTimeout(cImageTimeout);
+    cImageTimeout=0;
+    genImage = new Image();
+    genImage.onload=function (){cImageTimeout=setTimeout(fun, 0)};
+    genImage.onerror=new Function('alert(\'Could not load the image\')');
+    genImage.src=s;
+}
 
 // convert fahrenheit to celsius
 function fToC(fahrenheit) {
-    var fTemp = fahrenheit,
+    var fTemp = parseInt(fahrenheit),
         fToCel = (fTemp - 32) * 5 / 9;
     // rounding to nearest number after converting
     return Math.round(fToCel);
@@ -13,6 +72,11 @@ function cToF(celsius) {
     var cTemp = parseFloat(celsius);
     var cToFh = (cTemp * (9 / 5)) + 32;
     return Math.round(cToFh);
+}
+
+function spinner() {
+    var spinner = $('.icon-spin4');
+    spinner.show();
 }
 // DarkSky API call
 function weatherAPI(latitude, longitude) {
@@ -34,7 +98,8 @@ function weatherAPI(latitude, longitude) {
             "resizeClear": true
         });
         skycons.add(document.getElementById("icon"), forecast.currently.icon);
-        return currentCTemp;
+        skycons.play();
+        return currentCTemp;        
     });
 }
 
@@ -43,16 +108,24 @@ function getAddress(latitude, longitude) {
     return new Promise(function (resolve, reject) {
         var request = new XMLHttpRequest();
         var method = 'GET';
-        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo';
+        var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&sensor=true&key=AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo`;
         var async = true;
+        var spinner = $('.icon-spin4');        
 
         request.open(method, url, async);
         request.onreadystatechange = function () {
+            if(request.readyState < 4 ) {
+                //show spinner while waiting for request
+                spinner.show();
+            }
             if (request.readyState == 4) {
                 if (request.status == 200) {
                     var data = JSON.parse(request.responseText);
-                    // console.log(data);
                     var address = data.results[2].formatted_address;
+                    
+                    // hide spinner once data is fetched
+                    spinner.hide();
+                    // console.log(data);                                  
                     resolve(address);
                 } else {
                     reject(request.status);
@@ -79,7 +152,7 @@ function weatherReport() {
             var promised = Promise.all([currentTemp, userAddress]);
 
             if (promised) {
-                // console.log(promised);
+                console.log(promised);
                 resolve(promised);
                 console.log('resolved');
             } else
@@ -88,8 +161,9 @@ function weatherReport() {
     }).then(function(result) { 
         console.log(result[0]);
         console.log(result[1]);
-        $('.currentTemp').append('<p class="temp">' + result[0].currently.apparentTemperature + '<sup class="unit">&#8457;</sup></p>');
-        $('.location').append('<p class="loc">'+ result[1] +'</p>');
+        var currTemp = result[0].currently.apparentTemperature;
+        $('.currentTemp').append(`<p class="temp">${fToC(currTemp)}<sup class="cel unit">&#8451;</sup></p>`);
+        $('.location').append(`<p class="loc">${result[1]}</p>`);
     });
 };
 

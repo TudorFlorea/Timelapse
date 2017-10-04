@@ -1,11 +1,12 @@
 #weather{
     position: relative;
     float: right;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
+    // border: 1px solid black;
 
     width: 280px;
-    height: 200px;
+    height: 180px;
     // border: 1px solid black;
     // background: rgba(0, 0, 0, .3);
     border-radius: 5px;
@@ -14,32 +15,36 @@
     & .currentTemp {
         & p {
             position: relative;
-            right: -150px;
-            top: -50px;
+            right: -145px;
+            top: -75px;
             width: 50%;
-            font-size: 2rem;
+            font-size: 4rem;
             margin: 0;
+            cursor: pointer;
         }
         & .unit {
-            font-size: 1rem;
+            font-size: 1.4rem;
         }
     } /*! currentTemp*/
 
     & .location {
         position: relative;
+        font-size: 22px;
         margin: 0;
         padding: 0;
-        top: -20px;
-        left: 30px;
+        top: -60px;
         & .loc {
+            text-align: center;
             margin: 0;
         } /* ! loc */ 
     } /* ! location */
     & #icon {
         position: relative;
         // border: .5px solid black;
-        left: 80px;
-        top: 15px;
+        left: 60px;
+        top: 20px;
         float: left;
     }
+
+   
 } /*! weather*/
