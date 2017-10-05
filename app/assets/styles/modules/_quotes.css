@@ -1,0 +1,20 @@
+.quotesBox {
+    position: relative;
+    top: 67%;
+    color: aliceblue;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    & #quoteText {
+        margin-top: 1em;
+        font-size: 1.2em;
+    }
+    & #quoteAuthor {
+        margin: 0.5em;
+        font-size: 1em;
+    }
+    & #tweetButton {
+        margin-bottom: 1em;
+    }
+}

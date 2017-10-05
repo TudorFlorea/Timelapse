@@ -16,20 +16,27 @@
 </head>
 
 <body>
-    <!-- Weather  -->
-        <section id="weather">
-            <i class="icon-spin4 animate-spin"></i>
-            <canvas id="icon" width="100" height="100"></canvas>
-            <div class="currentTemp"></div>
-            <div class="location"></div>
-            <div class="daily"></div>
-        </section>
-        <div class="clearfix"></div>
+    <section id="weather">
+        <i class="icon-spin4 animate-spin"></i>
+        <canvas id="icon" width="100" height="100"></canvas>
+        <div class="currentTemp"></div>
+        <div class="location"></div>
+        <div class="daily"></div>
+    </section>
+    <div class="clearfix"></div>
     <!-- !Weather -->
 
+    <!-- Inspiring quotes -->
+    <section class="quotesBox">
+        <div id="quoteText"></div>
+        <div id="quoteAuthor"></div>
+        <button id="tweetButton" type="button" name="tweetButton">tweet</button>
+    </section>
+    <!-- !Inspiring quotes -->
 
-
-    <script type="text/javascript" src="./assets/scripts/vendor/skycons.js"></script>        
+    <!-- build:js assets/scripts/skycons.min.js -->
+    <script type="text/javascript" src="./assets/scripts/vendor/skycons.js"></script>
+    <!-- endbuild -->
     <!-- build:js assets/scripts/App.min.js -->
     <script type="text/javascript" src="./temp/scripts/App.js"></script>
     <!-- endbuild -->

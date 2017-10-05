@@ -65,34 +65,6 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2379,7 +2351,35 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === r && (a.$ = Wb), b && a.jQuery === r && (a.jQuery = Vb), r;
   }, b || (a.jQuery = a.$ = r), r;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)(module)))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
 
 /***/ }),
 /* 2 */
@@ -2388,7 +2388,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-var _jquery = __webpack_require__(1);
+var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -2396,10 +2396,15 @@ var _weather = __webpack_require__(4);
 
 var _weather2 = _interopRequireDefault(_weather);
 
+var _quotes = __webpack_require__(5);
+
+var _quotes2 = _interopRequireDefault(_quotes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
     _weather2.default.weatherReport();
+    (0, _quotes2.default)();
 });
 
 (0, _jquery2.default)('.currentTemp').on('click', function (e) {
@@ -2431,72 +2436,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _jquery = __webpack_require__(1);
+var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var cSpeed = 9;
-var cWidth = 64;
-var cHeight = 64;
-var cTotalFrames = 30;
-var cFrameWidth = 64;
-var cImageSrc = '../images/sprites.gif';
-
-var cImageTimeout = false;
-var cIndex = 0;
-var cXpos = 0;
-var cPreloaderTimeout = false;
-var SECONDS_BETWEEN_FRAMES = 0;
-
-function startAnimation() {
-
-    document.getElementById('loaderImage').style.backgroundImage = 'url(' + cImageSrc + ')';
-    document.getElementById('loaderImage').style.width = cWidth + 'px';
-    document.getElementById('loaderImage').style.height = cHeight + 'px';
-
-    //FPS = Math.round(100/(maxSpeed+2-speed));
-    FPS = Math.round(100 / cSpeed);
-    SECONDS_BETWEEN_FRAMES = 1 / FPS;
-
-    cPreloaderTimeout = setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES / 1000);
-}
-
-function continueAnimation() {
-
-    cXpos += cFrameWidth;
-    //increase the index so we know which frame of our animation we are currently on
-    cIndex += 1;
-
-    //if our cIndex is higher than our total number of frames, we're at the end and should restart
-    if (cIndex >= cTotalFrames) {
-        cXpos = 0;
-        cIndex = 0;
-    }
-
-    if (document.getElementById('loaderImage')) document.getElementById('loaderImage').style.backgroundPosition = -cXpos + 'px 0';
-
-    cPreloaderTimeout = setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES * 1000);
-}
-
-function stopAnimation() {
-    //stops animation
-    clearTimeout(cPreloaderTimeout);
-    cPreloaderTimeout = false;
-}
-
-function imageLoader(s, fun) //Pre-loads the sprites image
-{
-    clearTimeout(cImageTimeout);
-    cImageTimeout = 0;
-    genImage = new Image();
-    genImage.onload = function () {
-        cImageTimeout = setTimeout(fun, 0);
-    };
-    genImage.onerror = new Function('alert(\'Could not load the image\')');
-    genImage.src = s;
-}
 
 // convert fahrenheit to celsius
 function fToC(fahrenheit) {
@@ -2611,6 +2555,47 @@ var func = {
     fToC: fToC
 };
 exports.default = func;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// function to load random quotes from json file
+function quoteGenerator() {
+    _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
+        // var to randomize order of array indexes
+        var random = Math.floor(Math.random() * 101);
+        // Load quotes randomly
+        (0, _jquery2.default)("#quoteText").append(inspiringQuotes[random].quote);
+        (0, _jquery2.default)("#quoteAuthor").append(inspiringQuotes[random].name);
+    });
+
+    // tweet quotes
+
+    (0, _jquery2.default)("#tweetButton").on("click", tweet);
+
+    function tweet() {
+        var randomQuote = document.getElementById('quoteText').textContent;
+        var randomAuthor = document.getElementById('quoteAuthor').textContent;
+        var tweetUrl = ' https://twitter.com/intent/tweet?text=' + encodeURIComponent(randomQuote) + " " + encodeURIComponent(randomAuthor) + " " + "-" + "Turtles 18";
+        window.open(tweetUrl);
+    }
+}
+
+exports.default = quoteGenerator;
 
 /***/ })
 /******/ ]);
