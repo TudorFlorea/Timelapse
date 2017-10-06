@@ -1,6 +1,8 @@
 .quotesBox {
     position: relative;
     top: 67%;
+    width: 60%;
+    margin: 0 auto;
     color: aliceblue;
     display: flex;
     flex-flow: column;

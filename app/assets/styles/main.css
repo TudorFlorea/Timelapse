@@ -4,8 +4,9 @@
 @import "base/grids";
 
 
-@import "modules/weather.css";
+@import "modules/weather";
 @import "modules/spinner";
-@import "modules/quotes.css";
+@import "modules/quotes";
+@import "modules/todolist";
 
 @import "base/basebottom";

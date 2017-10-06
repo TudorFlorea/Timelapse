@@ -15,10 +15,6 @@ function cToF(celsius) {
     return Math.round(cToFh);
 }
 
-function spinner() {
-    var spinner = $('.icon-spin4');
-    spinner.show();
-}
 // DarkSky API call
 function weatherAPI(latitude, longitude) {
     // variables config for coordinates, url and api key

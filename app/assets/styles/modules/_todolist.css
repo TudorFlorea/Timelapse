@@ -1,0 +1,118 @@
+#todoMain {
+    position: absolute;
+    width: 310px;
+    height: auto;
+    right: 1%;
+    bottom: 8%;
+    background-color:black;
+    font-size: 15px;
+    border-radius: 3px;
+    /* background-color:rgba(15,15,15,0.700); */
+    display:none;
+}
+
+
+#todoBtn {
+    position: absolute;
+    right: 1%;
+    bottom: 0%;
+    color:white;
+}
+
+#todoTitle {
+    color: grey;
+    margin: 0;
+    padding: 6px 5px 2px 5px;
+}
+
+#inputTodo {
+    position: relative;
+    bottom: 1%;
+    background-color:transparent;
+    border: 0;
+    color:white;
+    font-size: 15px;
+    padding: 6px 5px 8px 5px;
+}
+
+#inputTodo:focus{
+    outline: none;
+}
+
+#todoBtn:before {
+    content: ' ';
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom:10px solid transparent;
+    border-right:10px solid transparent;
+    position: absolute;
+    left: 50%;
+    top: -65%;
+    margin-left: -10px;
+}
+
+.showArrow {
+    border-top-color: black;
+}
+
+#todoBtn.hidden:before {
+    border-top: 10px solid black;
+}
+
+#list {
+    list-style: none;
+    padding: 6px 5px 7px 5px;
+    margin: 0;
+    color: white;
+}
+
+.itemDone {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.deleteBtnTodo {
+    width:45px;
+    border-radius: 3px;
+    display: none;
+    color:grey;
+    padding: 2px;
+    background-color: transparent;
+    border: none;
+    border-color: white;
+    float: right;
+    background: none;
+}
+
+li:hover .deleteBtnTodo {
+    display: inline;
+}
+
+.deleteBtnTodo:focus{
+    outline: none;
+}
+
+.deleteBtnTodo:hover{
+    border: 2px solid grey;
+    padding: 0;
+}
+
+.deleteBtnTodo:active{
+    border: 2px solid white;
+    padding: 0;
+}
+
+#noTodoText {
+    color:white;
+    text-align: center;
+}
+
+#noTodoImg {
+    width: 15%;
+    height: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
