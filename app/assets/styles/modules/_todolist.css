@@ -1,22 +1,12 @@
 #todoMain {
-    position: absolute;
-    width: 310px;
+    position: relative;
+    width: 250px;
     height: auto;
     right: 1%;
-    bottom: 8%;
-    background-color:black;
+    bottom: 2%;
     font-size: 15px;
     border-radius: 3px;
-    /* background-color:rgba(15,15,15,0.700); */
-    display:none;
-}
-
-
-#todoBtn {
-    position: absolute;
-    right: 1%;
-    bottom: 0%;
-    color:white;
+    background-color:rgba(15,15,15,0.700);
 }
 
 #todoTitle {
@@ -38,21 +28,6 @@
 #inputTodo:focus{
     outline: none;
 }
-
-#todoBtn:before {
-    content: ' ';
-    width: 0px;
-    height: 0px;
-    border-top: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-bottom:10px solid transparent;
-    border-right:10px solid transparent;
-    position: absolute;
-    left: 50%;
-    top: -65%;
-    margin-left: -10px;
-}
-
 .showArrow {
     border-top-color: black;
 }

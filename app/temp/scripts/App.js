@@ -2699,21 +2699,12 @@ function todoFunc() {
   //creating example object list
   var tasks = [{ 'task': 'ehasd', 'status': 'tbd' }, { 'task': 'asd', 'status': 'done' }];
 
-  //display or hide the todo's box
-  (0, _jquery2.default)("#todoBtn").on('click', function (event) {
-    var todoStatus = (0, _jquery2.default)("#todoMain").css('display');
-    if (todoStatus == 'none') {
-      (0, _jquery2.default)('#todoMain').css('display', 'inline');
-      (0, _jquery2.default)('#todoBtn').toggleClass('hidden');
-      todoLoadTitle(tasks.length);
-      todoLoadList();
-    } else {
-      (0, _jquery2.default)('#todoBtn').toggleClass('hidden');
-      (0, _jquery2.default)('#todoMain').css('display', 'none');
-    }
-  });
+  todoLoadList();
+  todoLoadTitle(tasks.length);
+
   //load the title updating the number of existing tasks
   function todoLoadTitle() {
+    console.log(tasks);
     var numOfTasks = 0;
     if (tasks.length > 0) {
       for (var i = 0; i < tasks.length; i++) {
@@ -2730,9 +2721,8 @@ function todoFunc() {
 
   //generate list of tasks and add them to the list
   function todoLoadList() {
-    (0, _jquery2.default)('#list').html('');
+    (0, _jquery2.default)('#list').empty();
     for (var i = 0; i < tasks.length; i++) {
-      console.log(tasks[i].status);
       if (tasks[i].status === 'tbd') {
         (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
       } else {
@@ -2772,6 +2762,8 @@ function todoFunc() {
     var newTodo = (0, _jquery2.default)("#inputTodo").val();
     if (e.which == 13 && newTodo.length != 0) {
       tasks.push({ task: newTodo, status: 'tbd' });
+      (0, _jquery2.default)("#noTodoImg").remove();
+      (0, _jquery2.default)("#noTodoText").remove();
       todoLoadTitle();
       todoLoadList();
       (0, _jquery2.default)("#inputTodo").val('');
@@ -2788,9 +2780,9 @@ function todoFunc() {
       }
     }
   });
-
+  //If there is no todo show an image
   function noTodo() {
-    (0, _jquery2.default)('#todoList').html('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woooo, nothing to do!</p>');
+    (0, _jquery2.default)('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
   }
 }
 

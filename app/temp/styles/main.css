@@ -700,9 +700,8 @@ we can specify global variable to use flexbox as default instead of floats
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
-    margin-top: auto; /* TODO: this will pin quotes to the bottom of the page,
+    margin-top: auto /* TODO: this will pin quotes to the bottom of the page,
                            but it's not the best solution. Find better solution.*/
-    margin-bottom: 30px
 }
 
 .quotesBox .quoteInfo {
@@ -710,6 +709,7 @@ we can specify global variable to use flexbox as default instead of floats
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
+ height: 50px;
 }
 
 .quotesBox #quoteText:hover {
@@ -736,23 +736,14 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #todoMain {
-    position: absolute;
-    width: 310px;
+    position: relative;
+    width: 250px;
     height: auto;
     right: 1%;
-    bottom: 8%;
-    background-color:black;
+    bottom: 2%;
     font-size: 15px;
     border-radius: 3px;
-    /* background-color:rgba(15,15,15,0.700); */
-    display:none;
-}
-
-#todoBtn {
-    position: absolute;
-    right: 1%;
-    bottom: 0%;
-    color:white;
+    background-color:rgba(15, 15, 15, .700);
 }
 
 #todoTitle {
@@ -773,20 +764,6 @@ we can specify global variable to use flexbox as default instead of floats
 
 #inputTodo:focus{
     outline: none;
-}
-
-#todoBtn:before {
-    content: ' ';
-    width: 0px;
-    height: 0px;
-    border-top: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-bottom:10px solid transparent;
-    border-right:10px solid transparent;
-    position: absolute;
-    left: 50%;
-    top: -65%;
-    margin-left: -10px;
 }
 
 .showArrow {

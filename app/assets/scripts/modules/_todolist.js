@@ -8,21 +8,12 @@ var tasks = [
   {'task': 'asd',  'status': 'done'}
 ];
 
-//display or hide the todo's box
-$("#todoBtn").on('click', function(event){
-  var todoStatus = $("#todoMain").css('display');
-  if (todoStatus == 'none') {
-    $('#todoMain').css('display', 'inline');
-    $('#todoBtn').toggleClass('hidden');
-    todoLoadTitle(tasks.length);
-    todoLoadList();
-  } else {
-    $('#todoBtn').toggleClass('hidden');
-    $('#todoMain').css('display', 'none');
-  }
-});
+todoLoadList();
+todoLoadTitle(tasks.length);
+
 //load the title updating the number of existing tasks
 function todoLoadTitle() {
+  console.log(tasks);
   var numOfTasks = 0;
   if (tasks.length > 0) {
     for (var i = 0; i < tasks.length; i++) {
@@ -39,9 +30,8 @@ function todoLoadTitle() {
 
 //generate list of tasks and add them to the list
 function todoLoadList() {
-  $('#list').html('');
+  $('#list').empty();  
   for (let i = 0; i < tasks.length; i++) {
-    console.log(tasks[i].status);
     if (tasks[i].status === 'tbd') {
       $("#list").append(
         "<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>"
@@ -85,6 +75,8 @@ $("#inputTodo").on("keyup", function(e) {
   var newTodo = $("#inputTodo").val();
   if (e.which == 13 && newTodo.length != 0) {
       tasks.push({task: newTodo, status: 'tbd'});
+      $("#noTodoImg").remove();
+      $("#noTodoText").remove();
       todoLoadTitle();
       todoLoadList();
       $("#inputTodo").val('');
@@ -101,9 +93,9 @@ $( "#list" ).on( "click", 'button', function() {
     }
   }
 });
-
+//If there is no todo show an image
 function noTodo() {
-  $('#todoList').html('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woooo, nothing to do!</p>');
+  $('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
 }
 }
 
