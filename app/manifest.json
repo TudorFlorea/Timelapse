@@ -24,6 +24,7 @@
         "permissions": [
             "geolocation",
             "unlimitedStorage",
+            "history",
             "storage"
         ],
         "web_accessible_resources": [

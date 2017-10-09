@@ -1,0 +1,60 @@
+#daily {
+    height: 200px;
+    width: 400px;
+    margin-right: .5%;
+    display: flex;
+    flex-flow: column nowrap;
+    background: color(black alpha(35%));
+    border-radius: 5px;
+    align-items: flex-end;
+
+    & .daily_info {
+        display: flex;
+        flex: 1;
+        border-bottom: .3px solid #e0e0f8;
+        height: 150px;
+        width: 100%;
+    }
+
+    & ul {
+        display: flex;
+        margin: 0;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        width: 100%;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        & li {
+            list-style: none;
+            display: flex;
+            cursor: pointer;
+            flex-flow: row wrap-reverse;            
+            width: calc(100% / 5);
+            // border: .2px solid black;
+            height: 50px;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 3px;
+            
+            & [id*="icon_"] {
+                position: relative;
+                right: 5px;
+                top: 5px;
+            } /* !icon_ */
+            & [class*="daily_"] {
+                color: #e0e0f8;
+                position: relative;
+                bottom: -5px;
+                right: 5px;
+                font-size: 13px;
+                justify-content: space-around;
+                margin: 0;
+            } /* ! .daily */
+        } /* ! li */
+
+        & li:hover {
+            background: color(black alpha(45%));
+        }
+    } /* ! ul */
+}

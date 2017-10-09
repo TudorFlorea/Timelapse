@@ -44,6 +44,19 @@ html, body {
     padding: 0;
 }
 
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;    
+}
+
 *,
 *::before,
 *::after {
@@ -139,7 +152,11 @@ textarea {
 body {
     background: navajowhite url('../images/fog.jpg') no-repeat;
     background-size: cover;
-    
+}
+
+a {
+    color: aliceblue;
+    text-decoration: none;
 }
 
 /*
@@ -456,6 +473,116 @@ we can specify global variable to use flexbox as default instead of floats
 
 /*! weather*/
 
+#daily {
+    height: 200px;
+    width: 400px;
+    margin-right: .5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 5px;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end
+}
+
+#daily .daily_info {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-flex: 1;
+     -ms-flex: 1;
+         flex: 1;
+ border-bottom: .3px solid #e0e0f8;
+ height: 150px;
+ width: 100%;
+}
+
+#daily ul {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ margin: 0;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: row wrap;
+         flex-flow: row wrap;
+ -webkit-box-pack: justify;
+     -ms-flex-pack: justify;
+         justify-content: space-between;
+ width: 100%;
+ padding-left: 0;
+ margin-bottom: 0;
+}
+
+#daily ul li {
+ list-style: none;
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ cursor: pointer;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: row wrap-reverse;
+         flex-flow: row wrap-reverse;
+ width: 20%;
+ // border: .2px solid black;
+ height: 50px;
+ -webkit-box-align: end;
+     -ms-flex-align: end;
+         align-items: flex-end;
+ -webkit-box-pack: end;
+     -ms-flex-pack: end;
+         justify-content: flex-end;
+ padding: 3px;
+}
+
+#daily ul li [id*="icon_"] {
+ position: relative;
+ right: 5px;
+ top: 5px;
+}
+
+#daily ul li {
+
+ /*!icon_*/
+}
+
+#daily ul li [class*="daily_"] {
+ color: #e0e0f8;
+ position: relative;
+ bottom: -5px;
+ right: 5px;
+ font-size: 13px;
+ -ms-flex-pack: distribute;
+     justify-content: space-around;
+ margin: 0;
+}
+
+#daily ul li {
+
+ /*! .daily*/
+}
+
+#daily ul {
+
+ /*! li*/
+}
+
+#daily ul li:hover {
+ background: rgba(0, 0, 0, 0.45);
+}
+
+#daily {
+
+ /*! ul*/
+}
+
 /*
    Animation example, for spinners
 */
@@ -559,34 +686,53 @@ we can specify global variable to use flexbox as default instead of floats
 
 .quotesBox {
     position: relative;
-    top: 67%;
-    width: 60%;
-    margin: 0 auto;
+    width: 50%;
+    margin: 0 auto; 
+    margin-left: 70px;
     color: aliceblue;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    margin-top: auto; /* TODO: this will pin quotes to the bottom of the page,
+                           but it's not the best solution. Find better solution.*/
+    margin-bottom: 30px
 }
 
-.quotesBox #quoteText {
- margin-top: 1em;
- font-size: 1.2em;
+.quotesBox .quoteInfo {
+ margin: 10px;
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+}
+
+.quotesBox #quoteText:hover {
+ opacity: 0.7;
 }
 
 .quotesBox #quoteAuthor {
  margin: 0.5em;
+ margin-right: 1em;
  font-size: 1em;
+}
+
+.quotesBox #quoteAuthor:hover {
+ opacity: 0.7;
 }
 
 .quotesBox #tweetButton {
  margin-bottom: 1em;
+ cursor: pointer;
+}
+
+.quotesBox #tweetButton:hover {
+ opacity: 0.7;
 }
 
 #todoMain {
@@ -706,6 +852,103 @@ li:hover .deleteBtnTodo {
     margin-left: auto;
     margin-right: auto
 }
+
+#links {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 450px;
+    height: 55px
+}
+
+#links .links_wrapper {
+ background-color: rgba(0, 0, 0, .3);
+ border-radius: 5px;
+ width: 100%;
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+}
+
+#links .links_wrapper #links_list {
+ padding: 0;
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ width: 100%;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: row nowrap;
+         flex-flow: row nowrap;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+}
+
+#links .links_wrapper #links_list li {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ list-style: none;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ width: 50px;
+ height: 50px;
+ text-align: center;
+ font-size: 13px;
+}
+
+#links .links_wrapper #links_list {
+
+ /*! li*/
+}
+
+#links .links_wrapper {
+
+ /*! links_list*/
+}
+
+#links {
+
+ /*! links_wrapper*/
+}
+
+#links a {
+ color: #CCC;
+ text-decoration: none;
+}
+
+#links {
+
+ /*! a*/
+}
+
+#links .link_icon:hover {
+ opacity: .5;
+}
+
+/* ! links */
 
 /* ==========================================================================
    Helper classes
@@ -1101,4 +1344,5 @@ li:hover .deleteBtnTodo {
         page-break-after: avoid;
     }
 }
+
 /*# sourceMappingURL=main.css.map */
