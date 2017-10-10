@@ -43,6 +43,7 @@ $(document).on('change', 'input[name="checkbox"]', function(){
           tasks[i].status = 'done';
         }
       }
+      
   } else {
       numOfTodos++;
       $(input).toggleClass('itemDone');
@@ -52,6 +53,7 @@ $(document).on('change', 'input[name="checkbox"]', function(){
         }
       }
   }
+  todoLoadList();
 });
 
 //function to add new todos
