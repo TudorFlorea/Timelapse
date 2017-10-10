@@ -9,39 +9,25 @@ var tasks = [
 ];
 
 todoLoadList();
-todoLoadTitle(tasks.length);
-
-//load the title updating the number of existing tasks
-function todoLoadTitle() {
-  console.log(tasks);
-  var numOfTasks = 0;
-  if (tasks.length > 0) {
-    for (var i = 0; i < tasks.length; i++) {
-      if (tasks[i].status == 'tbd') {
-        numOfTasks++;
-      }
-    }
-    $('#todoHeader').html('<p id="todoTitle">' + numOfTasks +' to do</p>');
-  } else {
-    noTodo();
-    $('#todoHeader').html('<p id="todoTitle"> 0 to do</p>');
-  }
-}
 
 //generate list of tasks and add them to the list
 function todoLoadList() {
   $('#list').empty();  
-  for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].status === 'tbd') {
-      $("#list").append(
-        "<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>"
-      );
-    } else {
-      $("#list").append(
-        "<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>"
-      );
-    }
-  } 
+  if (tasks.length <= 0) {
+    noTodo();
+  } else {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].status === 'tbd') {
+        $("#list").append(
+          "<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>"
+        );
+      } else {
+        $("#list").append(
+          "<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>"
+        );
+      }
+    } 
+  }
 }
 //detecting a task done
 var numOfTodos = tasks.length;
@@ -57,7 +43,6 @@ $(document).on('change', 'input[name="checkbox"]', function(){
           tasks[i].status = 'done';
         }
       }
-      todoLoadTitle();
   } else {
       numOfTodos++;
       $(input).toggleClass('itemDone');
@@ -66,7 +51,6 @@ $(document).on('change', 'input[name="checkbox"]', function(){
           tasks[i].status = 'tbd';
         }
       }
-      todoLoadTitle();
   }
 });
 
@@ -77,7 +61,6 @@ $("#inputTodo").on("keyup", function(e) {
       tasks.push({task: newTodo, status: 'tbd'});
       $("#noTodoImg").remove();
       $("#noTodoText").remove();
-      todoLoadTitle();
       todoLoadList();
       $("#inputTodo").val('');
   }
@@ -88,7 +71,6 @@ $( "#list" ).on( "click", 'button', function() {
   for (var i = 0; i < tasks.length; i++) {
     if (tasks[i].task == itemToDelete) {
       tasks.splice(i, 1);
-      todoLoadTitle();
       todoLoadList();
     }
   }

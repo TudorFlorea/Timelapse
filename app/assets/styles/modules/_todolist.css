@@ -1,39 +1,38 @@
 #todoMain {
-    position: relative;
+    position:absolute;
     width: 250px;
     height: auto;
     right: 1%;
     bottom: 2%;
     font-size: 15px;
     border-radius: 3px;
-    background-color:rgba(15,15,15,0.700);
+    background-color:rgba(0,0,0,0.35);
 }
 
 #todoTitle {
-    color: grey;
+    color: white;
+    text-align: center;
     margin: 0;
     padding: 6px 5px 2px 5px;
 }
 
+#todoAdd {
+    margin: 0 auto;
+}
+
 #inputTodo {
-    position: relative;
-    bottom: 1%;
     background-color:transparent;
-    border: 0;
+    border-style: solid; 
+    border-width: 0px 0px 1px 0px; 
+    border-color: white;
     color:white;
     font-size: 15px;
-    padding: 6px 5px 8px 5px;
+    display: block;
+    margin: 0px auto 3% auto;
 }
 
 #inputTodo:focus{
     outline: none;
-}
-.showArrow {
-    border-top-color: black;
-}
-
-#todoBtn.hidden:before {
-    border-top: 10px solid black;
 }
 
 #list {
@@ -48,6 +47,19 @@
     color: grey;
 }
 
+.focusBtnTodo {
+    width:80px;
+    margin-left: 2px;
+    border-radius: 3px;
+    display: none;
+    color:grey;
+    padding: 2px;
+    background-color: transparent;
+    border: 2px solid grey;
+    float: right;
+    background: none;
+}
+
 .deleteBtnTodo {
     width:45px;
     border-radius: 3px;
@@ -55,10 +67,13 @@
     color:grey;
     padding: 2px;
     background-color: transparent;
-    border: none;
-    border-color: white;
+    border: 2px solid grey;
     float: right;
     background: none;
+}
+
+li:hover .focusBtnTodo {
+    display: inline;
 }
 
 li:hover .deleteBtnTodo {
@@ -69,14 +84,16 @@ li:hover .deleteBtnTodo {
     outline: none;
 }
 
-.deleteBtnTodo:hover{
-    border: 2px solid grey;
-    padding: 0;
+.focusBtnTodo:focus{
+    outline: none;
 }
 
 .deleteBtnTodo:active{
-    border: 2px solid white;
-    padding: 0;
+    border-color: white;
+}
+
+.focusBtnTodo:active{
+    border-color: white;
 }
 
 #noTodoText {

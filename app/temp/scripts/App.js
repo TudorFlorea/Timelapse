@@ -2700,33 +2700,19 @@ function todoFunc() {
   var tasks = [{ 'task': 'ehasd', 'status': 'tbd' }, { 'task': 'asd', 'status': 'done' }];
 
   todoLoadList();
-  todoLoadTitle(tasks.length);
-
-  //load the title updating the number of existing tasks
-  function todoLoadTitle() {
-    console.log(tasks);
-    var numOfTasks = 0;
-    if (tasks.length > 0) {
-      for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].status == 'tbd') {
-          numOfTasks++;
-        }
-      }
-      (0, _jquery2.default)('#todoHeader').html('<p id="todoTitle">' + numOfTasks + ' to do</p>');
-    } else {
-      noTodo();
-      (0, _jquery2.default)('#todoHeader').html('<p id="todoTitle"> 0 to do</p>');
-    }
-  }
 
   //generate list of tasks and add them to the list
   function todoLoadList() {
     (0, _jquery2.default)('#list').empty();
-    for (var i = 0; i < tasks.length; i++) {
-      if (tasks[i].status === 'tbd') {
-        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
-      } else {
-        (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
+    if (tasks.length <= 0) {
+      noTodo();
+    } else {
+      for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].status === 'tbd') {
+          (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>");
+        } else {
+          (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
+        }
       }
     }
   }
@@ -2744,7 +2730,6 @@ function todoFunc() {
           tasks[i].status = 'done';
         }
       }
-      todoLoadTitle();
     } else {
       numOfTodos++;
       (0, _jquery2.default)(input).toggleClass('itemDone');
@@ -2753,7 +2738,6 @@ function todoFunc() {
           tasks[i].status = 'tbd';
         }
       }
-      todoLoadTitle();
     }
   });
 
@@ -2764,7 +2748,6 @@ function todoFunc() {
       tasks.push({ task: newTodo, status: 'tbd' });
       (0, _jquery2.default)("#noTodoImg").remove();
       (0, _jquery2.default)("#noTodoText").remove();
-      todoLoadTitle();
       todoLoadList();
       (0, _jquery2.default)("#inputTodo").val('');
     }
@@ -2775,7 +2758,6 @@ function todoFunc() {
     for (var i = 0; i < tasks.length; i++) {
       if (tasks[i].task == itemToDelete) {
         tasks.splice(i, 1);
-        todoLoadTitle();
         todoLoadList();
       }
     }
