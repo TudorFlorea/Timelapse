@@ -14,6 +14,8 @@ import todoFunc from './modules/_todolist';
 // links.saveLinkEventListner();
 // links.renderCustomLinks();
 //links.clearStorage();
+// var test = document.getElementById("test");
+// console.log("a:" + test.getAttribute("data-id"));
 
 $(document).ready(function () {
     func.weatherReport();
@@ -28,10 +30,8 @@ $('.currentTemp').on('click', function (e) {
     } else {
         $('.temp').html(`${func.fToC(currTemp)}<sup class="cel unit">&#8451;</sup>`);
     }
-
  });
-
-// var test = document.getElementById("test");
-// console.log("a:" + test.getAttribute("data-id"));
-
+$('#icon').on('click', function (e) { 
+    $('#daily').toggleClass('invisible');
+ });
  

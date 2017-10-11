@@ -3,7 +3,7 @@
 @import "base/basetop";
 @import "base/grids";
 
-
+@import "modules/timelapse";
 @import "modules/weather";
 @import "modules/dailyWeather";
 @import "modules/spinner";

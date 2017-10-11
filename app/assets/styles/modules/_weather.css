@@ -1,50 +1,53 @@
-#weather{
-    position: relative;
-    float: right;
-    top: 5px;
-    right: 5px;
-    // border: 1px solid black;
-
+@lost flexbox flex;
+@lost gutter 0px;
+#weather {
+    margin: 3px .5%;
     width: 280px;
     height: 180px;
-    // border: 1px solid black;
-    // background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .35);
+    lost-utility: clearfix;
+    color: #e0e0f8;
     border-radius: 5px;
-    text-align: center;
-    color: #272a38;
-    & .currentTemp {
-        & p {
-            position: relative;
-            right: -145px;
-            top: -75px;
-            width: 50%;
-            font-size: 4rem;
-            margin: 0;
-            cursor: pointer;
-        }
-        & .unit {
-            font-size: 1.4rem;
-        }
-    } /*! currentTemp*/
 
     & .location {
-        position: relative;
+        lost-row: 1/4;
         font-size: 22px;
+        lost-align: center;
         margin: 0;
-        padding: 0;
-        top: -60px;
-        & .loc {
-            text-align: center;
-            margin: 0;
-        } /* ! loc */ 
-    } /* ! location */
-    & #icon {
-        position: relative;
-        // border: .5px solid black;
-        left: 60px;
-        top: 20px;
-        float: left;
+        padding: 0; 
     }
+    /* ! location */
+    & .wInfo {
+        lost-row: 3/4;
+        lost-align: bottom-center;
+        color: #e0e0f8;
+        padding-bottom: 15px;
 
-   
-} /*! weather*/
+        & .currIcon {
+            lost-column: 1/2;
+            lost-align: center;
+            width: 50%;            
+            & #icon {
+                cursor: pointer;
+            }
+        }
+        
+        & .currentTemp {
+            lost-column: 1/2;
+            lost-align: center;
+            width: 50%;            
+            & p {
+                font-size: 4rem;
+                margin: 0;
+                cursor: pointer;
+            }
+            & .unit {
+                font-size: 1.4rem;
+            }
+        }
+        /*! currentTemp*/
+    }
+}
+
+
+/*! weather*/

@@ -23,17 +23,15 @@
         },
         "permissions": [
             "geolocation",
-            "unlimitedStorage",
             "history",
-            "storage"
+            "storage",
+            "topSites",
+            "bookmarks",
+            "chrome://favicon/"   
         ],
         "web_accessible_resources": [
             "temp/scripts/*.js",
             "temp/styles/*.css"
         ],
-        "content_security_policy": "script-src 'self' https://api.darksky.net/forecast/; object-src 'self'",
-        "optional_permissions": [
-            "bookmarks",
-            "topSites"
-        ]
+        "content_security_policy": "script-src 'self' https://api.darksky.net/forecast/; object-src 'self'"
     }
