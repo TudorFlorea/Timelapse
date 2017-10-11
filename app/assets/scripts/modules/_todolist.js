@@ -3,10 +3,27 @@ import $ from '../vendor/jquery-3.2.1.min';
 function todoFunc() {
 
 //creating example object list
-var tasks = [
+/* var tasks = [
   {'task': 'ehasd', 'status': 'tbd'},
   {'task': 'asd',  'status': 'done'}
 ];
+ */
+
+chrome.storage.sync.set({task: 'nasdd13f', status: 'tbd'}, function() {
+  // Notify that we saved.
+  console.log('Settings saved');
+});
+
+
+var storage;
+
+chrome.storage.sync.get(null, function(taskStorage) {
+  if (!chrome.runtime.error) {
+    storage = taskStorage;
+  }
+});
+
+console.log(storage);
 
 todoLoadList();
 
@@ -60,7 +77,11 @@ $(document).on('change', 'input[name="checkbox"]', function(){
 $("#inputTodo").on("keyup", function(e) {
   var newTodo = $("#inputTodo").val();
   if (e.which == 13 && newTodo.length != 0) {
-      tasks.push({task: newTodo, status: 'tbd'});
+      chrome.storage.sync.set({task: newTodo, status: 'tbd'}, function() {
+      // Notify that we saved.
+      message('Settings saved');
+    });
+      tasks.push();
       $("#noTodoImg").remove();
       $("#noTodoText").remove();
       todoLoadList();
@@ -70,7 +91,7 @@ $("#inputTodo").on("keyup", function(e) {
 
 $( "#list" ).on( "click", 'button', function() {
   var itemToDelete = $(this).prev().prev().attr('id');
-  for (var i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].task == itemToDelete) {
       tasks.splice(i, 1);
       todoLoadList();

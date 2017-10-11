@@ -2697,7 +2697,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function todoFunc() {
 
   //creating example object list
-  var tasks = [{ 'task': 'ehasd', 'status': 'tbd' }, { 'task': 'asd', 'status': 'done' }];
+  /* var tasks = [
+    {'task': 'ehasd', 'status': 'tbd'},
+    {'task': 'asd',  'status': 'done'}
+  ];
+   */
+
+  chrome.storage.sync.set({ task: 'nasdd13f', status: 'tbd' }, function () {
+    // Notify that we saved.
+    console.log('Settings saved');
+  });
+
+  var storage;
+
+  chrome.storage.sync.get(null, function (taskStorage) {
+    if (!chrome.runtime.error) {
+      storage = taskStorage;
+    }
+  });
+
+  console.log(storage);
 
   todoLoadList();
 
@@ -2746,7 +2765,11 @@ function todoFunc() {
   (0, _jquery2.default)("#inputTodo").on("keyup", function (e) {
     var newTodo = (0, _jquery2.default)("#inputTodo").val();
     if (e.which == 13 && newTodo.length != 0) {
-      tasks.push({ task: newTodo, status: 'tbd' });
+      chrome.storage.sync.set({ task: newTodo, status: 'tbd' }, function () {
+        // Notify that we saved.
+        message('Settings saved');
+      });
+      tasks.push();
       (0, _jquery2.default)("#noTodoImg").remove();
       (0, _jquery2.default)("#noTodoText").remove();
       todoLoadList();
