@@ -465,6 +465,11 @@ we can specify global variable to use flexbox as default instead of floats
  cursor: pointer;
 }
 
+#weather .wInfo {
+
+ /*! currIcon*/
+}
+
 #weather .wInfo .currentTemp {
  flex-grow: 0;
  flex-shrink: 0;
@@ -511,6 +516,11 @@ we can specify global variable to use flexbox as default instead of floats
  /*! currentTemp*/
 }
 
+#weather {
+
+ /*! wInfo*/
+}
+
 /*! weather*/
 
 #daily {
@@ -526,7 +536,13 @@ we can specify global variable to use flexbox as default instead of floats
             flex-flow: column nowrap;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 5px;
-    color: #e0e0f8
+    color: #e0e0f8;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+    position: relative;
+    z-index: -5
 }
 
 #daily .daily_info {

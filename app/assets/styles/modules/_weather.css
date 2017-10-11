@@ -30,7 +30,7 @@
             & #icon {
                 cursor: pointer;
             }
-        }
+        } /* ! currIcon */
         
         & .currentTemp {
             lost-column: 1/2;
@@ -44,10 +44,9 @@
             & .unit {
                 font-size: 1.4rem;
             }
-        }
-        /*! currentTemp*/
-    }
-}
+        } /*! currentTemp*/
+    } /* ! wInfo */
+} /*! weather*/ 
 
 
-/*! weather*/
+

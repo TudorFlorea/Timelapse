@@ -2435,6 +2435,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 });
 (0, _jquery2.default)('#icon').on('click', function (e) {
     (0, _jquery2.default)('#daily').toggleClass('invisible');
+    if ((0, _jquery2.default)('#daily').hasClass('invisible')) {
+        (0, _jquery2.default)("#daily").css({ 'transform': 'translateX(100%)' });
+    } else {
+        (0, _jquery2.default)("#daily").css({ 'transform': 'translateX(0%)' });
+    }
 });
 
 /***/ }),
@@ -2602,14 +2607,13 @@ function weatherReport() {
             // TODO: implement auto units with &units=auto 
         api_call = url + apiKey + "/" + lat + "," + lng + "?exclude=alerts,flags,hourly,currently&callback=?",
             date = void 0;
-        var dataArr = []; // TODO: send data to Firebase
+        var dataArr = []; // TODO: send data storage
 
         // Fetch daily weather data
         if (dataArr.length < daysToReport) {
             // I could do this with already fetched data but couldn't add skycons in that way performance wise
             // but I excluded all data except daily in this API call
             _jquery2.default.getJSON(api_call, function (forecast) {
-                console.log(forecast);
                 var skycons;
                 var daily = forecast.daily.data;
 
@@ -2617,16 +2621,18 @@ function weatherReport() {
                     "color": "#e0e0f8",
                     "resizeClear": true
                 });
-                for (var index = 0; index <= daysToReport; index++) {
-                    dataArr[index] = daily[index];
-                    // get data from received timestamp
-                    date = new Date(daily[index].time * 1000).toString().substring(0, 10);
-                    // add formated date and skycons to daily overview
-                    (0, _jquery2.default)('.daily_' + index).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + index + '" width="30" height="30"></canvas>');
-                    skycons.add(document.getElementById('icon_' + index), daily[index].icon);
+                for (var i in daily) {
+                    if (parseInt(i) <= daysToReport) {
+                        // prepare data for storage
+                        dataArr[i] = daily[i];
+                        // get data from received timestamp
+                        date = new Date(daily[i].time * 1000).toString().substring(0, 10);
+                        // add formated date and skycons to daily overview
+                        (0, _jquery2.default)('.daily_' + i).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + i + '" width="30" height="30"></canvas>');
+                        skycons.add(document.getElementById('icon_' + i), daily[i].icon);
+                    }
                 }
                 var dailyArr = document.querySelectorAll(".forecast");
-
                 // Populate the daily info for the tomorrow only
                 populateDailyInfo(dailyArr, 0, dataArr);
                 skycons.add(document.getElementById('dailyIcon'), dataArr[0].icon);

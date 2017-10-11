@@ -33,5 +33,11 @@ $('.currentTemp').on('click', function (e) {
  });
 $('#icon').on('click', function (e) { 
     $('#daily').toggleClass('invisible');
+    if($('#daily').hasClass('invisible')){
+        $("#daily").css({'transform':'translateX(100%)'});
+    } else {
+        $("#daily").css({'transform':'translateX(0%)'});
+        
+    }
  });
  
