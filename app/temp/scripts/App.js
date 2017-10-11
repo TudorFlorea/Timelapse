@@ -2739,6 +2739,7 @@ function todoFunc() {
         }
       }
     }
+    todoLoadList();
   });
 
   //function to add new todos
