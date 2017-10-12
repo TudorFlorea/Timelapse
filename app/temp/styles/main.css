@@ -1821,7 +1821,7 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #todoMain {
-    position:absolute;
+    position: absolute;
     width: 250px;
     height: auto;
     right: 1%;
