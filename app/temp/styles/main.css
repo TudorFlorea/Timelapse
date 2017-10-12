@@ -147,13 +147,6 @@ textarea {
        font-size: calc(16px + 20 * ((100vw - 420px) / 860));
    }
 
-/* Just a test for postcss-assets resolve*/
-
-body {
-    background: navajowhite url('../images/fog.jpg') no-repeat;
-    background-size: cover;
-}
-
 a {
     color: aliceblue;
     text-decoration: none;
@@ -162,7 +155,7 @@ a {
 /*
 we can specify global variable to use flexbox as default instead of floats
 
-@lost flexbox flex;
+// @lost flexbox flex;
 */
 
 /* Grids */
@@ -189,13 +182,16 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .grid-one div {
-	width: calc(99.9% * 1/1 - (30px - 30px * 1/1));
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
 }
 
 .grid-one div:nth-child(1n) {
-	float: left;
-	margin-right: 30px;
-	clear: none;
+	margin-right: 0px;
+	margin-left: 0;
 }
 
 .grid-one div:last-child {
@@ -204,11 +200,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid-one div:nth-child(1n) {
 	margin-right: 0;
-	float: right;
-}
-
-.grid-one div:nth-child(1n + 1) {
-	clear: both;
+	margin-left: auto;
 }
 
 .nested-grid {
@@ -223,11 +215,15 @@ we can specify global variable to use flexbox as default instead of floats
 	width: 100%;
 	height: 500px;
 	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
+	display:flex;
+	flex-flow:row wrap;
 	max-width:80%;
 	margin-left:auto;
 	margin-right:auto;
 	padding-left:48px;
 	padding-right:48px;
+	display:flex;
+	flex-flow:row wrap;
 	max-width:80%;
 	margin-left:auto;
 	margin-right:auto;
@@ -238,38 +234,13 @@ we can specify global variable to use flexbox as default instead of floats
 	background: rgb(166, 166, 166);
 }
 
-.grid-two:before {
-	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
-	content:'';
-	display:table;
-}
-
-.grid-two:after {
-	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
-	content:'';
-	display:table;
-	clear:both;
-}
-
-.grid-two:before {
-	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
-	content:'';
-	display:table;
-}
-
-.grid-two:after {
-	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
-	content:'';
-	display:table;
-	clear:both;
-}
-
 .grid-two div {
 	/* lost row is for vertical grid */
 	width: 100%;
-	height: calc(99.9% * 1/5 - (30px - 30px * 1/5));
-	margin-bottom: 30px;
-	position: relative;
+	flex: 0 0 auto;
+	height: calc(99.9% * 1/5 - (0px - 0px * 1/5));
+	margin-bottom: 0px;
+	display: flex;
 }
 
 .grid-two div:last-child {
@@ -277,14 +248,10 @@ we can specify global variable to use flexbox as default instead of floats
 	margin-bottom: 0;
 }
 
-.grid-two div > * {
+.grid-two div {
 	/* lost row is for vertical grid */
-	position: absolute;
-	top: 50%;
-	right: auto;
-	bottom: auto;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	justify-content: center;
+	align-items: center;
 }
 
 .grid-two div p{
@@ -295,11 +262,15 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid-three {
 	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
 	max-width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 48px;
 	padding-right: 48px;
+	display: flex;
+	flex-flow: row wrap;
 	max-width: 80%;
 	margin-left: auto;
 	margin-right: auto;
@@ -308,38 +279,19 @@ we can specify global variable to use flexbox as default instead of floats
 	height: 100vh;
 }
 
-.grid-three:before {
-	content: '';
-	display: table;
-}
-
-.grid-three:after {
-	content: '';
-	display: table;
-	clear: both;
-}
-
-.grid-three:before {
-	content: '';
-	display: table;
-}
-
-.grid-three:after {
-	content: '';
-	display: table;
-	clear: both;
-}
-
 .grid-three div {
-	width: calc(99.9% * 1/1 - (30px - 30px * 1/1));
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
 	font-size: 2em;
 	background: rgb(166, 107, 0);
 }
 
 .grid-three div:nth-child(1n) {
-	float: left;
-	margin-right: 30px;
-	clear: none;
+	margin-right: 0px;
+	margin-left: 0;
 }
 
 .grid-three div:last-child {
@@ -348,11 +300,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid-three div:nth-child(1n) {
 	margin-right: 0;
-	float: right;
-}
-
-.grid-three div:nth-child(1n + 1) {
-	clear: both;
+	margin-left: auto;
 }
 
 /*  Flexbox Grid  */
@@ -377,15 +325,18 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .grid-four div {
-	width: calc(99.9% * 1/1 - (30px - 30px * 1/1));
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
+	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
 	font-size: 2em;
 	background: rgb(0, 102, 102);
 }
 
 .grid-four div:nth-child(1n) {
-	float: left;
-	margin-right: 30px;
-	clear: none;
+	margin-right: 0px;
+	margin-left: 0;
 }
 
 .grid-four div:last-child {
@@ -394,68 +345,67 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid-four div:nth-child(1n) {
 	margin-right: 0;
-	float: right;
+	margin-left: auto;
 }
 
-.grid-four div:nth-child(1n + 1) {
-	clear: both;
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
 }
 
-#weather{
-    position: relative;
-    float: right;
-    top: 5px;
-    right: 5px;
-    // border: 1px solid black;
-
-    width: 280px;
-    height: 180px;
-    // border: 1px solid black;
-    // background: rgba(0, 0, 0, .3);
-    border-radius: 5px;
-    text-align: center;
-    color: #272a38
-
-   
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-#weather .currentTemp p {
- position: relative;
- right: -145px;
- top: -75px;
- width: 50%;
- font-size: 64px;
- font-size: 4rem;
- margin: 0;
- cursor: pointer;
-}
-
-#weather .currentTemp .unit {
- font-size: 22.4px;
- font-size: 1.4rem;
-}
+/* https://slicejack.com/fullscreen-html5-video-background-css/ */
 
 #weather {
+    margin: 3px .5%;
+    width: 280px;
+    height: 180px;
+    background: rgba(0, 0, 0, .35);
+    color: #e0e0f8;
+    border-radius: 5px
+}
 
- /*! currentTemp*/
+#weather:before {
+    content: '';
+    display: table
+}
+
+#weather:after {
+    content: '';
+    display: table;
+    clear: both
 }
 
 #weather .location {
- position: relative;
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ margin-bottom: 0px;
  font-size: 22px;
+ display: flex;
  margin: 0;
  padding: 0;
- top: -60px;
 }
 
-#weather .location .loc {
- text-align: center;
- margin: 0;
+#weather .location:last-child {
+ margin-bottom: 0;
 }
 
 #weather .location {
-
- /*! loc*/
+ justify-content: center;
+ align-items: center;
 }
 
 #weather {
@@ -463,12 +413,112 @@ we can specify global variable to use flexbox as default instead of floats
  /*! location*/
 }
 
-#weather #icon {
- position: relative;
- // border: .5px solid black;
- left: 60px;
- top: 20px;
- float: left;
+#weather .wInfo {
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ margin-bottom: 0px;
+ display: flex;
+ color: #e0e0f8;
+ padding-bottom: 15px;
+}
+
+#weather .wInfo:last-child {
+ margin-bottom: 0;
+}
+
+#weather .wInfo {
+ justify-content: center;
+ align-items: flex-end;
+}
+
+#weather .wInfo .currIcon {
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ display: flex;
+ width: 50%;
+}
+
+#weather .wInfo .currIcon:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+#weather .wInfo .currIcon:last-child {
+ margin-right: 0;
+}
+
+#weather .wInfo .currIcon:nth-child(2n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+#weather .wInfo .currIcon {
+ justify-content: center;
+ align-items: center;
+}
+
+#weather .wInfo .currIcon #icon {
+ cursor: pointer;
+}
+
+#weather .wInfo {
+
+ /*! currIcon*/
+}
+
+#weather .wInfo .currentTemp {
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+ display: flex;
+ width: 50%;
+}
+
+#weather .wInfo .currentTemp:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+#weather .wInfo .currentTemp:last-child {
+ margin-right: 0;
+}
+
+#weather .wInfo .currentTemp:nth-child(2n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+#weather .wInfo .currentTemp {
+ justify-content: center;
+ align-items: center;
+}
+
+#weather .wInfo .currentTemp p {
+ font-size: 64px;
+ font-size: 4rem;
+ margin: 0;
+ cursor: pointer;
+}
+
+#weather .wInfo .currentTemp .unit {
+ font-size: 22.4px;
+ font-size: 1.4rem;
+}
+
+#weather .wInfo {
+
+ /*! currentTemp*/
+}
+
+#weather {
+
+ /*! wInfo*/
 }
 
 /*! weather*/
@@ -486,21 +536,199 @@ we can specify global variable to use flexbox as default instead of floats
             flex-flow: column nowrap;
     background: rgba(0, 0, 0, 0.35);
     border-radius: 5px;
-    -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: flex-end
+    color: #e0e0f8;
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-transition: .4s ease-in-out;
+    transition: .4s ease-in-out
 }
 
 #daily .daily_info {
- display: -webkit-box;
- display: -ms-flexbox;
- display: flex;
- -webkit-box-flex: 1;
-     -ms-flex: 1;
-         flex: 1;
  border-bottom: .3px solid #e0e0f8;
  height: 150px;
  width: 100%;
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: column;
+         flex-flow: column;
+ display: flex;
+ flex-flow: row wrap;
+ max-width: 100%;
+ margin-left: auto;
+ margin-right: auto;
+ padding-left: 8px;
+ padding-right: 8px;
+ display: flex;
+ flex-flow: row wrap;
+ max-width: 100%;
+ margin-left: auto;
+ margin-right: auto;
+}
+
+#daily .daily_info .daily_header {
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 1/5 - (0px - 0px * 1/5));
+ margin-bottom: 0px;
+ margin: 0;
+ display: flex;
+}
+
+#daily .daily_info .daily_header:last-child {
+ margin-bottom: 0;
+}
+
+#daily .daily_info .daily_header {
+ justify-content: center;
+ align-items: center;
+}
+
+#daily .daily_info .daily_header h4 {
+ margin: 0;
+ font-size: 22px;
+ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ font-weight: 300;
+}
+
+#daily .daily_info .daily_body {
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 4/5 - (0px - 0px * 4/5));
+ margin-bottom: 0px;
+ display: flex;
+}
+
+#daily .daily_info .daily_body:last-child {
+ margin-bottom: 0;
+}
+
+#daily .daily_info .daily_body {
+ justify-content: center;
+ align-items: center;
+}
+
+#daily .daily_info .daily_body .daily_icon {
+ height: 100%;
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ max-width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+}
+
+#daily .daily_info .daily_body .daily_icon:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+#daily .daily_info .daily_body .daily_icon:last-child {
+ margin-right: 0;
+}
+
+#daily .daily_info .daily_body .daily_icon:nth-child(4n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+#daily .daily_info .daily_body .daily_details {
+ height: 100%;
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ max-width: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ width: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+}
+
+#daily .daily_info .daily_body .daily_details:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+#daily .daily_info .daily_body .daily_details:last-child {
+ margin-right: 0;
+}
+
+#daily .daily_info .daily_body .daily_details:nth-child(4n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_temp {
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+ margin-bottom: 0px;
+ display: flex;
+ padding-right: 15px;
+ font-size: 28px;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_temp:last-child {
+ margin-bottom: 0;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_temp {
+ justify-content: flex-end;
+ align-items: center;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_temp .hiTemp {
+ color: #EE0000;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_temp .lowTemp {
+ color: #4876FF;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_summary {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+ margin-bottom: 0px;
+ font-size: 15px;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_summary:last-child {
+ margin-bottom: 0;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_misc {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: column wrap;
+         flex-flow: column wrap;
+ width: 100%;
+ flex: 0 0 auto;
+ height: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+ margin-bottom: 0px;
+ font-size: 14px;
+}
+
+#daily .daily_info .daily_body .daily_details .daily_misc:last-child {
+ margin-bottom: 0;
+}
+
+#daily {
+
+ /*! Daily info*/
 }
 
 #daily ul {
@@ -531,7 +759,6 @@ we can specify global variable to use flexbox as default instead of floats
      -ms-flex-flow: row wrap-reverse;
          flex-flow: row wrap-reverse;
  width: 20%;
- // border: .2px solid black;
  height: 50px;
  -webkit-box-align: end;
      -ms-flex-align: end;
@@ -581,108 +808,966 @@ we can specify global variable to use flexbox as default instead of floats
 #daily {
 
  /*! ul*/
+
+ .inline {
+	display: inline !important;
+ }
+
+ .inline-block {
+        display: inline-block !important;
+ }
+
+ .no-padding {
+	padding: 0px !important;
+ }
+
+ .no-margin {
+        margin: 0px !important;
+ }
 }
 
-/*
-   Animation example, for spinners
-*/
-
-.animate-spin {
-  -webkit-animation: spin 2s infinite linear;
-  animation: spin 2s infinite linear;
-  display: inline-block;
-}
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
-}
+/*!
+ *  Weather Icons 2.0
+ *  Updated August 1, 2015
+ *  Weather themed icons for Bootstrap
+ *  Author - Erik Flowers - erik@helloerik.com
+ *  Email: erik@helloerik.com
+ *  Twitter: http://twitter.com/Erik_UX
+ *  ------------------------------------------------------------------------------
+ *  Maintained at http://erikflowers.github.io/weather-icons
+ *
+ *  License
+ *  ------------------------------------------------------------------------------
+ *  - Font licensed under SIL OFL 1.1 -
+ *    http://scripts.sil.org/OFL
+ *  - CSS, SCSS and LESS are licensed under MIT License -
+ *    http://opensource.org/licenses/mit-license.html
+ *  - Documentation licensed under CC BY 3.0 -
+ *    http://creativecommons.org/licenses/by/3.0/
+ *  - Inspired by and works great as a companion with Font Awesome
+ *    "Font Awesome by Dave Gandy - http://fontawesome.io"
+ */
 
 @font-face {
-  font-family: 'fontello';
-  src: url('../font/fontello.eot?76754551');
-  src: url('../font/fontello.eot?76754551#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff2?76754551') format('woff2'),
-       url('../font/fontello.woff?76754551') format('woff'),
-       url('../font/fontello.ttf?76754551') format('truetype'),
-       url('../font/fontello.svg?76754551#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: weathericons;
+    src: url(../font/weathericons-regular-webfont.eot);
+    src: url(../font/weathericons-regular-webfont.eot?#iefix)format('embedded-opentype'), url(../font/weathericons-regular-webfont.woff2)format('woff2'), url(../font/weathericons-regular-webfont.woff)format('woff'), url(../font/weathericons-regular-webfont.ttf)format('truetype'), url(../font/weathericons-regular-webfont.svg#weather_iconsregular)format('svg');
+    font-weight: 400;
+    font-style: normal
 }
 
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'fontello';
-    src: url('../font/fontello.svg?76754551#fontello') format('svg');
-  }
-}
-*/
-
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello";
-  font-style: normal;
-  font-size: 85px;  
-  font-weight: normal;
-  speak: none;
- 
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: 100px;
-  text-align: center;
-  opacity: .8; 
- 
-  /* For safety - reset parent styles, that can break glyph codes*/
-  -webkit-font-feature-settings: normal;
-          font-feature-settings: normal;
-  font-variant: normal;
-  text-transform: none;
- 
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 2em;
- 
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: 100px;
- 
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
- 
-  /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
- 
-  /* Uncomment for 3D effect */
- text-shadow: 1px 1px 1px rgba(127, 127, 127, .3); 
+.wi {
+    display: inline-block;
+    font-family: weathericons;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
 }
 
-.icon-spin4:before { content: '\e834'; }
+.wi-fw {
+    text-align: center;
+    width: 1.4em
+}
 
-/* '' */
+.wi-rotate-90 {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg)
+}
+
+.wi-rotate-180 {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+}
+
+.wi-rotate-270 {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg)
+}
+
+.wi-flip-horizontal {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+    -webkit-transform: scale(-1, 1);
+    transform: scale(-1, 1)
+}
+
+.wi-flip-vertical {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
+    -webkit-transform: scale(1, -1);
+    transform: scale(1, -1)
+}
+
+.wi-day-sunny:before {
+    content: "\f00d"
+}
+
+.wi-day-cloudy:before {
+    content: "\f002"
+}
+
+.wi-day-cloudy-gusts:before {
+    content: "\f000"
+}
+
+.wi-day-cloudy-windy:before {
+    content: "\f001"
+}
+
+.wi-day-fog:before {
+    content: "\f003"
+}
+
+.wi-day-hail:before {
+    content: "\f004"
+}
+
+.wi-day-haze:before {
+    content: "\f0b6"
+}
+
+.wi-day-lightning:before {
+    content: "\f005"
+}
+
+.wi-day-rain:before {
+    content: "\f008"
+}
+
+.wi-day-rain-mix:before {
+    content: "\f006"
+}
+
+.wi-day-rain-wind:before {
+    content: "\f007"
+}
+
+.wi-day-showers:before {
+    content: "\f009"
+}
+
+.wi-day-sleet:before {
+    content: "\f0b2"
+}
+
+.wi-day-sleet-storm:before {
+    content: "\f068"
+}
+
+.wi-day-snow:before {
+    content: "\f00a"
+}
+
+.wi-day-snow-thunderstorm:before {
+    content: "\f06b"
+}
+
+.wi-day-snow-wind:before {
+    content: "\f065"
+}
+
+.wi-day-sprinkle:before {
+    content: "\f00b"
+}
+
+.wi-day-storm-showers:before {
+    content: "\f00e"
+}
+
+.wi-day-sunny-overcast:before {
+    content: "\f00c"
+}
+
+.wi-day-thunderstorm:before {
+    content: "\f010"
+}
+
+.wi-day-windy:before {
+    content: "\f085"
+}
+
+.wi-solar-eclipse:before {
+    content: "\f06e"
+}
+
+.wi-hot:before {
+    content: "\f072"
+}
+
+.wi-day-cloudy-high:before {
+    content: "\f07d"
+}
+
+.wi-day-light-wind:before {
+    content: "\f0c4"
+}
+
+.wi-night-clear:before {
+    content: "\f02e"
+}
+
+.wi-night-alt-cloudy:before {
+    content: "\f086"
+}
+
+.wi-night-alt-cloudy-gusts:before {
+    content: "\f022"
+}
+
+.wi-night-alt-cloudy-windy:before {
+    content: "\f023"
+}
+
+.wi-night-alt-hail:before {
+    content: "\f024"
+}
+
+.wi-night-alt-lightning:before {
+    content: "\f025"
+}
+
+.wi-night-alt-rain:before {
+    content: "\f028"
+}
+
+.wi-night-alt-rain-mix:before {
+    content: "\f026"
+}
+
+.wi-night-alt-rain-wind:before {
+    content: "\f027"
+}
+
+.wi-night-alt-showers:before {
+    content: "\f029"
+}
+
+.wi-night-alt-sleet:before {
+    content: "\f0b4"
+}
+
+.wi-night-alt-sleet-storm:before {
+    content: "\f06a"
+}
+
+.wi-night-alt-snow:before {
+    content: "\f02a"
+}
+
+.wi-night-alt-snow-thunderstorm:before {
+    content: "\f06d"
+}
+
+.wi-night-alt-snow-wind:before {
+    content: "\f067"
+}
+
+.wi-night-alt-sprinkle:before {
+    content: "\f02b"
+}
+
+.wi-night-alt-storm-showers:before {
+    content: "\f02c"
+}
+
+.wi-night-alt-thunderstorm:before {
+    content: "\f02d"
+}
+
+.wi-night-cloudy:before {
+    content: "\f031"
+}
+
+.wi-night-cloudy-gusts:before {
+    content: "\f02f"
+}
+
+.wi-night-cloudy-windy:before {
+    content: "\f030"
+}
+
+.wi-night-fog:before {
+    content: "\f04a"
+}
+
+.wi-night-hail:before {
+    content: "\f032"
+}
+
+.wi-night-lightning:before {
+    content: "\f033"
+}
+
+.wi-night-partly-cloudy:before {
+    content: "\f083"
+}
+
+.wi-night-rain:before {
+    content: "\f036"
+}
+
+.wi-night-rain-mix:before {
+    content: "\f034"
+}
+
+.wi-night-rain-wind:before {
+    content: "\f035"
+}
+
+.wi-night-showers:before {
+    content: "\f037"
+}
+
+.wi-night-sleet:before {
+    content: "\f0b3"
+}
+
+.wi-night-sleet-storm:before {
+    content: "\f069"
+}
+
+.wi-night-snow:before {
+    content: "\f038"
+}
+
+.wi-night-snow-thunderstorm:before {
+    content: "\f06c"
+}
+
+.wi-night-snow-wind:before {
+    content: "\f066"
+}
+
+.wi-night-sprinkle:before {
+    content: "\f039"
+}
+
+.wi-night-storm-showers:before {
+    content: "\f03a"
+}
+
+.wi-night-thunderstorm:before {
+    content: "\f03b"
+}
+
+.wi-lunar-eclipse:before {
+    content: "\f070"
+}
+
+.wi-stars:before {
+    content: "\f077"
+}
+
+.wi-storm-showers:before {
+    content: "\f01d"
+}
+
+.wi-thunderstorm:before {
+    content: "\f01e"
+}
+
+.wi-night-alt-cloudy-high:before {
+    content: "\f07e"
+}
+
+.wi-night-cloudy-high:before {
+    content: "\f080"
+}
+
+.wi-night-alt-partly-cloudy:before {
+    content: "\f081"
+}
+
+.wi-cloud:before {
+    content: "\f041"
+}
+
+.wi-cloudy:before {
+    content: "\f013"
+}
+
+.wi-cloudy-gusts:before {
+    content: "\f011"
+}
+
+.wi-cloudy-windy:before {
+    content: "\f012"
+}
+
+.wi-fog:before {
+    content: "\f014"
+}
+
+.wi-hail:before {
+    content: "\f015"
+}
+
+.wi-rain:before {
+    content: "\f019"
+}
+
+.wi-rain-mix:before {
+    content: "\f017"
+}
+
+.wi-rain-wind:before {
+    content: "\f018"
+}
+
+.wi-showers:before {
+    content: "\f01a"
+}
+
+.wi-sleet:before {
+    content: "\f0b5"
+}
+
+.wi-snow:before {
+    content: "\f01b"
+}
+
+.wi-sprinkle:before {
+    content: "\f01c"
+}
+
+.wi-storm-showers:before {
+    content: "\f01d"
+}
+
+.wi-thunderstorm:before {
+    content: "\f01e"
+}
+
+.wi-snow-wind:before {
+    content: "\f064"
+}
+
+.wi-snow:before {
+    content: "\f01b"
+}
+
+.wi-smog:before {
+    content: "\f074"
+}
+
+.wi-smoke:before {
+    content: "\f062"
+}
+
+.wi-lightning:before {
+    content: "\f016"
+}
+
+.wi-raindrops:before {
+    content: "\f04e"
+}
+
+.wi-raindrop:before {
+    content: "\f078"
+}
+
+.wi-dust:before {
+    content: "\f063"
+}
+
+.wi-snowflake-cold:before {
+    content: "\f076"
+}
+
+.wi-windy:before {
+    content: "\f021"
+}
+
+.wi-strong-wind:before {
+    content: "\f050"
+}
+
+.wi-sandstorm:before {
+    content: "\f082"
+}
+
+.wi-earthquake:before {
+    content: "\f0c6"
+}
+
+.wi-fire:before {
+    content: "\f0c7"
+}
+
+.wi-flood:before {
+    content: "\f07c"
+}
+
+.wi-meteor:before {
+    content: "\f071"
+}
+
+.wi-tsunami:before {
+    content: "\f0c5"
+}
+
+.wi-volcano:before {
+    content: "\f0c8"
+}
+
+.wi-hurricane:before {
+    content: "\f073"
+}
+
+.wi-tornado:before {
+    content: "\f056"
+}
+
+.wi-small-craft-advisory:before {
+    content: "\f0cc"
+}
+
+.wi-gale-warning:before {
+    content: "\f0cd"
+}
+
+.wi-storm-warning:before {
+    content: "\f0ce"
+}
+
+.wi-hurricane-warning:before {
+    content: "\f0cf"
+}
+
+.wi-wind-direction:before {
+    content: "\f0b1"
+}
+
+.wi-alien:before {
+    content: "\f075"
+}
+
+.wi-celsius:before {
+    content: "\f03c"
+}
+
+.wi-fahrenheit:before {
+    content: "\f045"
+}
+
+.wi-degrees:before {
+    content: "\f042"
+}
+
+.wi-thermometer:before {
+    content: "\f055"
+}
+
+.wi-thermometer-exterior:before {
+    content: "\f053"
+}
+
+.wi-thermometer-internal:before {
+    content: "\f054"
+}
+
+.wi-cloud-down:before {
+    content: "\f03d"
+}
+
+.wi-cloud-up:before {
+    content: "\f040"
+}
+
+.wi-cloud-refresh:before {
+    content: "\f03e"
+}
+
+.wi-horizon:before {
+    content: "\f047"
+}
+
+.wi-horizon-alt:before {
+    content: "\f046"
+}
+
+.wi-sunrise:before {
+    content: "\f051"
+}
+
+.wi-sunset:before {
+    content: "\f052"
+}
+
+.wi-moonrise:before {
+    content: "\f0c9"
+}
+
+.wi-moonset:before {
+    content: "\f0ca"
+}
+
+.wi-refresh:before {
+    content: "\f04c"
+}
+
+.wi-refresh-alt:before {
+    content: "\f04b"
+}
+
+.wi-umbrella:before {
+    content: "\f084"
+}
+
+.wi-barometer:before {
+    content: "\f079"
+}
+
+.wi-humidity:before {
+    content: "\f07a"
+}
+
+.wi-na:before {
+    content: "\f07b"
+}
+
+.wi-train:before {
+    content: "\f0cb"
+}
+
+.wi-moon-new:before {
+    content: "\f095"
+}
+
+.wi-moon-waxing-cresent-1:before {
+    content: "\f096"
+}
+
+.wi-moon-waxing-cresent-2:before {
+    content: "\f097"
+}
+
+.wi-moon-waxing-cresent-3:before {
+    content: "\f098"
+}
+
+.wi-moon-waxing-cresent-4:before {
+    content: "\f099"
+}
+
+.wi-moon-waxing-cresent-5:before {
+    content: "\f09a"
+}
+
+.wi-moon-waxing-cresent-6:before {
+    content: "\f09b"
+}
+
+.wi-moon-first-quarter:before {
+    content: "\f09c"
+}
+
+.wi-moon-waxing-gibbous-1:before {
+    content: "\f09d"
+}
+
+.wi-moon-waxing-gibbous-2:before {
+    content: "\f09e"
+}
+
+.wi-moon-waxing-gibbous-3:before {
+    content: "\f09f"
+}
+
+.wi-moon-waxing-gibbous-4:before {
+    content: "\f0a0"
+}
+
+.wi-moon-waxing-gibbous-5:before {
+    content: "\f0a1"
+}
+
+.wi-moon-waxing-gibbous-6:before {
+    content: "\f0a2"
+}
+
+.wi-moon-full:before {
+    content: "\f0a3"
+}
+
+.wi-moon-waning-gibbous-1:before {
+    content: "\f0a4"
+}
+
+.wi-moon-waning-gibbous-2:before {
+    content: "\f0a5"
+}
+
+.wi-moon-waning-gibbous-3:before {
+    content: "\f0a6"
+}
+
+.wi-moon-waning-gibbous-4:before {
+    content: "\f0a7"
+}
+
+.wi-moon-waning-gibbous-5:before {
+    content: "\f0a8"
+}
+
+.wi-moon-waning-gibbous-6:before {
+    content: "\f0a9"
+}
+
+.wi-moon-third-quarter:before {
+    content: "\f0aa"
+}
+
+.wi-moon-waning-crescent-1:before {
+    content: "\f0ab"
+}
+
+.wi-moon-waning-crescent-2:before {
+    content: "\f0ac"
+}
+
+.wi-moon-waning-crescent-3:before {
+    content: "\f0ad"
+}
+
+.wi-moon-waning-crescent-4:before {
+    content: "\f0ae"
+}
+
+.wi-moon-waning-crescent-5:before {
+    content: "\f0af"
+}
+
+.wi-moon-waning-crescent-6:before {
+    content: "\f0b0"
+}
+
+.wi-moon-alt-new:before {
+    content: "\f0eb"
+}
+
+.wi-moon-alt-waxing-cresent-1:before {
+    content: "\f0d0"
+}
+
+.wi-moon-alt-waxing-cresent-2:before {
+    content: "\f0d1"
+}
+
+.wi-moon-alt-waxing-cresent-3:before {
+    content: "\f0d2"
+}
+
+.wi-moon-alt-waxing-cresent-4:before {
+    content: "\f0d3"
+}
+
+.wi-moon-alt-waxing-cresent-5:before {
+    content: "\f0d4"
+}
+
+.wi-moon-alt-waxing-cresent-6:before {
+    content: "\f0d5"
+}
+
+.wi-moon-alt-first-quarter:before {
+    content: "\f0d6"
+}
+
+.wi-moon-alt-waxing-gibbous-1:before {
+    content: "\f0d7"
+}
+
+.wi-moon-alt-waxing-gibbous-2:before {
+    content: "\f0d8"
+}
+
+.wi-moon-alt-waxing-gibbous-3:before {
+    content: "\f0d9"
+}
+
+.wi-moon-alt-waxing-gibbous-4:before {
+    content: "\f0da"
+}
+
+.wi-moon-alt-waxing-gibbous-5:before {
+    content: "\f0db"
+}
+
+.wi-moon-alt-waxing-gibbous-6:before {
+    content: "\f0dc"
+}
+
+.wi-moon-alt-full:before {
+    content: "\f0dd"
+}
+
+.wi-moon-alt-waning-gibbous-1:before {
+    content: "\f0de"
+}
+
+.wi-moon-alt-waning-gibbous-2:before {
+    content: "\f0df"
+}
+
+.wi-moon-alt-waning-gibbous-3:before {
+    content: "\f0e0"
+}
+
+.wi-moon-alt-waning-gibbous-4:before {
+    content: "\f0e1"
+}
+
+.wi-moon-alt-waning-gibbous-5:before {
+    content: "\f0e2"
+}
+
+.wi-moon-alt-waning-gibbous-6:before {
+    content: "\f0e3"
+}
+
+.wi-moon-alt-third-quarter:before {
+    content: "\f0e4"
+}
+
+.wi-moon-alt-waning-crescent-1:before {
+    content: "\f0e5"
+}
+
+.wi-moon-alt-waning-crescent-2:before {
+    content: "\f0e6"
+}
+
+.wi-moon-alt-waning-crescent-3:before {
+    content: "\f0e7"
+}
+
+.wi-moon-alt-waning-crescent-4:before {
+    content: "\f0e8"
+}
+
+.wi-moon-alt-waning-crescent-5:before {
+    content: "\f0e9"
+}
+
+.wi-moon-alt-waning-crescent-6:before {
+    content: "\f0ea"
+}
+
+.wi-moon-0:before {
+    content: "\f095"
+}
+
+.wi-moon-1:before {
+    content: "\f096"
+}
+
+.wi-moon-2:before {
+    content: "\f097"
+}
+
+.wi-moon-3:before {
+    content: "\f098"
+}
+
+.wi-moon-4:before {
+    content: "\f099"
+}
+
+.wi-moon-5:before {
+    content: "\f09a"
+}
+
+.wi-moon-6:before {
+    content: "\f09b"
+}
+
+.wi-moon-7:before {
+    content: "\f09c"
+}
+
+.wi-moon-8:before {
+    content: "\f09d"
+}
+
+.wi-moon-9:before {
+    content: "\f09e"
+}
+
+.wi-moon-10:before {
+    content: "\f09f"
+}
+
+.wi-moon-11:before {
+    content: "\f0a0"
+}
+
+.wi-moon-12:before {
+    content: "\f0a1"
+}
+
+.wi-moon-13:before {
+    content: "\f0a2"
+}
+
+.wi-moon-14:before {
+    content: "\f0a3"
+}
+
+.wi-moon-15:before {
+    content: "\f0a4"
+}
+
+.wi-moon-16:before {
+    content: "\f0a5"
+}
+
+.wi-moon-17:before {
+    content: "\f0a6"
+}
+
+.wi-moon-18:before {
+    content: "\f0a7"
+}
+
+.wi-moon-19:before {
+    content: "\f0a8"
+}
+
+.wi-moon-20:before {
+    content: "\f0a9"
+}
+
+.wi-moon-21:before {
+    content: "\f0aa"
+}
+
+.wi-moon-22:before {
+    content: "\f0ab"
+}
+
+.wi-moon-23:before {
+    content: "\f0ac"
+}
+
+.wi-moon-24:before {
+    content: "\f0ad"
+}
+
+.wi-moon-25:before {
+    content: "\f0ae"
+}
+
+.wi-moon-26:before {
+    content: "\f0af"
+}
+
+.wi-moon-27:before {
+    content: "\f0b0"
+}
 
 .quotesBox {
     position: relative;
@@ -1028,13 +2113,16 @@ li:hover .deleteBtnTodo {
 @media (min-width: 576px) {
 
  .grid-one div {
-  width: calc(99.9% * 1/2 - (30px - 30px * 1/2));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
  }
 
  .grid-one div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-one div:last-child {
@@ -1043,21 +2131,20 @@ li:hover .deleteBtnTodo {
 
  .grid-one div:nth-child(2n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-one div:nth-child(2n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-three div {
-  width: calc(99.9% * 1/2 - (30px - 30px * 1/2));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
  }
 
  .grid-three div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-three div:last-child {
@@ -1066,21 +2153,20 @@ li:hover .deleteBtnTodo {
 
  .grid-three div:nth-child(2n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-three div:nth-child(2n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-four div {
-  width: calc(99.9% * 1/2 - (30px - 30px * 1/2));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
  }
 
  .grid-four div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-four div:last-child {
@@ -1089,24 +2175,23 @@ li:hover .deleteBtnTodo {
 
  .grid-four div:nth-child(2n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-four div:nth-child(2n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 }
 
 @media (min-width: 768px) {
 
  .grid-one div {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
  }
 
  .grid-one div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-one div:last-child {
@@ -1115,21 +2200,20 @@ li:hover .deleteBtnTodo {
 
  .grid-one div:nth-child(3n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-one div:nth-child(3n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-three div {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
  }
 
  .grid-three div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-three div:last-child {
@@ -1138,21 +2222,20 @@ li:hover .deleteBtnTodo {
 
  .grid-three div:nth-child(3n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-three div:nth-child(3n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-four div {
-  width: calc(99.9% * 1/3 - (30px - 30px * 1/3));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
+  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
  }
 
  .grid-four div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-four div:last-child {
@@ -1161,24 +2244,23 @@ li:hover .deleteBtnTodo {
 
  .grid-four div:nth-child(3n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-four div:nth-child(3n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 }
 
 @media (min-width: 992px) {
 
  .grid-one div {
-  width: calc(99.9% * 1/6 - (30px - 30px * 1/6));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/6 - (0px - 0px * 1/6));
+  max-width: calc(99.9% * 1/6 - (0px - 0px * 1/6));
+  width: calc(99.9% * 1/6 - (0px - 0px * 1/6));
  }
 
  .grid-one div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-left: 0;
  }
 
  .grid-one div:last-child {
@@ -1187,23 +2269,21 @@ li:hover .deleteBtnTodo {
 
  .grid-one div:nth-child(6n) {
   margin-right: 0;
-  float: right;
- }
-
- .grid-one div:nth-child(6n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-three div {
-  width: calc(99.9% * 1/4 - (30px - 30px * 1/4));
-  height: calc(99.9% * 1/4 - (30px - 30px * 1/4));
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+  width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
  }
 
  .grid-three div:nth-child(1n) {
-  float: left;
-  margin-right: 30px;
-  margin-bottom: 30px;
-  clear: none;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0;
  }
 
  .grid-three div:last-child {
@@ -1213,10 +2293,7 @@ li:hover .deleteBtnTodo {
 
  .grid-three div:nth-child(4n) {
   margin-right: 0;
- }
-
- .grid-three div:nth-child(4n + 1) {
-  clear: both;
+  margin-left: auto;
  }
 
  .grid-three div:nth-last-child(-n + 4) {
@@ -1260,8 +2337,21 @@ li:hover .deleteBtnTodo {
  }
 }
 
-@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullscreen-bg {
+    background: url('../images/videoframe.png') center center / cover no-repeat;
+  }
+
+  .fullscreen-bg__video {
+    display: none;
+  }
 }
 
 @media print {
@@ -1336,6 +2426,17 @@ li:hover .deleteBtnTodo {
     h3 {
         page-break-after: avoid;
     }
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
