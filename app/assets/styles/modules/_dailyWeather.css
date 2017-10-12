@@ -95,7 +95,6 @@
             cursor: pointer;
             flex-flow: row wrap-reverse;            
             width: calc(100% / 5);
-            // border: .2px solid black;
             height: 50px;
             align-items: flex-end;
             justify-content: flex-end;

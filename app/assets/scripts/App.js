@@ -19,25 +19,7 @@ import todoFunc from './modules/_todolist';
 
 $(document).ready(function () {
     func.weatherReport();
+    func.eventListeners();
     quoteGenerator();
     todoFunc();
 });
-
-$('.currentTemp').on('click', function (e) {
-    var currTemp = $('.currentTemp').text();
-    if ($('.unit').hasClass('cel')) {
-        $('.temp').html(`${func.cToF(currTemp)}<sup class="frh unit">&#8457;</sup>`);
-    } else {
-        $('.temp').html(`${func.fToC(currTemp)}<sup class="cel unit">&#8451;</sup>`);
-    }
- });
-$('#icon').on('click', function (e) { 
-    $('#daily').toggleClass('invisible');
-    if($('#daily').hasClass('invisible')){
-        $("#daily").css({'transform':'translateX(100%)'});
-    } else {
-        $("#daily").css({'transform':'translateX(0%)'});
-        
-    }
- });
- 
