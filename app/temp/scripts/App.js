@@ -2727,7 +2727,7 @@ exports.default = quoteGenerator;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _jquery = __webpack_require__(0);
@@ -2738,94 +2738,106 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function todoFunc() {
 
-  //creating example object list
-  var tasks;
+    // Initializing tasks variable and loading the list of tasks
+    var tasks;
 
-  todoLoadList();
+    todoLoadList();
 
-  //generate list of tasks and add them to the list
-  function todoLoadList() {
-    chrome.storage.sync.get('todos', function (taskStorage) {
-      var tasks = taskStorage.todos;
-      (0, _jquery2.default)('#list').empty();
-      if (tasks.length <= 0) {
-        noTodo();
-      } else {
-        for (var i = 0; i < tasks.length; i++) {
-          if (tasks[i].status === 'tbd') {
-            (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>");
-          } else {
-            (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
-          }
-        }
-      }
-    });
-  }
-
-  //detecting a task done
-  (0, _jquery2.default)(document).on('change', 'input[name="checkbox"]', function () {
-    var input = (0, _jquery2.default)(this).next('span');
-    var taskID = this.id;
-    if (this.checked) {
-      (0, _jquery2.default)(input).toggleClass('itemDone');
-      chrome.storage.sync.get('todos', function (taskStorage) {
-        tasks = taskStorage.todos;
-        for (var i = 0; i < tasks.length; i++) {
-          if (taskID == tasks[i].task) {
-            tasks[i].status = 'done';
-          }
-        }
-        chrome.storage.sync.set({ todos: tasks });
-        todoLoadList();
-      });
-    } else {
-      (0, _jquery2.default)(input).toggleClass('itemDone');
-      chrome.storage.sync.get('todos', function (taskStorage) {
-        tasks = taskStorage.todos;
-        for (var i = 0; i < tasks.length; i++) {
-          if (taskID == tasks[i].task) {
-            tasks[i].status = 'tbd';
-          }
-        }
-        todoLoadList();
-        chrome.storage.sync.set({ todos: tasks });
-      });
+    // Function that generates the list of tasks
+    function todoLoadList() {
+        chrome.storage.sync.get('todos', function (taskStorage) {
+            var tasks = taskStorage.todos;
+            (0, _jquery2.default)('#list').empty();
+            if (tasks.length <= 0) {
+                noTodo();
+            } else {
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].status === 'tbd') {
+                        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>");
+                    } else {
+                        (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
+                    }
+                }
+            }
+        });
     }
-  });
 
-  //function to add new todos
-  (0, _jquery2.default)("#inputTodo").on("keyup", function (e) {
-    var newTodo = (0, _jquery2.default)("#inputTodo").val();
-    if (e.which == 13 && newTodo.length != 0) {
-      chrome.storage.sync.get('todos', function (taskStorage) {
-        tasks = taskStorage.todos;
-        tasks.push({ 'task': newTodo, status: 'tbd' });
-        (0, _jquery2.default)("#noTodoImg").remove();
-        (0, _jquery2.default)("#noTodoText").remove();
-        (0, _jquery2.default)("#inputTodo").val('');
-        chrome.storage.sync.set({ todos: tasks });
-        todoLoadList();
-      });
-    }
-  });
-
-  (0, _jquery2.default)("#list").on("click", 'button', function () {
-    var itemToDelete = (0, _jquery2.default)(this).prev().prev().attr('id');
-    chrome.storage.sync.get('todos', function (taskStorage) {
-      tasks = taskStorage.todos;
-      for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].task == itemToDelete) {
-          tasks.splice(i, 1);
+    // Listen when checkbox is tick and marks task as done or to be done
+    (0, _jquery2.default)(document).on('change', 'input[name="checkbox"]', function () {
+        var input = (0, _jquery2.default)(this).next('span');
+        var taskID = this.id;
+        if (this.checked) {
+            (0, _jquery2.default)(input).toggleClass('itemDone');
+            chrome.storage.sync.get('todos', function (taskStorage) {
+                tasks = taskStorage.todos;
+                for (var i = 0; i < tasks.length; i++) {
+                    if (taskID == tasks[i].task) {
+                        tasks[i].status = 'done';
+                    }
+                }
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+                todoLoadList();
+            });
+        } else {
+            (0, _jquery2.default)(input).toggleClass('itemDone');
+            chrome.storage.sync.get('todos', function (taskStorage) {
+                tasks = taskStorage.todos;
+                for (var i = 0; i < tasks.length; i++) {
+                    if (taskID == tasks[i].task) {
+                        tasks[i].status = 'tbd';
+                    }
+                }
+                todoLoadList();
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+            });
         }
-      }
-      chrome.storage.sync.set({ todos: tasks });
-      todoLoadList();
     });
-  });
-  //If there is no todo show an image
-  function noTodo() {
-    (0, _jquery2.default)('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
-  }
+
+    // Listens for the input field on the task and when Enter is pressed, it adds it to the list
+    (0, _jquery2.default)("#inputTodo").on("keyup", function (e) {
+        var newTodo = (0, _jquery2.default)("#inputTodo").val();
+        if (e.which == 13 && newTodo.length != 0) {
+            chrome.storage.sync.get({ todos: [] }, function (taskStorage) {
+                tasks = taskStorage.todos;
+                console.log(tasks);
+                tasks.push({
+                    'task': newTodo,
+                    'status': 'tbd'
+                });
+                (0, _jquery2.default)("#noTodoImg").remove();
+                (0, _jquery2.default)("#noTodoText").remove();
+                (0, _jquery2.default)("#inputTodo").val('');
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+                todoLoadList();
+            });
+        }
+    });
+    // When Delete button is clicked looks for the task in the list and removes it
+    (0, _jquery2.default)("#list").on("click", 'button', function () {
+        var itemToDelete = (0, _jquery2.default)(this).prev().prev().attr('id');
+        chrome.storage.sync.get('todos', function (taskStorage) {
+            tasks = taskStorage.todos;
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i].task == itemToDelete) {
+                    tasks.splice(i, 1);
+                }
+            }
+            chrome.storage.sync.set({
+                todos: tasks
+            });
+            todoLoadList();
+        });
+    });
+    // When there is no tasks, display image and some text
+    function noTodo() {
+        (0, _jquery2.default)('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
+    }
 }
 
 exports.default = todoFunc;

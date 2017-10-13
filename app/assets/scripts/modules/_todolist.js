@@ -69,11 +69,12 @@ function todoFunc() {
     $("#inputTodo").on("keyup", function (e) {
         var newTodo = $("#inputTodo").val();
         if (e.which == 13 && newTodo.length != 0) {
-            chrome.storage.sync.get('todos', function (taskStorage) {
+            chrome.storage.sync.get({todos: []}, function (taskStorage) {
                 tasks = taskStorage.todos;
+                console.log(tasks);
                 tasks.push({
                     'task': newTodo,
-                    status: 'tbd'
+                    'status': 'tbd'
                 });
                 $("#noTodoImg").remove();
                 $("#noTodoText").remove();
