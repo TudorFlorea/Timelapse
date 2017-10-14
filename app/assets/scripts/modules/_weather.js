@@ -4,6 +4,7 @@ import config from './_config';
 var apiKey = config.wKey;
 var url = config.url;
 var skycons;
+var cache = {};
 
 
 function populateDailyInfo(arr, index, data) {
@@ -179,8 +180,6 @@ function weatherReport() {
                     // Add skycons
                     skycons.add(document.getElementById(`dailyIcon`), dataArr[thisIndex].icon);
                 });
-                // Animate Skycons
-                skycons.play();
             });
         }
     });

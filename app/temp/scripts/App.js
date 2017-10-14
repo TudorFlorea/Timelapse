@@ -2407,7 +2407,6 @@ var _todolist2 = _interopRequireDefault(_todolist);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import links from "./modules/_links";
-
 //links.printHistory();
 //links.printBookmarks();
 //links.setStorage();
@@ -2634,7 +2633,7 @@ function weatherReport() {
                     skycons.add(document.getElementById('dailyIcon'), dataArr[thisIndex].icon);
                 });
                 // Animate Skycons
-                skycons.play();
+                // skycons.play();
             });
         }
     });
