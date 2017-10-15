@@ -2726,7 +2726,7 @@ exports.default = quoteGenerator;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _jquery = __webpack_require__(0);
@@ -2737,102 +2737,106 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function todoFunc() {
 
-  //creating example object list
-  var tasks = [{ 'task': 'ehasd', 'status': 'tbd' }, { 'task': 'asd', 'status': 'done' }];
+    // Initializing tasks variable and loading the list of tasks
+    var tasks;
 
-  //display or hide the todo's box
-  (0, _jquery2.default)("#todoBtn").on('click', function (event) {
-    var todoStatus = (0, _jquery2.default)("#todoMain").css('display');
-    if (todoStatus == 'none') {
-      (0, _jquery2.default)('#todoMain').css('display', 'inline');
-      (0, _jquery2.default)('#todoBtn').toggleClass('hidden');
-      todoLoadTitle(tasks.length);
-      todoLoadList();
-    } else {
-      (0, _jquery2.default)('#todoBtn').toggleClass('hidden');
-      (0, _jquery2.default)('#todoMain').css('display', 'none');
+    todoLoadList();
+
+    // Function that generates the list of tasks
+    function todoLoadList() {
+        chrome.storage.sync.get('todos', function (taskStorage) {
+            var tasks = taskStorage.todos;
+            (0, _jquery2.default)('#list').empty();
+            if (tasks === undefined || tasks.length <= 0) {
+                noTodo();
+            } else {
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].status === 'tbd') {
+                        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button>");
+                    } else {
+                        (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
+                    }
+                }
+            }
+        });
     }
-  });
-  //load the title updating the number of existing tasks
-  function todoLoadTitle() {
-    var numOfTasks = 0;
-    if (tasks.length > 0) {
-      for (var i = 0; i < tasks.length; i++) {
-        if (tasks[i].status == 'tbd') {
-          numOfTasks++;
+
+    // Listen when checkbox is tick and marks task as done or to be done
+    (0, _jquery2.default)(document).on('change', 'input[name="checkbox"]', function () {
+        var input = (0, _jquery2.default)(this).next('span');
+        var taskID = this.id;
+        if (this.checked) {
+            (0, _jquery2.default)(input).toggleClass('itemDone');
+            chrome.storage.sync.get('todos', function (taskStorage) {
+                tasks = taskStorage.todos;
+                for (var i = 0; i < tasks.length; i++) {
+                    if (taskID == tasks[i].task) {
+                        tasks[i].status = 'done';
+                    }
+                }
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+                todoLoadList();
+            });
+        } else {
+            (0, _jquery2.default)(input).toggleClass('itemDone');
+            chrome.storage.sync.get('todos', function (taskStorage) {
+                tasks = taskStorage.todos;
+                for (var i = 0; i < tasks.length; i++) {
+                    if (taskID == tasks[i].task) {
+                        tasks[i].status = 'tbd';
+                    }
+                }
+                todoLoadList();
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+            });
         }
-      }
-      (0, _jquery2.default)('#todoHeader').html('<p id="todoTitle">' + numOfTasks + ' to do</p>');
-    } else {
-      noTodo();
-      (0, _jquery2.default)('#todoHeader').html('<p id="todoTitle"> 0 to do</p>');
-    }
-  }
+    });
 
-  //generate list of tasks and add them to the list
-  function todoLoadList() {
-    (0, _jquery2.default)('#list').html('');
-    for (var i = 0; i < tasks.length; i++) {
-      console.log(tasks[i].status);
-      if (tasks[i].status === 'tbd') {
-        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
-      } else {
-        (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
-      }
-    }
-  }
-  //detecting a task done
-  var numOfTodos = tasks.length;
-  (0, _jquery2.default)(document).on('change', 'input[name="checkbox"]', function () {
-    var input = (0, _jquery2.default)(this).next('span');
-    var taskID = this.id;
-
-    if (this.checked) {
-      numOfTodos--;
-      (0, _jquery2.default)(input).toggleClass('itemDone');
-      for (var i = 0; i < tasks.length; i++) {
-        if (taskID == tasks[i].task) {
-          tasks[i].status = 'done';
+    // Listens for the input field on the task and when Enter is pressed, it adds it to the list
+    (0, _jquery2.default)("#inputTodo").on("keyup", function (e) {
+        var newTodo = (0, _jquery2.default)("#inputTodo").val();
+        if (e.which == 13 && newTodo.length != 0) {
+            chrome.storage.sync.get({ todos: [] }, function (taskStorage) {
+                tasks = taskStorage.todos;
+                console.log(tasks);
+                tasks.push({
+                    'task': newTodo,
+                    'status': 'tbd'
+                });
+                (0, _jquery2.default)("#noTodoImg").remove();
+                (0, _jquery2.default)("#noTodoText").remove();
+                (0, _jquery2.default)("#inputTodo").val('');
+                chrome.storage.sync.set({
+                    todos: tasks
+                });
+                todoLoadList();
+            });
         }
-      }
-      todoLoadTitle();
-    } else {
-      numOfTodos++;
-      (0, _jquery2.default)(input).toggleClass('itemDone');
-      for (var i = 0; i < tasks.length; i++) {
-        if (taskID == tasks[i].task) {
-          tasks[i].status = 'tbd';
-        }
-      }
-      todoLoadTitle();
+    });
+    // When Delete button is clicked looks for the task in the list and removes it
+    (0, _jquery2.default)("#list").on("click", 'button', function () {
+        var itemToDelete = (0, _jquery2.default)(this).prev().prev().attr('id');
+        chrome.storage.sync.get('todos', function (taskStorage) {
+            tasks = taskStorage.todos;
+            for (var i = 0; i < tasks.length; i++) {
+                if (tasks[i].task == itemToDelete) {
+                    tasks.splice(i, 1);
+                }
+            }
+            chrome.storage.sync.set({
+                todos: tasks
+            });
+            todoLoadList();
+        });
+    });
+    // When there is no tasks, display image and some text
+    function noTodo() {
+        (0, _jquery2.default)('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
     }
-  });
-
-  //function to add new todos
-  (0, _jquery2.default)("#inputTodo").on("keyup", function (e) {
-    var newTodo = (0, _jquery2.default)("#inputTodo").val();
-    if (e.which == 13 && newTodo.length != 0) {
-      tasks.push({ task: newTodo, status: 'tbd' });
-      todoLoadTitle();
-      todoLoadList();
-      (0, _jquery2.default)("#inputTodo").val('');
-    }
-  });
-
-  (0, _jquery2.default)("#list").on("click", 'button', function () {
-    var itemToDelete = (0, _jquery2.default)(this).prev().prev().attr('id');
-    for (var i = 0; i < tasks.length; i++) {
-      if (tasks[i].task == itemToDelete) {
-        tasks.splice(i, 1);
-        todoLoadTitle();
-        todoLoadList();
-      }
-    }
-  });
-
-  function noTodo() {
-    (0, _jquery2.default)('#todoList').html('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woooo, nothing to do!</p>');
-  }
 }
 
 exports.default = todoFunc;
