@@ -12,13 +12,13 @@ function todoFunc() {
         chrome.storage.sync.get('todos', function (taskStorage) {
             var tasks = taskStorage.todos;
             $('#list').empty();
-            if (tasks.length <= 0) {
+            if (tasks === undefined || tasks.length <= 0) {
                 noTodo();
             } else {
                 for (let i = 0; i < tasks.length; i++) {
                     if (tasks[i].status === 'tbd') {
                         $("#list").append(
-                            "<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>"
+                            "<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button>"
                         );
                     } else {
                         $("#list").append(

@@ -1821,14 +1821,14 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #todoMain {
-    position: relative;
-    width: 50%;
-    margin: 0 auto; 
-    margin-left: 70px;
-    color: aliceblue;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    position: absolute;
+    width: 250px;
+    height: auto;
+    right: 1%;
+    bottom: 2%;
+    font-size: 15px;
+    border-radius: 3px;
+    background-color:rgba(0, 0, 0, .35);
 }
 
 #todoTitle {

@@ -2748,12 +2748,12 @@ function todoFunc() {
         chrome.storage.sync.get('todos', function (taskStorage) {
             var tasks = taskStorage.todos;
             (0, _jquery2.default)('#list').empty();
-            if (tasks.length <= 0) {
+            if (tasks === undefined || tasks.length <= 0) {
                 noTodo();
             } else {
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].status === 'tbd') {
-                        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button><button class='focusBtnTodo'>Main focus</button></li>");
+                        (0, _jquery2.default)("#list").append("<li><input name='checkbox'class='listItem' id='" + tasks[i].task + "' type='checkbox'><span>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button>");
                     } else {
                         (0, _jquery2.default)("#list").append("<li><input name='checkbox' class='listItem' id='" + tasks[i].task + "' type='checkbox' checked><span class='itemDone'>" + tasks[i].task + "</span><button class='deleteBtnTodo'>Delete</button></li>");
                     }
