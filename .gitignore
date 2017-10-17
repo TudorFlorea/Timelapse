@@ -28,6 +28,9 @@ yarn-error.log*
 dist/
 build/
 
+#Keys and secrets
+_config.js
+
 
 ### SublimeText ###
 # cache files for sublime text

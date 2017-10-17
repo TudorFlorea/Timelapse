@@ -2410,16 +2410,6 @@ var _links2 = _interopRequireDefault(_links);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import links from "./modules/_links";
-//links.printHistory();
-//links.printBookmarks();
-//links.setStorage();
-//links.printStorage();
-// links.linkToggle();
-// links.saveLinkEventListner();
-// links.renderCustomLinks();
-
-
 (0, _jquery2.default)(document).ready(function () {
     _weather2.default.weatherReport();
     _weather2.default.eventListeners();
@@ -2460,12 +2450,108 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var storage = chrome.storage.local;
 var apiKey = _config2.default.wKey;
 var url = _config2.default.url;
-var skycons;
-var cache = {};
+var skycons = new Skycons({ // weather icons
+    "color": "#e0e0f8",
+    "resizeClear": true
+});
+var wForecast = []; // All weather data
+var today = void 0; // Weather data for current day
+var daily = void 0; // Weekly forecast data
+var location = void 0;
+var date = void 0;
+var dailyArr = document.querySelectorAll(".forecast");
+var DAYS_TO_REPORT = 5; // weekly forecast
+var CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
 
+/**
+ * clearCache removes cache and cacheTime objects from storage
+/ */
+function clearCache() {
+    storage.remove(['cache', 'cacheTime'], function () {
+        console.log('Cache cleaned');
+    });
+}
+/**
+ * cacheCheck, checks if there is weather cache in storage and returns boolean value.
+/ */
+function cacheCheck() {
+    return new Promise(function (resolve, reject) {
+        var status;
+        storage.get(['cache', 'cacheTime'], function (items) {
+            // if cache is not older that 1h
+            console.log(items);
+            if (items.cache && items.cacheTime && items.cache.length > 1 && items.cacheTime > CACHE_DURATION) {
+                status = true;
+            } else {
+                status = false;
+            }
+            resolve(status);
+        });
+    }).then(function (value) {
+        console.log('Value: ' + value);
+        return value;
+    }).catch(function (reason) {
+        console.log('Error: ' + reason);
+        return reason;
+    });
+};
+/**
+ * @param {any} data - caches data to storage
+/ */
+function storeCache(data) {
+    storage.set({
+        cache: data,
+        cacheTime: Date.now()
+    }, function () {
+        console.log('Cache stored');
+    });
+}
+/**
+ * loadCache is loading cached weather data from storage, checks if data is not too old 
+ * and if not populates weather module with required information.
+ */
+function loadCache() {
+    storage.get(['cache', 'cacheTime'], function (items) {
+        today = items.cache[0];
+        daily = items.cache[1].data;
+        location = items.cache[2];
+        console.log(new Date(items.cacheTime));
+        console.log(new Date(Date.now()));
+        try {
+            // add weather info for current day to module
+            (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + items.cache[0].summary + '">\n                    ' + Math.round(items.cache[0].apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
+            (0, _jquery2.default)('.location').append('<p class="loc">' + items.cache[2] + '</p>');
+            skycons.add(document.getElementById("icon"), items.cache[0].icon);
+
+            for (var i in items.cache[1].data) {
+                if (parseInt(i) <= DAYS_TO_REPORT) {
+                    // get date from received timestamp
+                    date = new Date(items.cache[1].data[i].time * 1000).toString().substring(0, 10);
+                    // add formated date and skycons to daily overview
+                    (0, _jquery2.default)('.daily_' + i).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + i + '" width="30" height="30"></canvas>');
+                    skycons.add(document.getElementById('icon_' + i), items.cache[1].data[i].icon);
+                }
+            }
+            // Populate the daily info for the tomorrow only
+            populateDailyInfo(dailyArr, 0, items.cache[1].data);
+            skycons.add(document.getElementById('dailyIcon'), items.cache[1].data[0].icon);
+        } catch (error) {
+            throw new Error('Caching failed: ');
+        }
+    });
+}
+/**
+ *  Populates weather information elements
+ * 
+ * @param {any} arr  - takes and array of HTML elements to iterate through, main purpose is to set date for element through its index
+ * @param {any} index - index of selected element
+ * @param {any} data - data from cache or freshly fetched from APIs
+ */
 function populateDailyInfo(arr, index, data) {
+
     var sunUp = new Date(data[index].sunriseTime * 1000).toLocaleString('en-US', {
         hour: 'numeric',
         minute: 'numeric',
@@ -2478,11 +2564,11 @@ function populateDailyInfo(arr, index, data) {
     });
 
     (0, _jquery2.default)('.daily_header').html('<h4>' + arr[index].children[0].dataset.date + '</h4>');
-    (0, _jquery2.default)('.hiTemp').text(fToC(data[index].apparentTemperatureHigh));
-    (0, _jquery2.default)('.lowTemp').text(fToC(data[index].apparentTemperatureMin));
+    (0, _jquery2.default)('.hiTemp').text(Math.round(data[index].apparentTemperatureHigh));
+    (0, _jquery2.default)('.lowTemp').text(Math.round(data[index].apparentTemperatureMin));
     (0, _jquery2.default)('.wi-umbrella').text(' ' + Math.round(parseFloat(data[index].precipProbability) * 100) / 10 + '%');
     (0, _jquery2.default)('.wi-cloudy').text(' ' + Math.round(parseFloat(data[index].cloudCover) * 100) / 10 + '%');
-    (0, _jquery2.default)('.wi-humidity').text(' ' + parseFloat(data[index].humidity) * 100 + '%');
+    (0, _jquery2.default)('.wi-humidity').text(' ' + Math.round(parseFloat(data[index].humidity) * 100) + '%');
     (0, _jquery2.default)('.wi-strong-wind').text(' ' + Math.round(parseFloat(data[index].windSpeed)) + ' mph');
     (0, _jquery2.default)('.wi-sunrise').text(' ' + sunUp);
     (0, _jquery2.default)('.wi-sunset').text(' ' + sunDown);
@@ -2491,59 +2577,41 @@ function populateDailyInfo(arr, index, data) {
     (0, _jquery2.default)('.daily_icon').html('<canvas id="dailyIcon" width="90" height="90"></canvas>');
 }
 
-// convert fahrenheit to celsius
-function fToC(fahrenheit) {
-    var fTemp = parseInt(fahrenheit),
-        fToCel = (fTemp - 32) * 5 / 9;
-    // rounding to nearest number after converting
-    return Math.round(fToCel);
-}
-// convert celsius to fahrenheit
-function cToF(celsius) {
-    var cTemp = parseFloat(celsius);
-    var cToFh = cTemp * (9 / 5) + 32;
-    return Math.round(cToFh);
-}
-
 function eventListeners() {
     // Animate weekly report showing
     (0, _jquery2.default)('#icon').on('click', function (e) {
         (0, _jquery2.default)('#daily').toggleClass('invisible');
         if ((0, _jquery2.default)('#daily').hasClass('invisible')) {
-            (0, _jquery2.default)("#daily").css({ 'transform': 'translateX(100%)' });
+            (0, _jquery2.default)("#daily").css({
+                'transform': 'translateX(100%)'
+            });
+            skycons.pause();
         } else {
-            (0, _jquery2.default)("#daily").css({ 'transform': 'translateX(0%)' });
+            (0, _jquery2.default)("#daily").css({
+                'transform': 'translateX(0%)'
+            });
+            skycons.play();
         }
     });
-    // Switch between F and C units
-    (0, _jquery2.default)('.currentTemp').on('click', function (e) {
-        var currTemp = (0, _jquery2.default)('.currentTemp').text();
-        if ((0, _jquery2.default)('.unit').hasClass('cel')) {
-            (0, _jquery2.default)('.temp').html(cToF(currTemp) + '<sup class="frh unit">&#8457;</sup>');
-        } else {
-            (0, _jquery2.default)('.temp').html(fToC(currTemp) + '<sup class="cel unit">&#8451;</sup>');
-        }
+
+    // populate daily info for each day, when user clicks on day <li> element
+    (0, _jquery2.default)(dailyArr).on('click', function (e) {
+        // check for index number of clicked item
+        var thisIndex = (0, _jquery2.default)(dailyArr).index(this);
+        populateDailyInfo(dailyArr, thisIndex, daily);
+        // Add skycons
+        skycons.add(document.getElementById('dailyIcon'), daily[thisIndex].icon);
     });
 }
 
 // DarkSky current weather API call
 function weatherAPI(latitude, longitude) {
-    // variables config for coordinates, url and api key
     // latitude and longitude are accepted arguments and passed once a user has submitted the form.
     var lat = parseFloat(latitude),
         lng = parseFloat(longitude),
-        // TODO: implement auto units with &units=auto 
-    api_call = url + apiKey + "/" + lat + "," + lng + "/?exclude=alerts,flags,hourly,daily&Accept-Encoding:gzip&callback=?";
+        api_call = url + apiKey + "/" + lat + "," + lng + "/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?";
 
-    return _jquery2.default.getJSON(api_call, function (forecast) {
-        // console.log(forecast);
-        skycons = new Skycons({
-            "color": "#e0e0f8",
-            "resizeClear": true
-        });
-        skycons.add(document.getElementById("icon"), forecast.currently.icon);
-        skycons.play();
-    });
+    return _jquery2.default.getJSON(api_call, function (forecast) {});
 }
 
 // get User's current location(city, state)
@@ -2576,70 +2644,70 @@ function weatherReport() {
     if (!navigator.geolocation) {
         console.error('Geolocation not enabled');
         (0, _jquery2.default)('.location').append('<p>Geolocation is not enabled.</p>');
-        return;
     };
+
+    // try to populate data from cache if possible
     return new Promise(function (resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            var currentTemp = weatherAPI(latitude, longitude);
-            var userAddress = getAddress(latitude, longitude);
-            // waiting for all promises to resolve and and assigning them to promise var
-            var promised = Promise.all([currentTemp, userAddress]);
+        resolve(cacheCheck());
+    }).then(function (value) {
+        if (value) {
+            // populate from cache
+            console.log('Loading data from cache');
+            loadCache();
+        } else {
+            // fetch data from Dark Sky and Google location API
+            console.log('Cache error. Fetching data from APIs');
+            clearCache(); // clear old cache
+            return new Promise(function (resolve, reject) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var currentTemp = weatherAPI(latitude, longitude);
+                    var userAddress = getAddress(latitude, longitude);
+                    // waiting for all promises to resolve and and assigning them to promise var
+                    var promised = Promise.all([currentTemp, userAddress]);
 
-            if (promised) {
-                console.log(promised);
-                resolve(promised);
-                console.log('resolved');
-            } else throw reject('Error Happened: ' + reject.reason);
-        });
-    }).then(function (result) {
-        // appending basic data ( current temp, animated icon, and location) to weather section
-        (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + result[0].currently.summary + '">\n            ' + fToC(result[0].currently.apparentTemperature) + '<sup class="cel unit">&#8451;</sup></p>');
-        (0, _jquery2.default)('.location').append('<p class="loc">' + result[1] + '</p>');
-        return result;
-    }).then(function (data) {
-        var daysToReport = 5;
-        var lat = parseFloat(data[0].latitude),
-            lng = parseFloat(data[0].longitude),
-            // TODO: implement auto units with &units=auto 
-        api_call = url + apiKey + "/" + lat + "," + lng + "?exclude=alerts,flags,hourly,currently&Accept-Encoding:gzip&callback=?",
-            date = void 0;
-        var dataArr = []; // TODO: send data storage
+                    if (promised) {
+                        console.log(promised);
+                        resolve(promised);
+                        console.log('resolved');
+                    } else reject('Error Happened: ' + reject.reason);
+                });
+            }).then(function (result) {
+                wForecast.push(result[0].currently, result[0].daily, result[1]);
+                daily = wForecast[1].data;
+                today = wForecast[0];
+                location = wForecast[2];
+                // store new data to cache
+                storeCache(wForecast);
+                storage.get(['cache', 'cacheTime'], function (items) {
+                    console.log(items);
+                });
 
-        // Fetch daily weather data
-        if (dataArr.length < daysToReport) {
-            // I could do this with already fetched data but couldn't add skycons in that way performance wise
-            // but I excluded all data except daily in this API call
-            _jquery2.default.getJSON(api_call, function (forecast) {
-                var daily = forecast.daily.data;
+                // appending basic data ( current temp, animated icon, and location) to weather section
+                (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + result[0].currently.summary + '">\n                 ' + Math.round(result[0].currently.apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
+                (0, _jquery2.default)('.location').append('<p class="loc">' + result[1] + '</p>');
+                skycons.add(document.getElementById("icon"), result[0].currently.icon);
 
                 for (var i in daily) {
-                    if (parseInt(i) <= daysToReport) {
-                        // prepare data for storage
-                        dataArr[i] = daily[i];
-                        // get data from received timestamp
+                    if (parseInt(i) <= DAYS_TO_REPORT) {
+                        // get date from received timestamp
                         date = new Date(daily[i].time * 1000).toString().substring(0, 10);
                         // add formated date and skycons to daily overview
                         (0, _jquery2.default)('.daily_' + i).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + i + '" width="30" height="30"></canvas>');
                         skycons.add(document.getElementById('icon_' + i), daily[i].icon);
                     }
                 }
-                var dailyArr = document.querySelectorAll(".forecast");
-                // Populate the daily info for the tomorrow only
-                populateDailyInfo(dailyArr, 0, dataArr);
-                skycons.add(document.getElementById('dailyIcon'), dataArr[0].icon);
+                dailyArr = document.querySelectorAll(".forecast");
 
-                // populate daily info for each day, when user clicks on day <li></li> element
-                (0, _jquery2.default)(dailyArr).on('click', function (e) {
-                    // check for index number of clicked item
-                    var thisIndex = (0, _jquery2.default)(dailyArr).index(this);
-                    populateDailyInfo(dailyArr, thisIndex, dataArr);
-                    // Add skycons
-                    skycons.add(document.getElementById('dailyIcon'), dataArr[thisIndex].icon);
-                });
+                // Populate the daily info for the tomorrow only
+                populateDailyInfo(dailyArr, 0, daily);
+                skycons.add(document.getElementById('dailyIcon'), daily[0].icon);
+            }).catch(function (reason) {
+                console.log('Error while fetching data from APIs: ' + reason);
+                throw new Error(reason);
             });
-        }
+        };
     });
 };
 
