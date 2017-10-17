@@ -2408,6 +2408,10 @@ var _links = __webpack_require__(8);
 
 var _links2 = _interopRequireDefault(_links);
 
+var _mainFocus = __webpack_require__(9);
+
+var _mainFocus2 = _interopRequireDefault(_mainFocus);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
@@ -2415,6 +2419,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     _weather2.default.eventListeners();
     (0, _quotes2.default)();
     (0, _todolist2.default)();
+    (0, _mainFocus2.default)();
     _links2.default.renderCustomLinks();
     _links2.default.renderTopSites();
     _links2.default.saveLinkEventListner();
@@ -3109,6 +3114,27 @@ var links = {
 };
 
 exports.default = links;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mainFocusFeat() {}
+
+exports.default = mainFocusFeat;
 
 /***/ })
 /******/ ]);

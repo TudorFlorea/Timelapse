@@ -15,7 +15,7 @@
         padding: 6px 5px 2px 5px;
     }
     & #todoTitle {
-        color: white;
+        color: #e0e0f8;
         text-align: center;
         margin: 0;
         padding: 6px 5px 2px 5px;
@@ -27,8 +27,8 @@
         background-color:transparent;
         border-style: solid; 
         border-width: 0px 0px 1px 0px; 
-        border-color: white;
-        color:white;
+        border-color: #e0e0f8;
+        color:#e0e0f8;
         font-size: 15px;
         display: block;
         margin: 0px auto 3% auto;
@@ -40,7 +40,7 @@
         list-style: none;
         padding: 6px 5px 7px 5px;
         margin: 0;
-        color: white;
+        color: #e0e0f8;
     }
     & .itemDone {
         text-decoration: line-through;
@@ -64,10 +64,10 @@
         outline: none;
     }
     & .deleteBtnTodo:active{
-        border-color: white;
+        border-color: #e0e0f8;
     }
     & #noTodoText {
-        color:white;
+        color:#e0e0f8;
         text-align: center;
     }
     & #noTodoImg {
