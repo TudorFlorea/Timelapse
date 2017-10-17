@@ -2,7 +2,6 @@
 @import "base/fonts";
 @import "base/basetop";
 @import "base/grids";
-@import "vendor/font-awesome.min";
 
 @import "modules/timelapse";
 @import "modules/weather";

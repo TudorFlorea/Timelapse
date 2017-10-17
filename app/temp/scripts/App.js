@@ -2404,10 +2404,6 @@ var _todolist = __webpack_require__(7);
 
 var _todolist2 = _interopRequireDefault(_todolist);
 
-var _links = __webpack_require__(8);
-
-var _links2 = _interopRequireDefault(_links);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import links from "./modules/_links";
@@ -2418,16 +2414,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // links.linkToggle();
 // links.saveLinkEventListner();
 // links.renderCustomLinks();
-
+//links.clearStorage();
+// var test = document.getElementById("test");
+// console.log("a:" + test.getAttribute("data-id"));
 
 (0, _jquery2.default)(document).ready(function () {
     _weather2.default.weatherReport();
     _weather2.default.eventListeners();
     (0, _quotes2.default)();
     (0, _todolist2.default)();
-    _links2.default.renderCustomLinks();
-    _links2.default.renderTopSites();
-    _links2.default.saveLinkEventListner();
 });
 
 /***/ }),
@@ -2463,7 +2458,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var apiKey = _config2.default.wKey;
 var url = _config2.default.url;
 var skycons;
-var cache = {};
 
 function populateDailyInfo(arr, index, data) {
     var sunUp = new Date(data[index].sunriseTime * 1000).toLocaleString('en-US', {
@@ -2638,6 +2632,8 @@ function weatherReport() {
                     // Add skycons
                     skycons.add(document.getElementById('dailyIcon'), dataArr[thisIndex].icon);
                 });
+                // Animate Skycons
+                // skycons.play();
             });
         }
     });
@@ -2844,203 +2840,6 @@ function todoFunc() {
 }
 
 exports.default = todoFunc;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function getHistory() {
-
-    return new Promise(function (resolve, reject) {
-        chrome.history.search({ "text": "", "maxResults": 10 }, function (results) {
-            resolve(results);
-        });
-    });
-} /**
-   * Created by Tudor on 10/1/2017.
-   */
-
-function getBookmarks() {
-    return new Promise(function (resolve, reject) {
-        chrome.bookmarks.getTree(function (results) {
-            resolve(results);
-        });
-    });
-}
-
-function getStorage() {
-    return new Promise(function (resolve, reject) {
-        chrome.storage.sync.get(null, function (storage) {
-            resolve(storage);
-        });
-    });
-}
-
-function setStorage(name, value) {
-    var setName = name;
-    var setValue = value;
-    chrome.storage.sync.set({ setName: setValue }, function () {
-        console.log("storage ", links);
-    });
-}
-
-function saveLink(name, url) {
-    chrome.storage.sync.get(null, function (storage) {
-        var customLinks = storage.customLinks || [];
-        var id = customLinks.length == 0 ? 1 : customLinks[customLinks.length - 1].id + 1;
-        customLinks.push({
-            "id": id,
-            "name": name,
-            "url": url
-        });
-
-        chrome.storage.sync.set({ customLinks: customLinks });
-
-        renderCustomLinks();
-    });
-}
-
-function printStorage() {
-    getStorage().then(function (storage) {
-        console.log(storage);
-    });
-}
-
-function printBookmarks() {
-    getBookmarks().then(function (data) {
-        console.log(data);
-    });
-}
-
-function printHistory() {
-
-    getHistory().then(function (data) {
-        console.log(data);
-        var html = "<ul>";
-        for (var i = 0; i < data.length; i++) {
-            html += "<li>" + data[i]["title"] + "</li>";
-        }
-        html += "</ul>";
-        console.log(html);
-        (0, _jquery2.default)("#history").html(html);
-    });
-}
-
-function linkToggle() {
-    (0, _jquery2.default)("#links-header").on('click', function () {
-        (0, _jquery2.default)("#links-wrapper").toggle();
-    });
-}
-
-function saveLinkEventListner() {
-    (0, _jquery2.default)("#link_save").on('click', function () {
-        var name = (0, _jquery2.default)("#link_name").val();
-        var url = (0, _jquery2.default)("#link_url").val();
-        (0, _jquery2.default)("#link_name").val("");
-        (0, _jquery2.default)("#link_url").val("");
-        saveLink(name, url);
-    });
-}
-
-function renderCustomLinks() {
-    var html = "";
-    getStorage().then(function (storage) {
-        var links = storage.customLinks;
-        if (links != undefined) {
-            for (var i = 0; i < links.length; i++) {
-                html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "' target='_blank'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
-            }
-            (0, _jquery2.default)("#custom_links").html(html);
-            (0, _jquery2.default)(".delete-link").on('click', function () {
-                console.log("aa" + (0, _jquery2.default)(this).parent().attr('data-id'));
-                removeLink((0, _jquery2.default)(this).parent().attr('data-id'));
-            });
-        }
-    });
-}
-
-function addProtocol(url) {
-    var newUrl = url.split(":");
-    if (newUrl[0] == 'http' || url[0] == "https") {
-        return url;
-    } else {
-        return "http://" + url;
-    }
-}
-
-function removeLink(id) {
-    chrome.storage.sync.get(null, function (storage) {
-        var customLinks = storage.customLinks || [];
-        if (customLinks.length > 0) {
-            var newLinks = customLinks.filter(function (link) {
-                return link.id != id;
-            });
-            chrome.storage.sync.set({ customLinks: newLinks });
-            renderCustomLinks();
-        }
-    });
-}
-
-function getTopSites() {
-
-    return new Promise(function (resolve, reject) {
-        chrome.topSites.get(function (sites) {
-            resolve(sites);
-        });
-    });
-}
-
-function renderTopSites() {
-    getTopSites().then(function (topSites) {
-        var html = "";
-
-        if (topSites.length) {
-            // HARDCODED 6 => TODO - make a constant
-            for (var i = 0; i < 6; i++) {
-                html += '<li><a href="' + topSites[i].url + '" rel="noreferrer noopener" target="_blank"><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url + '" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 7) + "..." + ' </span></a></li>';
-            }
-
-            (0, _jquery2.default)("#links_list").html(html);
-        }
-    });
-}
-
-function substr(string, length) {
-    return string.substring(0, length);
-}
-
-function clearStorage() {
-    chrome.storage.sync.set({ customLinks: [] });
-    //chrome.storage.sync.clear();
-    //chrome.storage.local.clear();
-}
-
-var links = {
-    printHistory: printHistory,
-    printBookmarks: printBookmarks,
-    printStorage: printStorage,
-    setStorage: setStorage,
-    linkToggle: linkToggle,
-    saveLinkEventListner: saveLinkEventListner,
-    clearStorage: clearStorage,
-    renderCustomLinks: renderCustomLinks,
-    renderTopSites: renderTopSites
-};
-
-exports.default = links;
 
 /***/ })
 /******/ ]);
