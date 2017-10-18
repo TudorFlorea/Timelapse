@@ -2415,9 +2415,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     _weather2.default.eventListeners();
     (0, _quotes2.default)();
     (0, _todolist2.default)();
-    _links2.default.renderCustomLinks();
-    _links2.default.renderTopSites();
-    _links2.default.saveLinkEventListner();
+    _links2.default.init();
 });
 
 /***/ }),
@@ -3013,13 +3011,24 @@ function linkToggle() {
     });
 }
 
-function saveLinkEventListner() {
-    (0, _jquery2.default)("#link_save").on('click', function () {
+function eventListeners() {
+    (0, _jquery2.default)("#link_save").on('click', function (e) {
+        e.preventDefault();
         var name = (0, _jquery2.default)("#link_name").val();
         var url = (0, _jquery2.default)("#link_url").val();
         (0, _jquery2.default)("#link_name").val("");
         (0, _jquery2.default)("#link_url").val("");
         saveLink(name, url);
+    });
+
+    (0, _jquery2.default)("#link_close").on("click", function (e) {
+        e.preventDefault();
+        (0, _jquery2.default)("#save_links").css("display", "none");
+        (0, _jquery2.default)("#link_form_toggle").show();
+    });
+    // Show custom links
+    (0, _jquery2.default)(".dots").on('click', function () {
+        (0, _jquery2.default)("#custom_links_wrapper").toggleClass('invisible');
     });
 }
 
@@ -3029,7 +3038,7 @@ function renderCustomLinks() {
         var links = storage.customLinks;
         if (links != undefined) {
             for (var i = 0; i < links.length; i++) {
-                html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "' target='_blank'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
+                html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
             }
             (0, _jquery2.default)("#custom_links").html(html);
             (0, _jquery2.default)(".delete-link").on('click', function () {
@@ -3077,8 +3086,8 @@ function renderTopSites() {
 
         if (topSites.length) {
             // HARDCODED 6 => TODO - make a constant
-            for (var i = 0; i < 6; i++) {
-                html += '<li><a href="' + topSites[i].url + '" rel="noreferrer noopener" target="_blank"><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url + '" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 7) + "..." + ' </span></a></li>';
+            for (var i = 0; i < 8; i++) {
+                html += '<li class="link_list_item"><a href="' + topSites[i].url + '" rel="noreferrer noopener" title="' + topSites[i].title + ' "><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url + '" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 15) + '</span></a></li>';
             }
 
             (0, _jquery2.default)("#links_list").html(html);
@@ -3092,20 +3101,16 @@ function substr(string, length) {
 
 function clearStorage() {
     chrome.storage.sync.set({ customLinks: [] });
-    //chrome.storage.sync.clear();
-    //chrome.storage.local.clear();
+}
+
+function init() {
+    renderTopSites();
+    renderCustomLinks();
+    eventListeners();
 }
 
 var links = {
-    printHistory: printHistory,
-    printBookmarks: printBookmarks,
-    printStorage: printStorage,
-    setStorage: setStorage,
-    linkToggle: linkToggle,
-    saveLinkEventListner: saveLinkEventListner,
-    clearStorage: clearStorage,
-    renderCustomLinks: renderCustomLinks,
-    renderTopSites: renderTopSites
+    init: init
 };
 
 exports.default = links;

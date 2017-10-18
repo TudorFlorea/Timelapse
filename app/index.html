@@ -18,21 +18,33 @@
 
     <!-- Links  -->
     <section id="links">
-        <div id="links_wrapper">
+        <div id="links_wrapper">                
             <div id="top_links_wrapper">
-                <h2 id="top_links_heading">Top sites</h2>
                 <ul id="links_list">
-                    <li><a href="#" rel="noreferrer noopener" target="_blank"><img class="link_icon" src="./icons/link_icon.svg" alt="icon placeholder" height="30px" width="30px"><span class="link_title">Link</span></a></li>
+                    <li class="link_list_item">
+                        <a href="#" rel="noreferrer noopener" target="_blank">
+                            <img class="link_icon" src="./icons/link_icon.svg" alt="icon placeholder" height="30px" width="30px">
+                            <span class="link_title">Link</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div id="custom_links_wrapper">
-                <ul id="custom_links"></ul>
-                <br />
-                <form id="save_links">
-                    <input type="text" placeholder="name" id="link_name" class="link_inputs">
-                    <input type="text" placeholder="url" id="link_url" class="link_inputs">
-                    <button id="link_save">Save</button>
-                </form>
+            <i class="dots fa fa-ellipsis-v" aria-hidden="true" title="Add custom links"></i>
+            <div id="custom_links_wrapper" class="invisible">
+                <div id="custom_links_heading"><i class="fa fa-link" aria-hidden="true"> Custom Links</i></div>
+                <div id="hide_wrapper">
+                    <ul id="custom_links"></ul>
+                    <div id="link_form_toggle"><i class="fa fa-plus-square" aria-hidden="true"> Add Link</i></div>
+                    <form id="save_links">
+                        <input type="text" placeholder="name" id="link_name" class="link_inputs">
+                        <input type="text" placeholder="url" id="link_url" class="link_inputs">
+                        <div id="link_buttons_wrapper">
+                            <button id="link_save">Save</button>
+                            <button id="link_close">Close</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
 

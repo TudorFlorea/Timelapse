@@ -12,7 +12,5 @@ $(document).ready(function () {
     func.eventListeners();
     quoteGenerator();
     todoFunc();
-    links.renderCustomLinks();
-    links.renderTopSites();
-    links.saveLinkEventListner();
+    links.init();
 });

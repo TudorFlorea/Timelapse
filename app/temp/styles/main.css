@@ -3350,24 +3350,23 @@ we can specify global variable to use flexbox as default instead of floats
     display: -ms-flexbox;
     display: flex;
     position: absolute;
-    top: 40px;
-    left: 30px;
+    top: 2%;
+    left: 1%;
     -ms-flex-item-align: start;
         align-self: flex-start;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    width: 550px;
-    //height: 55px
+    // width: 550px; //height: 55px
 }
 
 #links #links_wrapper {
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
- -webkit-box-align: start;
-     -ms-flex-align: start;
-         align-items: flex-start;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
  -webkit-box-pack: start;
      -ms-flex-pack: start;
          justify-content: flex-start;
@@ -3377,8 +3376,16 @@ we can specify global variable to use flexbox as default instead of floats
          flex-flow: row wrap;
 }
 
+#links #links_wrapper .dots {
+ position: relative;
+ top: -135px;
+ left: -5px;
+ color: white;
+ cursor: pointer;
+}
+
 #links #links_wrapper #top_links_wrapper {
- background-color: rgba(0, 0, 0, .3);
+ background-color: rgba(60, 60, 60, .5);
  border-radius: 5px;
  width: 100%;
  display: -webkit-box;
@@ -3396,10 +3403,8 @@ we can specify global variable to use flexbox as default instead of floats
          flex-flow: column wrap;
 }
 
-#links #links_wrapper #top_links_wrapper #top_links_heading {
- color: #fff;
- padding: 0px;
- margin: 3px;
+#links #links_wrapper #top_links_wrapper ul {
+ margin: 0;
 }
 
 #links #links_wrapper #top_links_wrapper #links_list {
@@ -3412,29 +3417,35 @@ we can specify global variable to use flexbox as default instead of floats
  -webkit-box-direction: normal;
      -ms-flex-flow: row nowrap;
          flex-flow: row nowrap;
- -webkit-box-pack: center;
-     -ms-flex-pack: center;
-         justify-content: center;
+ -ms-flex-pack: distribute;
+     justify-content: space-around;
  -webkit-box-align: center;
      -ms-flex-align: center;
          align-items: center;
 }
 
-#links #links_wrapper #top_links_wrapper #links_list li {
+#links #links_wrapper #top_links_wrapper #links_list .link_list_item {
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
- -webkit-box-align: center;
-     -ms-flex-align: center;
-         align-items: center;
+ -webkit-box-align: baseline;
+     -ms-flex-align: baseline;
+         align-items: baseline;
  list-style: none;
  -webkit-box-pack: center;
      -ms-flex-pack: center;
          justify-content: center;
- width: 80px;
+ -webkit-box-flex: 1;
+     -ms-flex: 1;
+         flex: 1;
  height: 50px;
  text-align: center;
  font-size: 10px;
+ margin-top: 5px;
+}
+
+#links #links_wrapper #top_links_wrapper #links_list .link_list_item a .link_title {
+ // visibility: hidden;
 }
 
 #links #links_wrapper #top_links_wrapper #links_list {
@@ -3453,11 +3464,10 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #links #links_wrapper #custom_links_wrapper {
- width: 250px;
- margin-top: 20px;
+ width: 300px;
+ margin-top: 10px;
  background-color: rgba(0, 0, 0, .3);
  border-radius: 5px;
- //width: 100%;
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
@@ -3473,45 +3483,79 @@ we can specify global variable to use flexbox as default instead of floats
          flex-flow: row wrap;
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links {
+#links #links_wrapper #custom_links_wrapper #custom_links_heading {
+ color: #e0e0f8;
+ padding: 15px;
+ font-size: 18px;
+ cursor: pointer;
+}
+
+#links #links_wrapper #custom_links_wrapper #hide_wrapper {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: row wrap;
+         flex-flow: row wrap;
+ max-height: 300px;
+ overflow-y: scroll;
+}
+
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links {
  list-style-type: none;
  margin: 20px 20px;
  padding: 0;
  width: 250px;
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links li {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links li {
  display: block;
  color: #000;
- padding: 8px 8px;
+ padding: 8px 15px;
  text-decoration: none;
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links li .delete-link {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links li .delete-link {
  color: #fff;
  cursor: pointer;
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links li .link-name {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links li .link-name {
  display: inline-block;
- width: 170px;
+ width: 140px;
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links {
 
  /*Change the link color on hover*/
 }
 
-#links #links_wrapper #custom_links_wrapper #custom_links li:hover {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links li:hover {
  background-color: #555;
  color: white;
 }
 
-#links #links_wrapper #custom_links_wrapper #save_links {
- //padding: 0;
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #link_form_toggle {
+ color: #e0e0f8;
+ padding: 8px;
+ font-size: 14px;
+ cursor: pointer;
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
+ -ms-flex-item-align: start;
+     align-self: flex-start;
+}
+
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #save_links {
+ display: none;
  width: 100%;
  -webkit-box-orient: vertical;
  -webkit-box-direction: normal;
@@ -3525,7 +3569,7 @@ we can specify global variable to use flexbox as default instead of floats
          align-items: center;
 }
 
-#links #links_wrapper #custom_links_wrapper #save_links .link_inputs {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #save_links .link_inputs {
  padding: 4px 20px;
  margin: 4px 0;
  border: 1px solid #ccc;
@@ -3534,8 +3578,37 @@ we can specify global variable to use flexbox as default instead of floats
          box-sizing: border-box;
 }
 
-#links #links_wrapper #custom_links_wrapper #save_links #link_save {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #save_links #link_buttons_wrapper {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-orient: horizontal;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: row nowrap;
+         flex-flow: row nowrap;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: baseline;
+     -ms-flex-align: baseline;
+         align-items: baseline;
+ -ms-flex-line-pack: justify;
+     align-content: space-between;
+}
+
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #save_links #link_buttons_wrapper #link_save {
  background-color: #4CAF50;
+ color: white;
+ padding: 4px 20px;
+ margin: 4px 0;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ margin-right: 5px;
+}
+
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #save_links #link_buttons_wrapper #link_close {
+ background-color: #da5350;
  color: white;
  padding: 4px 20px;
  margin: 4px 0;
@@ -3544,7 +3617,7 @@ we can specify global variable to use flexbox as default instead of floats
  cursor: pointer;
 }
 
-#links #links_wrapper #custom_links_wrapper {
+#links #links_wrapper #custom_links_wrapper #hide_wrapper {
 
  /*! save_links*/
 }
@@ -3564,6 +3637,22 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 /* ! links */
+
+#hide_wrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .8); //border-radius: 10px;
+}
+
+#hide_wrapper::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#hide_wrapper::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
 
 /* ==========================================================================
    Helper classes
