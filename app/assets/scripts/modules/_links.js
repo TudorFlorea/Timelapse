@@ -108,6 +108,11 @@ function eventListeners() {
     $(".dots").on('click', function() {
         $("#custom_links_wrapper").toggleClass('invisible');
     });
+
+    $("#link_form_toggle").on('click', function() {
+        $(this).hide();
+        $("#save_links").css("display", "flex");
+     });
 }
 
 function renderCustomLinks() {

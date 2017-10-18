@@ -3030,6 +3030,11 @@ function eventListeners() {
     (0, _jquery2.default)(".dots").on('click', function () {
         (0, _jquery2.default)("#custom_links_wrapper").toggleClass('invisible');
     });
+
+    (0, _jquery2.default)("#link_form_toggle").on('click', function () {
+        (0, _jquery2.default)(this).hide();
+        (0, _jquery2.default)("#save_links").css("display", "flex");
+    });
 }
 
 function renderCustomLinks() {
