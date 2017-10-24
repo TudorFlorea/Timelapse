@@ -3351,7 +3351,7 @@ we can specify global variable to use flexbox as default instead of floats
     display: flex;
     position: absolute;
     top: 2%;
-    left: 1%;
+    left: 3%;
     -ms-flex-item-align: start;
         align-self: flex-start;
     -webkit-box-pack: center;
@@ -3377,9 +3377,9 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #links #links_wrapper .dots {
- position: relative;
- top: -115px;
- left: -5px;
+ position: fixed;
+ top: 30px;
+ left: 20px;
  color: white;
  cursor: pointer;
 }

@@ -2,7 +2,7 @@
     display: flex;
     position: absolute;
     top: 2%;
-    left: 1%;
+    left: 3%;
     align-self: flex-start;
     justify-content: center;
     // width: 550px; //height: 55px;
@@ -13,10 +13,10 @@
         flex-flow: row wrap;
 
         & .dots {
-            position: relative;
-            top: -115px;
-            left: -5px;
-            color: white; 
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            color: white;
             cursor: pointer;
         }
         & #top_links_wrapper {

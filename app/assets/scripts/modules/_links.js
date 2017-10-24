@@ -3,6 +3,7 @@
  */
 
 import $ from '../vendor/jquery-3.2.1.min';
+import config from './_config';
 
 function getHistory() {
 
@@ -113,6 +114,13 @@ function eventListeners() {
         $(this).hide();
         $("#save_links").css("display", "flex");
      });
+    $(".dots").on("mouseenter", function() {
+        $(this).addClass("fa-lg");
+    });
+
+    $(".dots").on("mouseleave", function() {
+        $(this).removeClass("fa-lg");
+    });
 }
 
 function renderCustomLinks() {
@@ -169,8 +177,9 @@ function renderTopSites() {
         let html = "";
 
         if (topSites.length) {
-            // HARDCODED 6 => TODO - make a constant
-            for (var i = 0; i < 8; i++) {
+            //temporary solution!!
+            let topSitesCount = config.MAX_TOP_SITES > topSites.length ? topSites.length : config.MAX_TOP_SITES;
+            for (var i = 0; i < topSitesCount; i++) {
                 html += '<li class="link_list_item"><a href="'+ topSites[i].url +'" rel="noreferrer noopener" title="'+ topSites[i].title +' "><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url +'" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 15) +'</span></a></li>';
             }
 

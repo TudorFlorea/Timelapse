@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2343,7 +2343,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return 1 === arguments.length ? this.off(a, "**") : this.off(b, a || "**", c);
     } }), r.holdReady = function (a) {
     a ? r.readyWait++ : r.ready(!0);
-  }, r.isArray = Array.isArray, r.parseJSON = JSON.parse, r.nodeName = B, "function" == "function" && __webpack_require__(3) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+  }, r.isArray = Array.isArray, r.parseJSON = JSON.parse, r.nodeName = B, "function" == "function" && __webpack_require__(4) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
     return r;
   }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Vb = a.jQuery,
@@ -2388,11 +2388,31 @@ module.exports = function(module) {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var config = {
+    wKey: '6a70ec8ed658efa9fb9cc968bc6c7a22',
+    url: 'https://api.darksky.net/forecast/',
+    gKey: 'AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo',
+    MAX_TOP_SITES: 8
+};
+
+exports.default = config;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _weather = __webpack_require__(4);
+var _weather = __webpack_require__(5);
 
 var _weather2 = _interopRequireDefault(_weather);
 
@@ -2419,7 +2439,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 });
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -2428,7 +2448,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2442,7 +2462,7 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _config = __webpack_require__(5);
+var _config = __webpack_require__(2);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -2717,25 +2737,6 @@ var func = {
 exports.default = func;
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var config = {
-    wKey: '6a70ec8ed658efa9fb9cc968bc6c7a22',
-    url: 'https://api.darksky.net/forecast/',
-    gKey: 'AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo'
-};
-
-exports.default = config;
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2926,7 +2927,15 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _config = __webpack_require__(2);
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Tudor on 10/1/2017.
+ */
 
 function getHistory() {
 
@@ -2935,9 +2944,7 @@ function getHistory() {
             resolve(results);
         });
     });
-} /**
-   * Created by Tudor on 10/1/2017.
-   */
+}
 
 function getBookmarks() {
     return new Promise(function (resolve, reject) {
@@ -3035,6 +3042,13 @@ function eventListeners() {
         (0, _jquery2.default)(this).hide();
         (0, _jquery2.default)("#save_links").css("display", "flex");
     });
+    (0, _jquery2.default)(".dots").on("mouseenter", function () {
+        (0, _jquery2.default)(this).addClass("fa-lg");
+    });
+
+    (0, _jquery2.default)(".dots").on("mouseleave", function () {
+        (0, _jquery2.default)(this).removeClass("fa-lg");
+    });
 }
 
 function renderCustomLinks() {
@@ -3090,8 +3104,9 @@ function renderTopSites() {
         var html = "";
 
         if (topSites.length) {
-            // HARDCODED 6 => TODO - make a constant
-            for (var i = 0; i < 8; i++) {
+            //temporary solution!!
+            var topSitesCount = _config2.default.MAX_TOP_SITES > topSites.length ? topSites.length : _config2.default.MAX_TOP_SITES;
+            for (var i = 0; i < topSitesCount; i++) {
                 html += '<li class="link_list_item"><a href="' + topSites[i].url + '" rel="noreferrer noopener" title="' + topSites[i].title + ' "><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url + '" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 15) + '</span></a></li>';
             }
 
