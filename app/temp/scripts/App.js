@@ -2759,11 +2759,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // function to load random quotes from json file
 function quoteGenerator() {
     _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
-        // var to randomize order of array indexes
-        var random = Math.floor(Math.random() * 101);
-        // Load quotes randomly
-        (0, _jquery2.default)("#quoteText").append(inspiringQuotes[random].quote);
-        (0, _jquery2.default)("#quoteAuthor").append("<a href=\"#\">" + inspiringQuotes[random].name + "</a>").hide();
+        return new Promise(function (resolve, reject) {
+            var quotes = [];
+            inspiringQuotes.forEach(function (quote) {
+                quote.wikiUrl = "https://en.wikipedia.org/wiki/" + encodeURI(quote.name);
+                quotes.push(quote);
+            }, this);
+            resolve(quotes);
+        }).then(function (data) {
+            var randomQuote = data[Math.floor(Math.random() * 101)];
+
+            (0, _jquery2.default)("#quoteText").append(randomQuote.quote);
+            (0, _jquery2.default)("#quoteAuthor").append("<a href=\"" + randomQuote.wikiUrl + "\" target=\"_blank\">" + randomQuote.name + "</a>").hide();
+        });
     });
 
     // tweet quotes
