@@ -3,6 +3,7 @@
  */
 
 import $ from '../vendor/jquery-3.2.1.min';
+import config from './_config';
 
 function getHistory() {
 
@@ -89,13 +90,36 @@ function linkToggle() {
     });
 }
 
-function saveLinkEventListner() {
-    $("#link_save").on('click', function() {
+function eventListeners() {
+    $("#link_save").on('click', function(e) {
+        e.preventDefault();
         let name = $("#link_name").val();
         let url = $("#link_url").val();
         $("#link_name").val("");
         $("#link_url").val("");
         saveLink(name, url);
+    });
+
+    $("#link_close").on("click", function(e) {
+        e.preventDefault();
+        $("#save_links").css("display", "none");
+        $("#link_form_toggle").show();
+    });
+    // Show custom links
+    $(".dots").on('click', function() {
+        $("#custom_links_wrapper").toggleClass('invisible');
+    });
+
+    $("#link_form_toggle").on('click', function() {
+        $(this).hide();
+        $("#save_links").css("display", "flex");
+     });
+    $(".dots").on("mouseenter", function() {
+        $(this).addClass("fa-lg");
+    });
+
+    $(".dots").on("mouseleave", function() {
+        $(this).removeClass("fa-lg");
     });
 }
 
@@ -105,7 +129,7 @@ function renderCustomLinks() {
         let links = storage.customLinks;
         if(links != undefined) {
             for(let i = 0; i < links.length; i++) {
-                html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "' target='_blank'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
+                html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
             }
             $("#custom_links").html(html);
             $(".delete-link").on('click', function() {
@@ -153,9 +177,10 @@ function renderTopSites() {
         let html = "";
 
         if (topSites.length) {
-            // HARDCODED 6 => TODO - make a constant
-            for (var i = 0; i < 6; i++) {
-                html += '<li><a href="'+ topSites[i].url +'" rel="noreferrer noopener" target="_blank"><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url +'" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 7) + "..." + ' </span></a></li>';
+            //temporary solution!!
+            let topSitesCount = config.MAX_TOP_SITES > topSites.length ? topSites.length : config.MAX_TOP_SITES;
+            for (var i = 0; i < topSitesCount; i++) {
+                html += '<li class="link_list_item"><a href="'+ topSites[i].url +'" rel="noreferrer noopener" title="'+ topSites[i].title +' "><img class="link_icon" src="chrome://favicon/size/48/' + topSites[i].url +'" alt="icon placeholder" height="30px" width="30px"><br /><span class="link_title"> ' + substr(topSites[i].title, 15) +'</span></a></li>';
             }
 
             $("#links_list").html(html);
@@ -171,23 +196,17 @@ function substr(string, length) {
 
 function clearStorage() {
         chrome.storage.sync.set({customLinks: []});
-    //chrome.storage.sync.clear();
-    //chrome.storage.local.clear();
+}
+
+function init() {
+    renderTopSites();
+    renderCustomLinks();
+    eventListeners();
 }
 
 
-
-
 const links = {
-    printHistory,
-    printBookmarks,
-    printStorage,
-    setStorage,
-    linkToggle,
-    saveLinkEventListner,
-    clearStorage,
-    renderCustomLinks,
-    renderTopSites
+    init
 };
 
 export default links;

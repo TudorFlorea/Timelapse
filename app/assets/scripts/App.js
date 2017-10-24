@@ -17,4 +17,5 @@ $(document).ready(function () {
     links.renderCustomLinks();
     links.renderTopSites();
     links.saveLinkEventListner();
+    links.init();
 });
