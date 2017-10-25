@@ -65,6 +65,9 @@
             align-items: center;
             justify-content: center;
             flex-flow: row wrap;
+              transform: translateX(-100%);
+              transition: .4s ease-in-out;
+
             & #custom_links_heading {
                 color: #e0e0f8;
                 padding: 15px;

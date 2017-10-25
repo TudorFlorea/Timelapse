@@ -3481,6 +3481,10 @@ we can specify global variable to use flexbox as default instead of floats
  -webkit-box-direction: normal;
      -ms-flex-flow: row wrap;
          flex-flow: row wrap;
+ -webkit-transform: translateX(-100%);
+         transform: translateX(-100%);
+ -webkit-transition: .4s ease-in-out;
+ transition: .4s ease-in-out;
 }
 
 #links #links_wrapper #custom_links_wrapper #custom_links_heading {

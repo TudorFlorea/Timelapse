@@ -3036,6 +3036,15 @@ function eventListeners() {
     // Show custom links
     (0, _jquery2.default)(".dots").on('click', function () {
         (0, _jquery2.default)("#custom_links_wrapper").toggleClass('invisible');
+        if ((0, _jquery2.default)('#custom_links_wrapper').hasClass('invisible')) {
+            (0, _jquery2.default)("#custom_links_wrapper").css({
+                'transform': 'translateX(-100%)'
+            });
+        } else {
+            (0, _jquery2.default)("#custom_links_wrapper").css({
+                'transform': 'translateX(0%)'
+            });
+        }
     });
 
     (0, _jquery2.default)("#link_form_toggle").on('click', function () {
