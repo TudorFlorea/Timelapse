@@ -183,6 +183,7 @@ function getTopSites() {
 
 function renderTopSites() {
     getTopSites().then(function(topSites) {
+        console.log(topSites);
         let html = "";
 
         if (topSites.length) {
