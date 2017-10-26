@@ -2476,10 +2476,10 @@ var skycons = new Skycons({ // weather icons
     "resizeClear": true
 });
 var wForecast = []; // All weather data
-var today = void 0; // Weather data for current day
-var daily = void 0; // Weekly forecast data
-var location = void 0;
-var date = void 0;
+var today; // Weather data for current day
+var daily; // Weekly forecast data
+var location;
+var date;
 var dailyArr = document.querySelectorAll(".forecast");
 var DAYS_TO_REPORT = 5; // weekly forecast
 var CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
@@ -2606,7 +2606,7 @@ function eventListeners() {
             skycons.pause();
         } else {
             (0, _jquery2.default)("#daily").css({
-                'transform': 'translateX(0%)'
+                'transform': 'translateX(6%)'
             });
             skycons.play();
         }

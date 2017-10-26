@@ -3,11 +3,13 @@
 #weather {
     margin: 3px .5%;
     width: 280px;
+    min-width: 280px;
     height: 180px;
     background: rgba(0, 0, 0, .35);
-    lost-utility: clearfix;
+    lost-center: 100% .5rem;
     color: #e0e0f8;
     border-radius: 5px;
+    margin-right: 1rem;
 
     & .location {
         lost-row: 1/4;

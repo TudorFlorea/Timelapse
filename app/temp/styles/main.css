@@ -164,7 +164,7 @@ a {
 /*
 we can specify global variable to use flexbox as default instead of floats
 
-// @lost flexbox flex;
+@lost flexbox flex;
 */
 
 /* Grids */
@@ -355,6 +355,128 @@ we can specify global variable to use flexbox as default instead of floats
 .grid-four div:nth-child(1n) {
 	margin-right: 0;
 	margin-left: auto;
+}
+
+/* ==========================================================================
+   Custom Grids
+   ========================================================================== */
+
+.body{
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 16px;
+	padding-right: 16px;
+	display: flex;
+	flex-flow: row wrap;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.grid__top {
+	width: 100%;
+	height: 100%;
+	width: 100%;
+	flex: 0 0 auto;
+	height: calc(99.9% * 2.5/5 - (0px - 0px * 2.5/5));
+	margin-bottom: 0px;
+	display: flex
+}
+
+.grid__top:last-child {
+	margin-bottom: 0
+}
+
+.grid__top {
+	justify-content: flex-end;
+	align-items: flex-start
+}
+
+.grid__top .links_column {
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ max-width: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ width: calc(99.9% * 3/4 - (0px - 0px * 3/4));
+ display: flex;
+ padding-top: 2%;
+ padding-left: 2%;
+}
+
+.grid__top .links_column:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+.grid__top .links_column:last-child {
+ margin-right: 0;
+}
+
+.grid__top .links_column:nth-child(4n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+.grid__top .links_column {
+ justify-content: flex-start;
+ align-items: flex-start;
+}
+
+.grid__top .weather_column {
+ flex-grow: 0;
+ flex-shrink: 0;
+ flex-basis: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ max-width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+     -ms-flex-flow: column nowrap;
+         flex-flow: column nowrap;
+ display: flex;
+}
+
+.grid__top .weather_column:nth-child(1n) {
+ margin-right: 0px;
+ margin-left: 0;
+}
+
+.grid__top .weather_column:last-child {
+ margin-right: 0;
+}
+
+.grid__top .weather_column:nth-child(4n) {
+ margin-right: 0;
+ margin-left: auto;
+}
+
+.grid__top .weather_column {
+ justify-content: flex-end;
+ align-items: center;
+}
+
+.grid__bottom {
+	width: 100%;
+	height: 100%;
+	width: 100%;
+	flex: 0 0 auto;
+	height: calc(99.9% * 2.5/5 - (0px - 0px * 2.5/5));
+	margin-bottom: 0px;
+	display: flex;	
+}
+
+.grid__bottom:last-child {
+	margin-bottom: 0;	
+}
+
+.grid__bottom {
+	justify-content: center;
+	align-items: flex-end;	
 }
 
 /*!
@@ -3413,21 +3535,25 @@ we can specify global variable to use flexbox as default instead of floats
 #weather {
     margin: 3px .5%;
     width: 280px;
+    min-width: 280px;
     height: 180px;
     background: rgba(0, 0, 0, .35);
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     color: #e0e0f8;
-    border-radius: 5px
-}
-
-#weather:before {
-    content: '';
-    display: table
-}
-
-#weather:after {
-    content: '';
-    display: table;
-    clear: both
+    border-radius: 5px;
+    margin-right: 16px;
+    margin-right: 1rem
 }
 
 #weather .location {
@@ -3560,7 +3686,6 @@ we can specify global variable to use flexbox as default instead of floats
 #daily {
     height: 200px;
     width: 400px;
-    margin-right: .5%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -4786,7 +4911,6 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox {
-    position: relative;
     width: 50%;
     margin: 0 auto; 
     margin-left: 70px;
@@ -4797,12 +4921,7 @@ we can specify global variable to use flexbox as default instead of floats
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-flow: column wrap;
-            flex-flow: column wrap;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    margin-top: auto /* TODO: this will pin quotes to the bottom of the page,
-                           but it's not the best solution. Find better solution.*/
+            flex-flow: column wrap
 }
 
 .quotesBox .quoteInfo {
@@ -4837,11 +4956,10 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #todoMain {
-    position: absolute;
     width: 250px;
     height: auto;
-    right: 1%;
-    bottom: 2%;
+    margin: 16px;
+    margin: 1rem;
     font-size: 15px;
     border-radius: 3px;
     background-color:rgba(0, 0, 0, .35)
@@ -4934,15 +5052,11 @@ we can specify global variable to use flexbox as default instead of floats
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    position: absolute;
-    top: 2%;
-    left: 3%;
     -ms-flex-item-align: start;
         align-self: flex-start;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center;
-    // width: 550px; //height: 55px
+            justify-content: center
 }
 
 #links #links_wrapper {
@@ -5027,10 +5141,6 @@ we can specify global variable to use flexbox as default instead of floats
  text-align: center;
  font-size: 10px;
  margin-top: 5px;
-}
-
-#links #links_wrapper #top_links_wrapper #links_list .link_list_item a .link_title {
- // visibility: hidden;
 }
 
 #links #links_wrapper #top_links_wrapper #links_list {/*! li*/
