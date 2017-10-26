@@ -138,17 +138,6 @@ textarea {
 }
 
 /* ==========================================================================
-   Browser Upgrade Prompt
-   ========================================================================== */
-
-.browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-/* ==========================================================================
    Custom CSS
    ========================================================================== */
 
@@ -3514,6 +3503,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 .fullscreen-bg {
   position: fixed;
+  background: #282628;
   top: 0;
   right: 0;
   bottom: 0;
@@ -3534,9 +3524,9 @@ we can specify global variable to use flexbox as default instead of floats
 
 #weather {
     margin: 3px .5%;
-    width: 280px;
-    min-width: 280px;
-    height: 180px;
+    width: 200px;
+    min-width: 200px;
+    height: 150px;
     background: rgba(0, 0, 0, .35);
     display: flex;
     flex-flow: row wrap;
@@ -3553,7 +3543,8 @@ we can specify global variable to use flexbox as default instead of floats
     color: #e0e0f8;
     border-radius: 5px;
     margin-right: 16px;
-    margin-right: 1rem
+    margin-right: 1rem;
+    text-align: center;
 }
 
 #weather .location {
@@ -3561,7 +3552,7 @@ we can specify global variable to use flexbox as default instead of floats
  flex: 0 0 auto;
  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
  margin-bottom: 0px;
- font-size: 22px;
+ font-size: 16px;
  display: flex;
  margin: 0;
  padding: 0;
@@ -3664,15 +3655,22 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #weather .wInfo .currentTemp p {
- font-size: 64px;
- font-size: 4rem;
+ display: flex;
+ font-size: 48px;
+ font-size: 3rem;
  margin: 0;
  cursor: pointer;
+ margin-bottom: 15px;
+}
+
+#weather .wInfo .currentTemp p {
+ justify-content: center;
+ align-items: center;
 }
 
 #weather .wInfo .currentTemp .unit {
- font-size: 22.4px;
- font-size: 1.4rem;
+ font-size: 17.6px;
+ font-size: 1.1rem;
 }
 
 #weather .wInfo {/*! currentTemp*/
@@ -5636,6 +5634,84 @@ we can specify global variable to use flexbox as default instead of floats
  }
 }
 
+@media (min-width: 1200px) {
+
+ #weather {
+  margin: 3px .5%;
+  width: 280px;
+  min-width: 280px;
+  height: 180px;
+  background: rgba(0, 0, 0, .35);
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #e0e0f8;
+  border-radius: 5px;
+  margin-right: 1rem;
+ }
+
+ #weather .location {
+  width: 100%;
+  flex: 0 0 auto;
+  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+  margin-bottom: 0px;
+  font-size: 22px;
+  display: flex;
+  margin: 0;
+  padding: 0;
+ }
+
+ #weather .location:last-child {
+  margin-bottom: 0;
+ }
+
+ #weather .location {
+  justify-content: center;
+  align-items: center;
+ }
+
+ #weather .wInfo .currentTemp {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+  display: flex;
+  width: 50%;
+ }
+
+ #weather .wInfo .currentTemp:nth-child(1n) {
+  margin-right: 0px;
+  margin-left: 0;
+ }
+
+ #weather .wInfo .currentTemp:last-child {
+  margin-right: 0;
+ }
+
+ #weather .wInfo .currentTemp:nth-child(2n) {
+  margin-right: 0;
+  margin-left: auto;
+ }
+
+ #weather .wInfo .currentTemp {
+  justify-content: center;
+  align-items: center;
+ }
+
+ #weather .wInfo .currentTemp p {
+  font-size: 4rem;
+  margin: 0;
+  cursor: pointer;
+ }
+
+ #weather .wInfo .currentTemp .unit {
+  font-size: 1.4rem;
+ }
+}
+
 @media screen and (min-width: 1280px) {
 
  .responsive {
@@ -5650,16 +5726,9 @@ we can specify global variable to use flexbox as default instead of floats
  }
 }
 
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 300%;
-    left: -100%;
-  }
-}
-
 @media (max-width: 767px) {
   .fullscreen-bg {
-    background: url('../images/videoframe.png') center center / cover no-repeat;
+    background: #282628 url('../images/videoframe.png') center center / cover no-repeat;
   }
 
   .fullscreen-bg__video {
@@ -5741,14 +5810,21 @@ we can specify global variable to use flexbox as default instead of floats
     }
 }
 
-@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
-
 @media (min-aspect-ratio: 16/9) {
   .fullscreen-bg__video {
     height: 300%;
     top: -100%;
+  }
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
   }
 }
 
