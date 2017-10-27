@@ -4,7 +4,6 @@
 #daily {
     height: 200px;
     width: 400px;
-    margin-right: .5%;
     display: flex;
     flex-flow: column nowrap;
     background: color(black alpha(35%));
@@ -154,14 +153,6 @@
  *  - Inspired by and works great as a companion with Font Awesome
  *    "Font Awesome by Dave Gandy - http://fontawesome.io"
  */
-
-@font-face {
-    font-family: weathericons;
-    src: url(../font/weathericons-regular-webfont.eot);
-    src: url(../font/weathericons-regular-webfont.eot?#iefix)format('embedded-opentype'), url(../font/weathericons-regular-webfont.woff2)format('woff2'), url(../font/weathericons-regular-webfont.woff)format('woff'), url(../font/weathericons-regular-webfont.ttf)format('truetype'), url(../font/weathericons-regular-webfont.svg#weather_iconsregular)format('svg');
-    font-weight: 400;
-    font-style: normal
-}
 
 .wi {
     display: inline-block;

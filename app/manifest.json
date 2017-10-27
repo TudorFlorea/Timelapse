@@ -31,7 +31,8 @@
         ],
         "web_accessible_resources": [
             "temp/scripts/*.js",
-            "temp/styles/*.css"
+            "temp/styles/*.css",
+            "assets/**/*"
         ],
         "content_security_policy": "script-src 'self' https://api.darksky.net/forecast/; object-src 'self'"
     }

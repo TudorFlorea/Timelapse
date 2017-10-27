@@ -108,6 +108,15 @@ function eventListeners() {
     // Show custom links
     $(".dots").on('click', function() {
         $("#custom_links_wrapper").toggleClass('invisible');
+        if($('#custom_links_wrapper').hasClass('invisible')) {
+            $("#custom_links_wrapper").css({
+                'transform': 'translateX(-100%)'
+            });
+        } else {
+            $("#custom_links_wrapper").css({
+                'transform': 'translateX(0%)'
+            });
+        }
     });
 
     $("#link_form_toggle").on('click', function() {
@@ -174,6 +183,7 @@ function getTopSites() {
 
 function renderTopSites() {
     getTopSites().then(function(topSites) {
+        console.log(topSites);
         let html = "";
 
         if (topSites.length) {

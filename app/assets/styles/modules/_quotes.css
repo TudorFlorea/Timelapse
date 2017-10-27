@@ -1,14 +1,10 @@
 .quotesBox {
-    position: relative;
     width: 50%;
     margin: 0 auto; 
     margin-left: 70px;
     color: aliceblue;
     display: flex;
     flex-flow: column wrap;
-    align-items: flex-start;
-    margin-top: auto; /* TODO: this will pin quotes to the bottom of the page,
-                           but it's not the best solution. Find better solution.*/
 
     & .quoteInfo {
         margin: 10px;

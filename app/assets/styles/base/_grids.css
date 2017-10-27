@@ -2,8 +2,9 @@
 /*
 we can specify global variable to use flexbox as default instead of floats
 
-// @lost flexbox flex;
+@lost flexbox flex;
 */
+@lost flexbox flex;
 
 /* Grids */
 
@@ -104,4 +105,41 @@ we can specify global variable to use flexbox as default instead of floats
 	@media (--viewport-large) {
 		lost-column: 1/4 4 30px flex;
 	}
+}
+
+
+/* ==========================================================================
+   Custom Grids
+   ========================================================================== */
+
+.body{
+	width: 100%;
+	lost-center: 100% 1rem flex;
+}
+.grid__top {
+	width: 100%;
+	height: 100%;
+	lost-row: 2.5/5;
+	lost-align: top-right;
+
+	& .links_column {
+		lost-column: 3/4 flex;
+		lost-align: top-left;
+		padding-top: 2%;
+		padding-left: 2%;
+	}
+
+	& .weather_column {
+		lost-column: 1/4 flex;
+		flex-flow: column nowrap;
+		lost-align: right;
+		
+	}
+}
+
+.grid__bottom {
+	width: 100%;
+	height: 100%;
+	lost-row: 2.5/5;
+	lost-align: bottom;	
 }

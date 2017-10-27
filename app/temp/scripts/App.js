@@ -2484,10 +2484,10 @@ var skycons = new Skycons({ // weather icons
     "resizeClear": true
 });
 var wForecast = []; // All weather data
-var today = void 0; // Weather data for current day
-var daily = void 0; // Weekly forecast data
-var location = void 0;
-var date = void 0;
+var today; // Weather data for current day
+var daily; // Weekly forecast data
+var location;
+var date;
 var dailyArr = document.querySelectorAll(".forecast");
 var DAYS_TO_REPORT = 5; // weekly forecast
 var CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
@@ -2614,7 +2614,7 @@ function eventListeners() {
             skycons.pause();
         } else {
             (0, _jquery2.default)("#daily").css({
-                'transform': 'translateX(0%)'
+                'transform': 'translateX(6%)'
             });
             skycons.play();
         }
@@ -2764,14 +2764,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //hide button on load
 (0, _jquery2.default)("#tweetButton").hide();
 
+function checkCache(params) {}
+
 // function to load random quotes from json file
 function quoteGenerator() {
     _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
         // var to randomize order of array indexes
-        var random = Math.floor(Math.random() * 101);
-        // Load quotes randomly
-        (0, _jquery2.default)("#quoteText").append(inspiringQuotes[random].quote);
-        (0, _jquery2.default)("#quoteAuthor").append("<a href=\"#\">" + inspiringQuotes[random].name + "</a>").hide();
+        return new Promise(function (resolve, reject) {
+            var quotes = [];
+            inspiringQuotes.forEach(function (quote) {
+                quote.wikiUrl = "https://en.wikipedia.org/wiki/" + encodeURI(quote.name);
+                quotes.push(quote);
+            }, this);
+            resolve(quotes);
+        }).then(function (data) {
+            var randomQuote = data[Math.floor(Math.random() * 101)];
+
+            (0, _jquery2.default)("#quoteText").append(randomQuote.quote);
+            (0, _jquery2.default)("#quoteAuthor").append("<a href=\"" + randomQuote.wikiUrl + "\" target=\"_blank\">" + randomQuote.name + "</a>").hide();
+        }).catch(function (err) {
+            console.log(err);
+        });
     });
 
     // tweet quotes
@@ -3043,6 +3056,15 @@ function eventListeners() {
     // Show custom links
     (0, _jquery2.default)(".dots").on('click', function () {
         (0, _jquery2.default)("#custom_links_wrapper").toggleClass('invisible');
+        if ((0, _jquery2.default)('#custom_links_wrapper').hasClass('invisible')) {
+            (0, _jquery2.default)("#custom_links_wrapper").css({
+                'transform': 'translateX(-100%)'
+            });
+        } else {
+            (0, _jquery2.default)("#custom_links_wrapper").css({
+                'transform': 'translateX(0%)'
+            });
+        }
     });
 
     (0, _jquery2.default)("#link_form_toggle").on('click', function () {
@@ -3108,6 +3130,7 @@ function getTopSites() {
 
 function renderTopSites() {
     getTopSites().then(function (topSites) {
+        console.log(topSites);
         var html = "";
 
         if (topSites.length) {

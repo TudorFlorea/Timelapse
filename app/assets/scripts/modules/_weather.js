@@ -1,19 +1,19 @@
 import $ from '../vendor/jquery-3.2.1.min';
 import config from './_config';
 
-let storage = chrome.storage.local;
-let apiKey = config.wKey;
-let url = config.url;
-let skycons = new Skycons({ // weather icons
+var storage = chrome.storage.local;
+var apiKey = config.wKey;
+var url = config.url;
+var skycons = new Skycons({ // weather icons
     "color": "#e0e0f8",
     "resizeClear": true
 });
-let wForecast = []; // All weather data
-let today; // Weather data for current day
-let daily; // Weekly forecast data
-let location;
-let date;
-let dailyArr = document.querySelectorAll(".forecast");
+var wForecast = []; // All weather data
+var today; // Weather data for current day
+var daily; // Weekly forecast data
+var location;
+var date;
+var dailyArr = document.querySelectorAll(".forecast");
 const DAYS_TO_REPORT = 5; // weekly forecast
 const CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
 
@@ -139,7 +139,7 @@ function eventListeners() {
             skycons.pause();
         } else {
             $("#daily").css({
-                'transform': 'translateX(0%)'
+                'transform': 'translateX(6%)'
             });
             skycons.play();
         }
@@ -148,7 +148,7 @@ function eventListeners() {
     // populate daily info for each day, when user clicks on day <li> element
     $(dailyArr).on('click', function (e) {
         // check for index number of clicked item
-        var thisIndex = $(dailyArr).index(this);
+        let thisIndex = $(dailyArr).index(this);
         populateDailyInfo(dailyArr, thisIndex, daily);
         // Add skycons
         skycons.add(document.getElementById(`dailyIcon`), daily[thisIndex].icon);
@@ -158,7 +158,7 @@ function eventListeners() {
 // DarkSky current weather API call
 function weatherAPI(latitude, longitude) {
     // latitude and longitude are accepted arguments and passed once a user has submitted the form.
-    var lat = parseFloat(latitude),
+    let lat = parseFloat(latitude),
         lng = parseFloat(longitude),
         api_call = url + apiKey + "/" + lat + "," + lng + "/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?";
 
