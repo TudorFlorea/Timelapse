@@ -6,10 +6,14 @@ function mainFocusFeat() {
     loadMainFocus();
 
     function loadMainFocus() {
-        chrome.storage.sync.get({mainFocus: []}, function (mainFocusStorage) {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
             mFocus = mainFocusStorage.mainFocus;
             if (mFocus.length > 0) {
                 showMainFocus();
+            } else {
+                $(".mainFocusInput").show();
+                $("#mainFocusList").hide();
+                $(".mainFocusInput").val('');
             }
         });
     }
@@ -34,17 +38,21 @@ function mainFocusFeat() {
     function showMainFocus() {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
             mFocus = mainFocusStorage.mainFocus;
-            console.log(mFocus);
         });
-        $(".mainFocusInput").remove();
-        $("#mainFocus").append(
-            "<ul id='mainFocusList'><li><input class='mFocusStyle' type='checkbox'>" + mFocus[0].taskForToday + "<button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button></ul>"
-        );
-        $("#mainFocusList").show();
+        if (mFocus.length > 0) {
+            $(".mainFocusInput").hide();
+            $("#mainFocusList").html(
+                "<li><input class='mFocusStyle' type='checkbox'>" + mFocus[0].taskForToday + "<button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button>"
+            );
+            $("#mainFocusList").show();
+        }
     }
 
-    $("#deleteMainFocus").on("click", function () {
-        alert('We have a click');
+    $("#mainFocusList").on("click", "button", function () {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            chrome.storage.sync.set({'mainFocus': []});
+            loadMainFocus();
+        });     
     });
 }
 
