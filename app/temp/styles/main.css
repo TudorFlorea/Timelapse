@@ -5341,6 +5341,77 @@ we can specify global variable to use flexbox as default instead of floats
     background-color: #555;
 }
 
+#mainFocus {
+    color:#e0e0f8;
+    position: relative;
+    margin: 0 auto;
+    font-size: 30px;
+    bottom:50px;
+}
+
+.mainFocusInput {
+    background-color:transparent;
+    border-style: solid; 
+    border-width: 0px 0px 1px 0px; 
+    border-color: #e0e0f8;
+    color:#e0e0f8;
+    font-size: 15px;
+    display: block;
+    margin: 0px auto 3% auto;
+    width: 300px;
+    font-size: 24px;
+}
+
+.mainFocusInput:focus{
+    outline: none;
+}
+
+.mFocusStyle {
+    max-width: 200px;
+    margin:0px;
+}
+
+.deleteBtnMainFocus {
+    width:45px;
+    border-radius: 3px;
+    display: none;
+    color:grey;
+    padding: 2px;
+    background-color: transparent;
+    border: 2px solid grey;
+    float: right;
+    background: none;
+    margin-top: 10px;
+}
+
+li:hover .deleteBtnMainFocus {
+    display: inline;
+}
+
+.deleteBtnMainFocus:focus{
+    outline: none;
+}
+
+.deleteBtnMainFocus:active{
+    border-color: #e0e0f8;
+}
+
+#mainFocusList {
+    margin:0;
+}
+
+.mainFocusText {
+    margin: 0 auto;
+}
+
+#mainFocusList {
+    list-style: none;
+    padding-left: 0px;
+    text-align: center;
+    font-size: 27px;
+    
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

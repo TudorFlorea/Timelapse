@@ -5,6 +5,7 @@ import func from './modules/_weather';
 import quoteGenerator from './modules/_quotes';
 import todoFunc from './modules/_todolist';
 import links from "./modules/_links";
+import mainFocusFeat from "./modules/_mainFocus";
 
 
 $(document).ready(function () {
@@ -13,4 +14,5 @@ $(document).ready(function () {
     quoteGenerator();
     todoFunc();
     links.init();
+    mainFocusFeat();
 });

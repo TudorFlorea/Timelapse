@@ -2428,6 +2428,10 @@ var _links = __webpack_require__(8);
 
 var _links2 = _interopRequireDefault(_links);
 
+var _mainFocus = __webpack_require__(9);
+
+var _mainFocus2 = _interopRequireDefault(_mainFocus);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
@@ -2436,6 +2440,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _quotes2.default)();
     (0, _todolist2.default)();
     _links2.default.init();
+    (0, _mainFocus2.default)();
 });
 
 /***/ }),
@@ -3157,6 +3162,79 @@ var links = {
 };
 
 exports.default = links;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mainFocusFeat() {
+
+    var mFocus;
+    loadMainFocus();
+
+    function loadMainFocus() {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            mFocus = mainFocusStorage.mainFocus;
+            if (mFocus.length > 0) {
+                showMainFocus();
+            } else {
+                (0, _jquery2.default)(".mainFocusInput").show();
+                (0, _jquery2.default)("#mainFocusList").hide();
+                (0, _jquery2.default)(".mainFocusInput").val('');
+            }
+        });
+    }
+
+    (0, _jquery2.default)(".mainFocusInput").on("keyup", function (e) {
+        var mainFText = (0, _jquery2.default)(".mainFocusInput").val();
+        if (e.which == 13 && mainFText.length != 0) {
+            chrome.storage.sync.get({ mainFocus: [] }, function (mainFocusStorage) {
+                mFocus = mainFocusStorage.mainFocus;
+                mFocus = [];
+                mFocus.push({
+                    'taskForToday': mainFText
+                });
+                chrome.storage.sync.set({
+                    mainFocus: mFocus
+                });
+                showMainFocus();
+            });
+        }
+    });
+
+    function showMainFocus() {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            mFocus = mainFocusStorage.mainFocus;
+        });
+        if (mFocus.length > 0) {
+            (0, _jquery2.default)(".mainFocusInput").hide();
+            (0, _jquery2.default)("#mainFocusList").html("<li><input class='mFocusStyle' type='checkbox'>" + mFocus[0].taskForToday + "<button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button>");
+            (0, _jquery2.default)("#mainFocusList").show();
+        }
+    }
+
+    (0, _jquery2.default)("#mainFocusList").on("click", "button", function () {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            chrome.storage.sync.set({ 'mainFocus': [] });
+            loadMainFocus();
+        });
+    });
+}
+
+exports.default = mainFocusFeat;
 
 /***/ })
 /******/ ]);
