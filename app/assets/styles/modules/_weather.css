@@ -1,7 +1,7 @@
 @lost flexbox flex;
 @lost gutter 0px;
 #weather {
-    margin: 3px .5%;
+    margin: 3px .5rem;
     width: 200px;
     min-width: 200px;
     height: 150px;
@@ -83,6 +83,4 @@
     }
     /* ! wInfo */
 }
-
-
 /*! weather*/

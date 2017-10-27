@@ -10,7 +10,7 @@
     border-radius: 5px;
     color: #e0e0f8;
     transform: translateX(100%);
-    transition: .4s ease-in-out;
+    transition: .4s linear;
 
     & .daily_info {
         border-bottom: .3px solid #e0e0f8;

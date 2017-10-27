@@ -103,37 +103,40 @@
         </div>
     </section>
     <section class="grid__bottom">
-
-        <!-- Inspiring quotes -->
-        <section class="quotesBox">
-            <div id="quoteText"></div>
-            <div class="quoteInfo">
-                <div id="quoteAuthor"></div>
-                <img id="tweetButton" src="icons/Twitter_Social_Icon_Rounded_Square_Color.png" alt="twitter icon">
-            </div>
-        </section>
-        <!-- !Inspiring quotes -->
-        <!-- Todo -->
-        <section id='todoMain'>
-            <div id='todoHeader'>
-            </div>
-            <div id='todoList'>
-                <ul id='list'>
-                </ul>
-            </div>
-            <div id='todoAdd'>
-                <input type='text' id='inputTodo' name='newTodo' placeholder="New todo...">
-            </div>
-        </section>
-        <!-- !Todo -->
+        <div class="quotes_column">
+            <!-- Inspiring quotes -->
+            <section class="quotesBox">
+                <div id="quoteText"></div>
+                <div class="quoteInfo">
+                    <div id="quoteAuthor"></div>
+                    <img id="tweetButton" src="icons/Twitter_Social_Icon_Rounded_Square_Color.png" height="32px" width="32px" alt="twitter icon">
+                </div>
+            </section>
+            <!-- !Inspiring quotes -->
+        </div>
+        <div class="todo_column">
+            <!-- Todo -->
+            <section id='todoMain'>
+                <div id='todoHeader'>
+                </div>
+                <div id='todoList'>
+                    <ul id='list'>
+                    </ul>
+                </div>
+                <div id='todoAdd'>
+                    <input type='text' id='inputTodo' name='newTodo' placeholder="New todo...">
+                </div>
+            </section>
+            <!-- !Todo -->
+        </div>
     </section>
 
     <!-- Timelapse  -->
     <div class="fullscreen-bg">
         <!-- add loop to video for looping -->
-        <video muted autoplay poster="assets/images/Night_Sky.mp4" class="fullscreen-bg__video">
+        <video muted autoplay loop poster="assets/images/Night_Sky.mp4" class="fullscreen-bg__video">
             <!-- <source src="#.webm" type="video/webm"> -->
-            <source src="assets/images/Night_Sky.mp4" type="video/mp4">
+            <source src="assets/images/4.mp4" type="video/mp4">
             <!-- <source src="#.ogv" type="video/ogg"> -->
         </video>
     </div>

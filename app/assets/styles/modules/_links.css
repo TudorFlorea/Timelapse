@@ -1,7 +1,6 @@
 #links {
     display: flex;
-    align-self: flex-start;
-    justify-content: center;
+
     & #links_wrapper {
         display: flex;
         align-items: center;
@@ -11,14 +10,12 @@
         & .dots {
             position: fixed;
             top: 30px;
-            left: 20px;
+            left: 5px;
             color: white;
             cursor: pointer;
         }
         & #top_links_wrapper {
-            background-color: rgba(60, 60, 60, 0.5);
-            border-radius: 5px;
-            width: 100%;
+            width: 90%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -30,7 +27,7 @@
                 padding: 0;
                 display: flex;
                 width: 100%;
-                flex-flow: row nowrap;
+                flex-flow: row wrap;
                 justify-content: space-around;
                 align-items: center;
                 & .link_list_item {
@@ -39,10 +36,8 @@
                     list-style: none;
                     justify-content: center;
                     flex: 1;
-                    height: 50px;
                     text-align: center;
                     font-size: 10px;
-                    margin-top: 5px;
                 }
                 /* ! li */
             }
