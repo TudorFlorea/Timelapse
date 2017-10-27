@@ -138,9 +138,16 @@ function eventListeners() {
             });
             skycons.pause();
         } else {
-            $("#daily").css({
-                'transform': 'translateX(6%)'
-            });
+            // media queries
+            if ($( window ).width() < 1000) {
+                $("#daily").css({
+                    'transform': 'translateX(-15%)'
+                });
+            } else {
+                $("#daily").css({
+                    'transform': 'translateX(6%)'
+                });
+            }
             skycons.play();
         }
     });

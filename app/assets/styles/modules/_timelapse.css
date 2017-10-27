@@ -1,5 +1,6 @@
 .fullscreen-bg {
   position: fixed;
+  background: #282628;
   top: 0;
   right: 0;
   bottom: 0;
@@ -32,7 +33,7 @@
 
 @media (max-width: 767px) {
   .fullscreen-bg {
-    background: url('../images/videoframe.png') center center / cover no-repeat;
+    background: #282628 url('../images/videoframe.png') center center / cover no-repeat;
   }
 
   .fullscreen-bg__video {

@@ -16,3 +16,9 @@ $(document).ready(function () {
     links.init();
     mainFocusFeat();
 });
+
+// Returns width of browser viewport
+console.log($( window ).width()); 
+
+// Returns width of HTML document
+console.log($( document ).width()); 

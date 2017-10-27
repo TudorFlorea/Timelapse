@@ -2443,6 +2443,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _mainFocus2.default)();
 });
 
+// Returns width of browser viewport
+console.log((0, _jquery2.default)(window).width());
+
+// Returns width of HTML document
+console.log((0, _jquery2.default)(document).width());
+
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
@@ -2610,9 +2616,16 @@ function eventListeners() {
             });
             skycons.pause();
         } else {
-            (0, _jquery2.default)("#daily").css({
-                'transform': 'translateX(6%)'
-            });
+            // media queries
+            if ((0, _jquery2.default)(window).width() < 1000) {
+                (0, _jquery2.default)("#daily").css({
+                    'transform': 'translateX(-15%)'
+                });
+            } else {
+                (0, _jquery2.default)("#daily").css({
+                    'transform': 'translateX(6%)'
+                });
+            }
             skycons.play();
         }
     });
