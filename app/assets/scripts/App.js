@@ -14,3 +14,9 @@ $(document).ready(function () {
     todoFunc();
     links.init();
 });
+
+// Returns width of browser viewport
+console.log($( window ).width()); 
+
+// Returns width of HTML document
+console.log($( document ).width()); 

@@ -3741,8 +3741,8 @@ we can specify global variable to use flexbox as default instead of floats
 /*! weather*/
 
 #daily {
-    height: 200px;
-    width: 400px;
+    height: 150px;
+    width: 300px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3755,8 +3755,8 @@ we can specify global variable to use flexbox as default instead of floats
     color: #e0e0f8;
     -webkit-transform: translateX(100%);
             transform: translateX(100%);
-    -webkit-transition: .4s linear;
-    transition: .4s linear
+    -webkit-transition: .3s ease-in;
+    transition: .3s ease-in;
 }
 
 #daily .daily_info {
@@ -3801,7 +3801,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 #daily .daily_info .daily_header h4 {
  margin: 0;
- font-size: 22px;
+ font-size: 14px;
  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
  font-weight: 300;
 }
@@ -3876,7 +3876,7 @@ we can specify global variable to use flexbox as default instead of floats
  margin-bottom: 0px;
  display: flex;
  padding-right: 15px;
- font-size: 28px;
+ font-size: 18px;
 }
 
 #daily .daily_info .daily_body .daily_details .daily_temp:last-child {
@@ -3910,7 +3910,8 @@ we can specify global variable to use flexbox as default instead of floats
  flex: 0 0 auto;
  height: calc(99.9% * 1/3 - (0px - 0px * 1/3));
  margin-bottom: 0px;
- font-size: 15px;
+ font-size: 10px;
+ text-align: center;
 }
 
 #daily .daily_info .daily_body .daily_details .daily_summary:last-child {
@@ -3935,7 +3936,7 @@ we can specify global variable to use flexbox as default instead of floats
  flex: 0 0 auto;
  height: calc(99.9% * 1/3 - (0px - 0px * 1/3));
  margin-bottom: 0px;
- font-size: 14px;
+ font-size: 10px;
 }
 
 #daily .daily_info .daily_body .daily_details .daily_misc:last-child {
@@ -3973,7 +3974,8 @@ we can specify global variable to use flexbox as default instead of floats
      -ms-flex-flow: row wrap-reverse;
          flex-flow: row wrap-reverse;
  width: 20%;
- height: 50px;
+ // height: 70px;
+ margin-top: 15px;
  -webkit-box-align: end;
      -ms-flex-align: end;
          align-items: flex-end;
@@ -3997,7 +3999,7 @@ we can specify global variable to use flexbox as default instead of floats
  position: relative;
  bottom: -5px;
  right: 5px;
- font-size: 13px;
+ font-size: 9.5px;
  -ms-flex-pack: distribute;
      justify-content: space-around;
  margin: 0;
@@ -4016,7 +4018,7 @@ we can specify global variable to use flexbox as default instead of floats
 #daily {/*! ul*/
 
  .inline {
-	display: inline !important;
+        display: inline !important;
  }
 
  .inline-block {
@@ -4024,7 +4026,7 @@ we can specify global variable to use flexbox as default instead of floats
  }
 
  .no-padding {
-	padding: 0px !important;
+        padding: 0px !important;
  }
 
  .no-margin {
@@ -5766,6 +5768,74 @@ we can specify global variable to use flexbox as default instead of floats
 
  #weather .wInfo .currentTemp .unit {
   font-size: 1.4rem;
+ }
+
+ #daily {
+  height: 200px;
+  width: 400px;
+ }
+
+ #daily .daily_info {
+  height: 150px;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+ }
+
+ #daily .daily_info .daily_header h4 {
+  font-size: 22px;
+ }
+
+ #daily .daily_info .daily_body .daily_details .daily_temp {
+  padding-right: 15px;
+  font-size: 28px;
+ }
+
+ #daily .daily_info .daily_body .daily_details .daily_summary {
+  font-size: 15px;
+ }
+
+ #daily .daily_info .daily_body .daily_details .daily_misc {
+  font-size: 14px;
+ }
+
+ #daily ul li {
+  height: 50px;
+  margin-top: 0;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 3px;
+ }
+
+ #daily ul li [id*="icon_"] {
+  position: relative;
+  right: 5px;
+  top: 5px;
+ }
+
+ #daily ul li {/*!icon_*/
+ }
+
+ #daily ul li [class*="daily_"] {
+  color: #e0e0f8;
+  position: relative;
+  bottom: -5px;
+  right: 5px;
+  font-size: 13px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 0;
  }
 }
 
