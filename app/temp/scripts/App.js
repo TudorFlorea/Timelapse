@@ -3234,7 +3234,7 @@ function mainFocusFeat() {
         });
         if (mFocus.length > 0) {
             (0, _jquery2.default)(".mainFocusInput").hide();
-            (0, _jquery2.default)("#mainFocusList").html("<li><input class='mFocusStyle' type='checkbox'>" + mFocus[0].taskForToday + "<button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button>");
+            (0, _jquery2.default)("#mainFocusList").html("<li><input class='mFocusStyle' name='checkbox2' type='checkbox'><span>" + mFocus[0].taskForToday + "</span><button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button>");
             (0, _jquery2.default)("#mainFocusList").show();
         }
     }
@@ -3244,6 +3244,18 @@ function mainFocusFeat() {
             chrome.storage.sync.set({ 'mainFocus': [] });
             loadMainFocus();
         });
+    });
+
+    (0, _jquery2.default)(document).on('change', 'input[name="checkbox2"]', function () {
+        var input = (0, _jquery2.default)(this).next('span');
+        if (this.checked) {
+            (0, _jquery2.default)(input).toggleClass('mainFocusDone');
+            chrome.storage.sync.set({ 'mainFocus': [] });
+            (0, _jquery2.default)('.mFocusStyle').fadeOut();
+            setTimeout(function () {
+                loadMainFocus();
+            }, 2000);
+        }
     });
 }
 

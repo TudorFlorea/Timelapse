@@ -5513,6 +5513,11 @@ li:hover .deleteBtnMainFocus {
     
 }
 
+.mainFocusDone {
+    text-decoration: line-through;
+    color: grey;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

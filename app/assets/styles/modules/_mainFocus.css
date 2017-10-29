@@ -71,3 +71,8 @@ li:hover .deleteBtnMainFocus {
     font-size: 27px;
     
 }
+
+.mainFocusDone {
+    text-decoration: line-through;
+    color: grey;
+}
