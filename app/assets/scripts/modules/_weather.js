@@ -138,9 +138,9 @@ function eventListeners() {
             });
             skycons.pause();
         } else {
-            $("#daily").css({
-                'transform': 'translateX(6%)'
-            });
+                $("#daily").css({
+                    'transform': 'translateX(0%)'
+                });
             skycons.play();
         }
     });

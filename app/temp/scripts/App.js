@@ -2606,7 +2606,7 @@ function eventListeners() {
             skycons.pause();
         } else {
             (0, _jquery2.default)("#daily").css({
-                'transform': 'translateX(6%)'
+                'transform': 'translateX(0%)'
             });
             skycons.play();
         }
