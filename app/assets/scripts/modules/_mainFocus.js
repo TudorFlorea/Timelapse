@@ -2,6 +2,7 @@ import $ from '../vendor/jquery-3.2.1.min';
 
 function mainFocusFeat() {
 
+    var arrayQuotes = ['Way to go!', 'You did it!', 'You rock!']
     var mFocus;
     loadMainFocus();
 
@@ -60,11 +61,11 @@ function mainFocusFeat() {
         if (this.checked) {
             $(input).toggleClass('mainFocusDone');
             chrome.storage.sync.set({'mainFocus': []});
-            $('.mFocusStyle').fadeOut();
+            $('#mainFocusList').fadeOut(2000, function() {
+                $(this).remove()});
             setTimeout(function() {
                 loadMainFocus();
             }, 2000);
-            
         } 
     })
 }

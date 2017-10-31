@@ -3195,6 +3195,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function mainFocusFeat() {
 
+    var arrayQuotes = ['Way to go!', 'You did it!', 'You rock!'];
     var mFocus;
     loadMainFocus();
 
@@ -3251,7 +3252,9 @@ function mainFocusFeat() {
         if (this.checked) {
             (0, _jquery2.default)(input).toggleClass('mainFocusDone');
             chrome.storage.sync.set({ 'mainFocus': [] });
-            (0, _jquery2.default)('.mFocusStyle').fadeOut();
+            (0, _jquery2.default)('#mainFocusList').fadeOut(2000, function () {
+                (0, _jquery2.default)(this).remove();
+            });
             setTimeout(function () {
                 loadMainFocus();
             }, 2000);
