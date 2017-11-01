@@ -4,9 +4,6 @@ const config = {
     url: 'https://api.darksky.net/forecast/',
     gKey: 'AIzaSyAS7K0j6WL719mEhiIFH2XYlkZdEo3breo',
     MAX_TOP_SITES: 8
-}
-
+};
 
 export default config;
-
-

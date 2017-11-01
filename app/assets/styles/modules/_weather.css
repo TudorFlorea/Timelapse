@@ -10,6 +10,8 @@
     color: #e0e0f8;
     border-radius: 5px;
     text-align: center;
+    transition: background .5s linear;
+
     @media (--viewport-extralarge) {
         width: 240px;
         min-width: 240px;
@@ -58,5 +60,9 @@
         /*! currentTemp*/
     }
     /* ! wInfo */
+
+    &:hover {
+        background: rgba(0, 0, 0, .55);
+    }
 }
 /*! weather*/

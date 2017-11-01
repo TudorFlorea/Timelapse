@@ -169,6 +169,10 @@
     .no-margin {
         margin: 0px !important;
     }
+
+    &:hover {
+        background: color(black alpha(55%));        
+    }
 }
 
 

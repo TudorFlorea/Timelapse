@@ -4,7 +4,7 @@ import $ from '../vendor/jquery-3.2.1.min';
 $("#tweetButton").hide();
 
 function checkCache(params) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
         chrome.storage.local.get('quotes', function (params) {
             if (params.quotes) {
                 resolve(true);
@@ -68,7 +68,7 @@ function storeQuotes(quotes) {
 
 // function to load random quotes from json file
 function quoteGenerator() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
         resolve(checkCache());
     }).then(function (cacheStatus) {
         if (cacheStatus) {
