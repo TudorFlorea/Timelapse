@@ -2432,9 +2432,14 @@ var _mainFocus = __webpack_require__(9);
 
 var _mainFocus2 = _interopRequireDefault(_mainFocus);
 
+var _timelapse = __webpack_require__(10);
+
+var _timelapse2 = _interopRequireDefault(_timelapse);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
+    (0, _timelapse2.default)();
     _weather2.default.weatherReport();
     _weather2.default.eventListeners();
     (0, _quotes2.default)();
@@ -2442,12 +2447,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     _links2.default.init();
     (0, _mainFocus2.default)();
 });
-
-// Returns width of browser viewport
-console.log((0, _jquery2.default)(window).width());
-
-// Returns width of HTML document
-console.log((0, _jquery2.default)(document).width());
 
 /***/ }),
 /* 4 */
@@ -2479,19 +2478,21 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _ref = [_config2.default.wKey, _config2.default.url],
+    apiKey = _ref[0],
+    url = _ref[1];
+
 var storage = chrome.storage.local;
-var apiKey = _config2.default.wKey;
-var url = _config2.default.url;
 var skycons = new Skycons({ // weather icons
-    "color": "#e0e0f8",
-    "resizeClear": true
+    color: '#e0e0f8',
+    resizeClear: true
 });
 var wForecast = []; // All weather data
-var today; // Weather data for current day
-var daily; // Weekly forecast data
-var location;
-var date;
-var dailyArr = document.querySelectorAll(".forecast");
+var today = void 0; // Weather data for current day
+var daily = void 0; // Weekly forecast data
+var location = void 0;
+var date = void 0;
+var dailyArr = document.querySelectorAll('.forecast');
 var DAYS_TO_REPORT = 5; // weekly forecast
 var CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
 
@@ -2507,8 +2508,8 @@ function clearCache() {
  * cacheCheck, checks if there is weather cache in storage and returns boolean value.
 / */
 function cacheCheck() {
-    return new Promise(function (resolve, reject) {
-        var status;
+    return new Promise(function (resolve) {
+        var status = void 0;
         storage.get(['cache', 'cacheTime'], function (items) {
             // if cache is not older that 1h
             console.log(items);
@@ -2526,7 +2527,7 @@ function cacheCheck() {
         console.log('Error: ' + reason);
         return reason;
     });
-};
+}
 /**
  * @param {any} data - caches data to storage
 / */
@@ -2538,49 +2539,15 @@ function storeCache(data) {
         console.log('Cache stored');
     });
 }
-/**
- * loadCache is loading cached weather data from storage, checks if data is not too old 
- * and if not populates weather module with required information.
- */
-function loadCache() {
-    storage.get(['cache', 'cacheTime'], function (items) {
-        today = items.cache[0];
-        daily = items.cache[1].data;
-        location = items.cache[2];
-        console.log(new Date(items.cacheTime));
-        console.log(new Date(Date.now()));
-        try {
-            // add weather info for current day to module
-            (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + items.cache[0].summary + '">\n                    ' + Math.round(items.cache[0].apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
-            (0, _jquery2.default)('.location').append('<p class="loc">' + items.cache[2] + '</p>');
-            skycons.add(document.getElementById("icon"), items.cache[0].icon);
 
-            for (var i in items.cache[1].data) {
-                if (parseInt(i) <= DAYS_TO_REPORT) {
-                    // get date from received timestamp
-                    date = new Date(items.cache[1].data[i].time * 1000).toString().substring(0, 10);
-                    // add formated date and skycons to daily overview
-                    (0, _jquery2.default)('.daily_' + i).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + i + '" width="30" height="30"></canvas>');
-                    skycons.add(document.getElementById('icon_' + i), items.cache[1].data[i].icon);
-                }
-            }
-            // Populate the daily info for the tomorrow only
-            populateDailyInfo(dailyArr, 0, items.cache[1].data);
-            skycons.add(document.getElementById('dailyIcon'), items.cache[1].data[0].icon);
-        } catch (error) {
-            throw new Error('Caching failed: ');
-        }
-    });
-}
 /**
  *  Populates weather information elements
- * 
+ *
  * @param {any} arr  - takes and array of HTML elements to iterate through, main purpose is to set date for element through its index
  * @param {any} index - index of selected element
  * @param {any} data - data from cache or freshly fetched from APIs
  */
 function populateDailyInfo(arr, index, data) {
-
     var sunUp = new Date(data[index].sunriseTime * 1000).toLocaleString('en-US', {
         hour: 'numeric',
         minute: 'numeric',
@@ -2606,26 +2573,57 @@ function populateDailyInfo(arr, index, data) {
     (0, _jquery2.default)('.daily_icon').html('<canvas id="dailyIcon" width="90" height="90"></canvas>');
 }
 
+/**
+ * loadCache is loading cached weather data from storage, checks if data is not too old
+ * and if not populates weather module with required information.
+ */
+function loadCache() {
+    storage.get(['cache', 'cacheTime'], function (items) {
+        var _ref2 = [items.cache[0], items.cache[1].data, items.cache[2]];
+        today = _ref2[0];
+        daily = _ref2[1];
+        location = _ref2[2];
+
+        console.log(new Date(items.cacheTime));
+        console.log(new Date(Date.now()));
+        try {
+            // add weather info for current day to module
+            (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + items.cache[0].summary + '">\n                    ' + Math.round(items.cache[0].apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
+            (0, _jquery2.default)('.location').append('<p class="loc">' + items.cache[2] + '</p>');
+            skycons.add(document.getElementById('icon'), items.cache[0].icon);
+            /*eslint-disable */
+            for (var i in items.cache[1].data) {
+                if (parseInt(i) <= DAYS_TO_REPORT) {
+                    // get date from received timestamp
+                    date = new Date(items.cache[1].data[i].time * 1000).toString().substring(0, 10);
+                    // add formated date and skycons to daily overview
+                    (0, _jquery2.default)('.daily_' + i).html('<p data-date="' + date + '" class="daily_date">' + date + '</p><canvas id="icon_' + i + '" width="30" height="30"></canvas>');
+                    skycons.add(document.getElementById('icon_' + i), items.cache[1].data[i].icon);
+                }
+            }
+            /* eslint-enable */
+            // Populate the daily info for the tomorrow only
+            populateDailyInfo(dailyArr, 0, items.cache[1].data);
+            skycons.add(document.getElementById('dailyIcon'), items.cache[1].data[0].icon);
+        } catch (error) {
+            throw new Error('Caching failed: ');
+        }
+    });
+}
+
 function eventListeners() {
     // Animate weekly report showing
     (0, _jquery2.default)('#icon').on('click', function (e) {
         (0, _jquery2.default)('#daily').toggleClass('invisible');
         if ((0, _jquery2.default)('#daily').hasClass('invisible')) {
-            (0, _jquery2.default)("#daily").css({
-                'transform': 'translateX(100%)'
+            (0, _jquery2.default)('#daily').css({
+                transform: 'translateX(100%)'
             });
             skycons.pause();
         } else {
-            // media queries
-            if ((0, _jquery2.default)(window).width() < 1000) {
-                (0, _jquery2.default)("#daily").css({
-                    'transform': 'translateX(-15%)'
-                });
-            } else {
-                (0, _jquery2.default)("#daily").css({
-                    'transform': 'translateX(6%)'
-                });
-            }
+            (0, _jquery2.default)('#daily').css({
+                transform: 'translateX(0%)'
+            });
             skycons.play();
         }
     });
@@ -2643,9 +2641,9 @@ function eventListeners() {
 // DarkSky current weather API call
 function weatherAPI(latitude, longitude) {
     // latitude and longitude are accepted arguments and passed once a user has submitted the form.
-    var lat = parseFloat(latitude),
-        lng = parseFloat(longitude),
-        api_call = url + apiKey + "/" + lat + "," + lng + "/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?";
+    var lat = parseFloat(latitude);
+    var lng = parseFloat(longitude);
+    var api_call = url + apiKey + '/' + lat + ',' + lng + '/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?';
 
     return _jquery2.default.getJSON(api_call, function (forecast) {});
 }
@@ -2655,10 +2653,10 @@ function getAddress(latitude, longitude) {
     return new Promise(function (resolve, reject) {
         var request = new XMLHttpRequest();
         var method = 'GET';
-        var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=' + _config2.default.gKey;
+        var lUrl = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true&key=' + _config2.default.gKey;
         var async = true;
 
-        request.open(method, url, async);
+        request.open(method, lUrl, async);
         request.onreadystatechange = function () {
             if (request.readyState == 4) {
                 if (request.status == 200) {
@@ -2673,14 +2671,14 @@ function getAddress(latitude, longitude) {
         };
         request.send();
     });
-};
+}
 
 function weatherReport() {
     // Check HTML5 geolocation.
     if (!navigator.geolocation) {
         console.error('Geolocation not enabled');
         (0, _jquery2.default)('.location').append('<p>Geolocation is not enabled.</p>');
-    };
+    }
 
     // try to populate data from cache if possible
     return new Promise(function (resolve, reject) {
@@ -2696,8 +2694,10 @@ function weatherReport() {
             clearCache(); // clear old cache
             return new Promise(function (resolve, reject) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
+                    var _ref3 = [position.coords.latitude, position.coords.longitude],
+                        latitude = _ref3[0],
+                        longitude = _ref3[1];
+
                     var currentTemp = weatherAPI(latitude, longitude);
                     var userAddress = getAddress(latitude, longitude);
                     // waiting for all promises to resolve and and assigning them to promise var
@@ -2707,14 +2707,18 @@ function weatherReport() {
                         console.log(promised);
                         resolve(promised);
                         console.log('resolved');
-                    } else reject('Error Happened: ' + reject.reason);
+                    } else {
+                        reject(Error('Error Happened: ' + reject.reason));
+                    }
                 });
             }).then(function (result) {
                 wForecast.push(result[0].currently, result[0].daily, result[1]);
-                daily = wForecast[1].data;
-                today = wForecast[0];
-                location = wForecast[2];
+
                 // store new data to cache
+                var _ref4 = [wForecast[1].data, wForecast[0], wForecast[2]];
+                daily = _ref4[0];
+                today = _ref4[1];
+                location = _ref4[2];
                 storeCache(wForecast);
                 storage.get(['cache', 'cacheTime'], function (items) {
                     console.log(items);
@@ -2723,8 +2727,8 @@ function weatherReport() {
                 // appending basic data ( current temp, animated icon, and location) to weather section
                 (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + result[0].currently.summary + '">\n                 ' + Math.round(result[0].currently.apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
                 (0, _jquery2.default)('.location').append('<p class="loc">' + result[1] + '</p>');
-                skycons.add(document.getElementById("icon"), result[0].currently.icon);
-
+                skycons.add(document.getElementById('icon'), result[0].currently.icon);
+                /*eslint-disable */
                 for (var i in daily) {
                     if (parseInt(i) <= DAYS_TO_REPORT) {
                         // get date from received timestamp
@@ -2734,7 +2738,8 @@ function weatherReport() {
                         skycons.add(document.getElementById('icon_' + i), daily[i].icon);
                     }
                 }
-                dailyArr = document.querySelectorAll(".forecast");
+                /* eslint-enable */
+                dailyArr = document.querySelectorAll('.forecast');
 
                 // Populate the daily info for the tomorrow only
                 populateDailyInfo(dailyArr, 0, daily);
@@ -2743,9 +2748,9 @@ function weatherReport() {
                 console.log('Error while fetching data from APIs: ' + reason);
                 throw new Error(reason);
             });
-        };
+        }
     });
-};
+}
 
 // Object for exporting
 var func = {
@@ -2774,38 +2779,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //hide button on load
 (0, _jquery2.default)("#tweetButton").hide();
 
-function checkCache(params) {}
-
-// function to load random quotes from json file
-function quoteGenerator() {
-    _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
-        // var to randomize order of array indexes
-        return new Promise(function (resolve, reject) {
-            var quotes = [];
-            inspiringQuotes.forEach(function (quote) {
-                quote.wikiUrl = "https://en.wikipedia.org/wiki/" + encodeURI(quote.name);
-                quotes.push(quote);
-            }, this);
-            resolve(quotes);
-        }).then(function (data) {
-            var randomQuote = data[Math.floor(Math.random() * 101)];
-
-            (0, _jquery2.default)("#quoteText").append(randomQuote.quote);
-            (0, _jquery2.default)("#quoteAuthor").append("<a href=\"" + randomQuote.wikiUrl + "\" target=\"_blank\">" + randomQuote.name + "</a>").hide();
-        }).catch(function (err) {
-            console.log(err);
+function checkCache(params) {
+    return new Promise(function (resolve) {
+        chrome.storage.local.get('quotes', function (params) {
+            if (params.quotes) {
+                resolve(true);
+            } else {
+                resolve(false);
+            }
         });
+    }).catch(function (error) {
+        console.log('Quotes cache error: ', error);
     });
+};
 
+function evListeners() {
     // tweet quotes
     (0, _jquery2.default)("#tweetButton").on("click", tweet);
-
-    function tweet() {
-        var randomQuote = document.getElementById('quoteText').textContent;
-        var randomAuthor = document.getElementById('quoteAuthor').textContent;
-        var tweetUrl = ' https://twitter.com/intent/tweet?text=' + encodeURIComponent(randomQuote) + " " + encodeURIComponent(randomAuthor) + " " + "-" + "Turtles 18";
-        window.open(tweetUrl);
-    }
 
     //fade in author and twitter icon
     (0, _jquery2.default)('.quotesBox').on('mouseover', function () {
@@ -2815,6 +2805,76 @@ function quoteGenerator() {
     (0, _jquery2.default)('.quotesBox').on('mouseleave', function () {
         (0, _jquery2.default)('#tweetButton').fadeOut("slow");
         (0, _jquery2.default)('#quoteAuthor').fadeOut("slow");
+    });
+}
+
+function loadQuotes() {
+    chrome.storage.local.get('quotes', function (quotes) {
+        displayQuote(quotes.quotes);
+        console.log('Quotes loaded from cache.');
+    });
+}
+
+function tweet() {
+    var randomQuote = document.getElementById('quoteText').textContent;
+    var randomAuthor = document.getElementById('quoteAuthor').textContent;
+    var tweetUrl = ' https://twitter.com/intent/tweet?text=' + encodeURIComponent(randomQuote) + " " + encodeURIComponent(randomAuthor) + " " + "-" + "Turtles 18";
+    window.open(tweetUrl);
+}
+
+function displayQuote() {
+    var quote = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    var randomQuote = quote[Math.floor(Math.random() * 102)];
+    // Check for unknown authors
+    if (randomQuote.name.toLowerCase() === "unknown") {
+        (0, _jquery2.default)("#quoteText").append(randomQuote.quote);
+        (0, _jquery2.default)("#quoteAuthor").append(randomQuote.name).hide();
+    } else {
+        (0, _jquery2.default)("#quoteText").append(randomQuote.quote);
+        (0, _jquery2.default)("#quoteAuthor").append('<a href="' + randomQuote.wikiUrl + '" target="_blank">' + randomQuote.name + '</a>').hide();
+    }
+}
+// Store quotes to cache
+function storeQuotes(quotes) {
+    chrome.storage.local.set({
+        quotes: quotes
+    }, function () {
+        console.log('Quotes cached.');
+    });
+}
+
+// function to load random quotes from json file
+function quoteGenerator() {
+    return new Promise(function (resolve) {
+        resolve(checkCache());
+    }).then(function (cacheStatus) {
+        if (cacheStatus) {
+            // if there is cached quotes, load them and fire up event listeners
+            loadQuotes();
+            evListeners();
+        } else {
+            // else fetch quotes from github gist and load them
+            console.log('No quotes in cache. Loading quotes from gist.');
+            _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
+                // var to randomize order of array indexes
+                return new Promise(function (resolve, reject) {
+                    var quotes = [];
+                    inspiringQuotes.forEach(function (quote) {
+                        quote.wikiUrl = "https://en.wikipedia.org/wiki/" + encodeURI(quote.name);
+                        quotes.push(quote);
+                    }, this);
+                    resolve(quotes);
+                }).then(function (data) {
+                    // store modified quotes to storage
+                    storeQuotes(data);
+                    displayQuote(data);
+                    evListeners();
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            });
+        }
     });
 }
 
@@ -3268,6 +3328,60 @@ function mainFocusFeat() {
 }
 
 exports.default = mainFocusFeat;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var video = document.getElementById('js-video');
+var numOfVideos = 7;
+
+function randomVideo() {
+    var randomBg = Math.round(Math.random() * (numOfVideos - 1) + 1);
+    (0, _jquery2.default)('#js-video source').attr('src', 'assets/images/' + randomBg + '.mp4');
+    (0, _jquery2.default)('#js-video')[0].load();
+}
+function videoFunc() {
+    randomVideo();
+    // check for end of the video fade it out and start playing again
+    (0, _jquery2.default)('#js-video').bind('ended', function () {
+        (0, _jquery2.default)('.fullscreen-bg').css('opacity', 0.5).animate({ opacity: 1 }, 2000, 'linear');
+        video.play();
+    });
+    // pause video on click
+    (0, _jquery2.default)('.grid__bottom').on('click', function () {
+        /*eslint-disable */
+        video.paused ? video.play() : video.pause();
+        /* eslint-enable */
+    });
+    // Set timer to fadeout content if mouse is inactive for 6 seconds
+    var timer = void 0;
+    (0, _jquery2.default)(document).mousemove(function () {
+        if (timer) {
+            clearTimeout(timer);
+            timer = 0;
+        }
+        (0, _jquery2.default)('.main_grid').fadeIn('slow', 'linear');
+        timer = setTimeout(function () {
+            (0, _jquery2.default)('.main_grid').fadeOut('slow', 'linear');
+        }, 6000);
+    });
+}
+
+exports.default = videoFunc;
 
 /***/ })
 /******/ ]);

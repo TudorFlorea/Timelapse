@@ -15,140 +15,141 @@
 </head>
 
 <body>
-    <section class="grid__top">
-        <div class="links_column">
-            <!-- Links  -->
-            <section id="links">
-                <div id="links_wrapper">
-                    <div id="top_links_wrapper">
-                        <ul id="links_list">
-                            <li class="link_list_item">
+    <div class="main_grid">
+        <section class="grid__top">
+            <div class="links_column">
+                <!-- Links  -->
+                <section id="links">
+                    <div id="links_wrapper">
+                        <div id="top_links_wrapper">
+                            <ul id="links_list">
+                                <li class="link_list_item">
 
-                            </li>
-                        </ul>
-                    </div>
-                    <i class="dots fa fa-link" aria-hidden="true" title="Add custom links"></i>
-                    <div id="custom_links_wrapper" class="invisible">
-                        <div id="custom_links_heading">
-                            <i class="fa fa-link" aria-hidden="true"> Custom Links</i>
+                                </li>
+                            </ul>
                         </div>
-                        <div id="hide_wrapper">
-                            <ul id="custom_links"></ul>
-                            <div id="link_form_toggle">
-                                <i class="fa fa-plus-square" aria-hidden="true"> Add Link</i>
+                        <i class="dots fa fa-link" aria-hidden="true" title="Add custom links"></i>
+                        <div id="custom_links_wrapper" class="invisible">
+                            <div id="custom_links_heading">
+                                <i class="fa fa-link" aria-hidden="true"> Custom Links</i>
                             </div>
-                            <form id="save_links">
-                                <input type="text" placeholder="name" id="link_name" class="link_inputs">
-                                <input type="text" placeholder="url" id="link_url" class="link_inputs">
-                                <div id="link_buttons_wrapper">
-                                    <button id="link_save">Save</button>
-                                    <button id="link_close">Close</button>
+                            <div id="hide_wrapper">
+                                <ul id="custom_links"></ul>
+                                <div id="link_form_toggle">
+                                    <i class="fa fa-plus-square" aria-hidden="true"> Add Link</i>
                                 </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-            </section>
-            <!-- !Links -->
-        </div>
-
-        <div class="weather_column">
-            <!-- Weather -->
-            <section id="weather">
-                <div class="wInfo">
-                    <div class="currIcon">
-                        <canvas id="icon" width="100" height="100"></canvas>
-                    </div>
-                    <div class="currentTemp"></div>
-                </div>
-                <div class="location"></div>
-            </section>
-            <div id="daily" class="invisible">
-                <div class="daily_info">
-                    <div class="daily_header">
-                        <h4></h4>
-                    </div>
-                    <div class="daily_body">
-                        <div class="daily_details">
-                            <div class="daily_temp">
-                                <b class="hiTemp"></b>
-                                <i class="wi wi-degrees"></i>&nbsp;&nbsp;
-                                <b class="lowTemp"></b>
-                                <i class="wi wi-degrees"></i>
+                                <form id="save_links">
+                                    <input type="text" placeholder="name" id="link_name" class="link_inputs">
+                                    <input type="text" placeholder="url" id="link_url" class="link_inputs">
+                                    <div id="link_buttons_wrapper">
+                                        <button id="link_save">Save</button>
+                                        <button id="link_close">Close</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="daily_misc">
-                                <i class="wi wi-umbrella"></i>
-                                <i class="wi wi-cloudy"></i>
-                                <i class="wi wi-humidity"></i>
-                                <i class="wi wi-strong-wind"></i>
-                                <i class="wi wi-sunrise"></i>
-                                <i class="wi wi-sunset"></i>
-                            </div>
-                            <div class="daily_summary"></div>
+
                         </div>
-                        <div class="daily_icon"></div>
                     </div>
-                </div>
-                <ul>
-                    <li class="forecast daily_0"></li>
-                    <li class="forecast daily_1"></li>
-                    <li class="forecast daily_2"></li>
-                    <li class="forecast daily_3"></li>
-                    <li class="forecast daily_4"></li>
-                </ul>
+
+                </section>
+                <!-- !Links -->
             </div>
-            <!-- !Weather -->
-        </div>
-    </section>
 
-    <section class="grid__bottom">
-        <!-- Inspiring quotes -->
-        <div class="quotes_column">
-            <section class="quotesBox">
-                <div id="quoteText"></div>
-                <div class="quoteInfo">
-                    <div id="quoteAuthor"></div>
-                    <img id="tweetButton" src="icons/Twitter_Social_Icon_Rounded_Square_Color.png" height="32px" width="32px" alt="twitter icon">
-                </div>
-            </section>
-        </div>
-        <!-- !Inspiring quotes -->
-        <!-- Main Focus -->
-        <section id='mainFocus'>
-            <p class='mainFocusText'>What do you want to get done today?</p>
-            <input class='mainFocusInput' type="text">
-            <ul id='mainFocusList'></ul>
-        </section>
-        <!-- !Main Focus -->
-        <!-- Todo -->
-        <div class="todo_column">
-            <section id='todoMain'>
-                <div id='todoHeader'>
-                </div>
-                <div id='todoList'>
-                    <ul id='list'>
+            <div class="weather_column">
+                <!-- Weather -->
+                <section id="weather">
+                    <div class="wInfo">
+                        <div class="currIcon">
+                            <canvas id="icon" width="90" height="90"></canvas>
+                        </div>
+                        <div class="currentTemp"></div>
+                    </div>
+                    <div class="location"></div>
+                </section>
+                <div id="daily" class="invisible">
+                    <div class="daily_info">
+                        <div class="daily_header">
+                            <h4></h4>
+                        </div>
+                        <div class="daily_body">
+                            <div class="daily_details">
+                                <div class="daily_temp">
+                                    <b class="hiTemp"></b>
+                                    <i class="wi wi-degrees"></i>&nbsp;&nbsp;
+                                    <b class="lowTemp"></b>
+                                    <i class="wi wi-degrees"></i>
+                                </div>
+                                <div class="daily_misc">
+                                    <i class="wi wi-umbrella"></i>
+                                    <i class="wi wi-cloudy"></i>
+                                    <i class="wi wi-humidity"></i>
+                                    <i class="wi wi-strong-wind"></i>
+                                    <i class="wi wi-sunrise"></i>
+                                    <i class="wi wi-sunset"></i>
+                                </div>
+                                <div class="daily_summary"></div>
+                            </div>
+                            <div class="daily_icon"></div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="forecast daily_0"></li>
+                        <li class="forecast daily_1"></li>
+                        <li class="forecast daily_2"></li>
+                        <li class="forecast daily_3"></li>
+                        <li class="forecast daily_4"></li>
                     </ul>
                 </div>
-                <div id='todoAdd'>
-                    <input type='text' id='inputTodo' name='newTodo' placeholder="New todo...">
-                </div>
+                <!-- !Weather -->
+            </div>
+        </section>
+        <section class="grid__bottom">
+            <div class="quotes_column">
+                <!-- Inspiring quotes -->
+                <section class="quotesBox">
+                    <div id="quoteText"></div>
+                    <div class="quoteInfo">
+                        <div id="quoteAuthor"></div>
+                        <img id="tweetButton" src="icons/Twitter_Social_Icon_Rounded_Square_Color.png" height="32px" width="32px" alt="twitter icon">
+                    </div>
+                </section>
+                <!-- !Inspiring quotes -->
+            </div>
+            <!-- Main Focus -->
+            <section id='mainFocus'>
+                <p class='mainFocusText'>What do you want to get done today?</p>
+                <input class='mainFocusInput' type="text">
+                <ul id='mainFocusList'></ul>
             </section>
-        </div>
-        <!-- !Todo -->
-    </section>
-
+            <!-- !Main Focus -->
+            <div class="todo_column">
+                <!-- Todo -->
+                <section id='todoMain'>
+                    <div id='todoHeader'>
+                    </div>
+                    <div id='todoList'>
+                        <ul id='list'>
+                        </ul>
+                    </div>
+                    <div id='todoAdd'>
+                        <input type='text' id='inputTodo' name='newTodo' placeholder="New todo...">
+                    </div>
+                </section>
+                <!-- !Todo -->
+            </div>
+        </section>
+    </div>
     <!-- Timelapse  -->
     <div class="fullscreen-bg">
         <!-- add loop to video for looping -->
-        <video muted autoplay loop poster="assets/images/Night_Sky.mp4" class="fullscreen-bg__video">
+        <video id="js-video" muted autoplay class="fullscreen-bg__video">
             <!-- <source src="#.webm" type="video/webm"> -->
-            <source src="assets/images/2.mp4" type="video/mp4">
+            <source>
             <!-- <source src="#.ogv" type="video/ogg"> -->
         </video>
     </div>
     <!-- ! Timelapse  -->
+
     <!-- build:js assets/scripts/skycons.min.js -->
     <script type="text/javascript" src="./assets/scripts/vendor/skycons.js"></script>
     <!-- endbuild -->

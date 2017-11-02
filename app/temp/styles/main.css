@@ -43,6 +43,7 @@ body {
    ========================================================================== */
 
 html, body {
+    background: #212121;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
@@ -156,224 +157,29 @@ we can specify global variable to use flexbox as default instead of floats
 @lost flexbox flex;
 */
 
-/* Grids */
-
-.grid-item {
-	background: rgb(107, 120, 133);
-	height: 100px;
-	margin-bottom: 20px;
-}
-
-.grid-one {
-	width: 100%; /* must be declared on parent*/
-}
-
-.grid-one:before { /* must be declared on parent*/
-	content: '';
-	display: table;
-}
-
-.grid-one:after { /* must be declared on parent*/
-	content: '';
-	display: table;
-	clear: both;
-}
-
-.grid-one div {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-}
-
-.grid-one div:nth-child(1n) {
-	margin-right: 0px;
-	margin-left: 0;
-}
-
-.grid-one div:last-child {
-	margin-right: 0;
-}
-
-.grid-one div:nth-child(1n) {
-	margin-right: 0;
-	margin-left: auto;
-}
-
-.nested-grid {
-	background: red;
-	height: 50px;
-	margin-bottom: 10px;
-}
-
-/*		VERTICAL GRID 		*/
-
-.grid-two {
-	width: 100%;
-	height: 500px;
-	/* we can use lost center instead of lost utility: clearfix. Also second propertu in this is for padding(left, right)*/
-	display:flex;
-	flex-flow:row wrap;
-	max-width:80%;
-	margin-left:auto;
-	margin-right:auto;
-	padding-left:48px;
-	padding-right:48px;
-	display:flex;
-	flex-flow:row wrap;
-	max-width:80%;
-	margin-left:auto;
-	margin-right:auto;
-	padding-left:3rem;
-	padding-right:3rem;
-	padding-top: 48px;
-	padding-top: 3rem;
-	background: rgb(166, 166, 166);
-}
-
-.grid-two div {
-	/* lost row is for vertical grid */
-	width: 100%;
-	flex: 0 0 auto;
-	height: calc(99.9% * 1/5 - (0px - 0px * 1/5));
-	margin-bottom: 0px;
-	display: flex;
-}
-
-.grid-two div:last-child {
-	/* lost row is for vertical grid */
-	margin-bottom: 0;
-}
-
-.grid-two div {
-	/* lost row is for vertical grid */
-	justify-content: center;
-	align-items: center;
-}
-
-.grid-two div p{
-	margin: 0;
-}
-
-/*  Waffle Grid*/
-
-.grid-three {
-	width: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 48px;
-	padding-right: 48px;
-	display: flex;
-	flex-flow: row wrap;
-	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 3rem;
-	padding-right: 3rem;
-	height: 100vh;
-}
-
-.grid-three div {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	font-size: 2em;
-	background: rgb(166, 107, 0);
-}
-
-.grid-three div:nth-child(1n) {
-	margin-right: 0px;
-	margin-left: 0;
-}
-
-.grid-three div:last-child {
-	margin-right: 0;
-}
-
-.grid-three div:nth-child(1n) {
-	margin-right: 0;
-	margin-left: auto;
-}
-
-/*  Flexbox Grid  */
-
-.grid-four {
-	width: 100%;
-	display: flex;
-	flex-flow: row wrap;
-	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 48px;
-	padding-right: 48px;
-	display: flex;
-	flex-flow: row wrap;
-	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 3rem;
-	padding-right: 3rem;
-	height: 60vh;
-}
-
-.grid-four div {
-	flex-grow: 0;
-	flex-shrink: 0;
-	flex-basis: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	max-width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	width: calc(99.9% * 1/1 - (0px - 0px * 1/1));
-	font-size: 2em;
-	background: rgb(0, 102, 102);
-}
-
-.grid-four div:nth-child(1n) {
-	margin-right: 0px;
-	margin-left: 0;
-}
-
-.grid-four div:last-child {
-	margin-right: 0;
-}
-
-.grid-four div:nth-child(1n) {
-	margin-right: 0;
-	margin-left: auto;
-}
-
 /* ==========================================================================
    Custom Grids
    ========================================================================== */
 
-.body{
+.main_grid{
+	position: relative;
 	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 16px;
-	padding-right: 16px;
-	display: flex;
-	flex-flow: row wrap;
-	max-width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 1rem;
-	padding-right: 1rem;
 }
 
 .grid__top {
+	position: relative;
+	z-index: 2;	
 	width: 100%;
 	height: 100%;
 	width: 100%;
 	flex: 0 0 auto;
-	height: calc(99.9% * 2.5/5 - (0px - 0px * 2.5/5));
+	height: calc(99.9% * 3/6 - (0px - 0px * 3/6));
 	margin-bottom: 0px;
 	display: flex
 }
@@ -383,7 +189,7 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .grid__top {
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: flex-start
 }
 
@@ -430,6 +236,9 @@ we can specify global variable to use flexbox as default instead of floats
      -ms-flex-flow: column nowrap;
          flex-flow: column nowrap;
  display: flex;
+ -webkit-box-align: end !important;
+     -ms-flex-align: end !important;
+         align-items: flex-end !important;
 }
 
 .grid__top .weather_column:nth-child(1n) {
@@ -452,11 +261,12 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .grid__bottom {
+	position: relative;
+	z-index: 2;
 	width: 100%;
-	height: 100%;
 	width: 100%;
 	flex: 0 0 auto;
-	height: calc(99.9% * 2.5/5 - (0px - 0px * 2.5/5));
+	height: calc(99.9% * 3/6 - (0px - 0px * 3/6));
 	margin-bottom: 0px;
 	display: flex
 }
@@ -3567,7 +3377,7 @@ we can specify global variable to use flexbox as default instead of floats
   bottom: 0;
   left: 0;
   overflow: hidden;
-  z-index: -100;
+  z-index: 1;
 }
 
 .fullscreen-bg__video {
@@ -3581,29 +3391,25 @@ we can specify global variable to use flexbox as default instead of floats
 /* https://slicejack.com/fullscreen-html5-video-background-css/ */
 
 #weather {
+    width: 100%;
+    flex: 0 0 auto;
+    height: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+    margin-bottom: 0px;
     margin: 3px 8px;
     margin: 3px .5rem;
     width: 200px;
     min-width: 200px;
     height: 150px;
     background: rgba(0, 0, 0, .35);
-    display: flex;
-    flex-flow: row wrap;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 8px;
-    padding-right: 8px;
-    display: flex;
-    flex-flow: row wrap;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
     color: #e0e0f8;
     border-radius: 5px;
-    margin-right: 16px;
-    margin-right: 1rem;
     text-align: center;
+    -webkit-transition: background .5s linear;
+    transition: background .5s linear;
+}
+
+#weather:last-child {
+    margin-bottom: 0;
 }
 
 #weather .location {
@@ -3611,7 +3417,7 @@ we can specify global variable to use flexbox as default instead of floats
  flex: 0 0 auto;
  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
  margin-bottom: 0px;
- font-size: 16px;
+ font-size: 15px;
  display: flex;
  margin: 0;
  padding: 0;
@@ -3718,8 +3524,6 @@ we can specify global variable to use flexbox as default instead of floats
  font-size: 48px;
  font-size: 3rem;
  margin: 0;
- cursor: pointer;
- margin-bottom: 15px;
 }
 
 #weather .wInfo .currentTemp p {
@@ -3727,9 +3531,7 @@ we can specify global variable to use flexbox as default instead of floats
  align-items: center;
 }
 
-#weather .wInfo .currentTemp .unit {
- font-size: 17.6px;
- font-size: 1.1rem;
+#weather .wInfo .currentTemp {/*!media*/
 }
 
 #weather .wInfo {/*! currentTemp*/
@@ -3738,9 +3540,17 @@ we can specify global variable to use flexbox as default instead of floats
 #weather {/*! wInfo*/
 }
 
+#weather:hover {
+ background: rgba(0, 0, 0, .55);
+}
+
 /*! weather*/
 
 #daily {
+    width: 100%;
+    flex: 0 0 auto;
+    height: calc(99.9% * 1/2 - (0px - 0px * 1/2));
+    margin-bottom: 0px;
     height: 150px;
     width: 300px;
     display: -webkit-box;
@@ -3757,6 +3567,10 @@ we can specify global variable to use flexbox as default instead of floats
             transform: translateX(100%);
     -webkit-transition: .3s ease-in;
     transition: .3s ease-in;
+}
+
+#daily:last-child {
+    margin-bottom: 0;
 }
 
 #daily .daily_info {
@@ -4032,6 +3846,10 @@ we can specify global variable to use flexbox as default instead of floats
  .no-margin {
         margin: 0px !important;
  }
+}
+
+#daily:hover {
+ background: rgba(0, 0, 0, 0.55);
 }
 
 /*!
@@ -5021,6 +4839,10 @@ we can specify global variable to use flexbox as default instead of floats
  opacity: 0.7;
 }
 
+.quotesBox:hover {
+ background: rgba(0, 0, 0, .7);
+}
+
 #todoMain {
     width: 250px;
     height: auto;
@@ -5598,294 +5420,21 @@ we can specify global variable to use flexbox as default instead of floats
     /* Style adjustments for viewports that meet the condition */
 }
 
-@media (min-width: 576px) {
-
- .grid-one div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
- }
-
- .grid-one div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-one div:last-child {
-  margin-right: 0;
- }
-
- .grid-one div:nth-child(2n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-three div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
- }
-
- .grid-three div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-three div:last-child {
-  margin-right: 0;
- }
-
- .grid-three div:nth-child(2n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-four div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
- }
-
- .grid-four div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-four div:last-child {
-  margin-right: 0;
- }
-
- .grid-four div:nth-child(2n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-}
-
-@media (min-width: 768px) {
-
- .grid-one div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
- }
-
- .grid-one div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-one div:last-child {
-  margin-right: 0;
- }
-
- .grid-one div:nth-child(3n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-three div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
- }
-
- .grid-three div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-three div:last-child {
-  margin-right: 0;
- }
-
- .grid-three div:nth-child(3n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-four div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  max-width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
-  width: calc(99.9% * 1/3 - (0px - 0px * 1/3));
- }
-
- .grid-four div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-four div:last-child {
-  margin-right: 0;
- }
-
- .grid-four div:nth-child(3n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-}
-
-@media (min-width: 992px) {
-
- .grid-one div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/6 - (0px - 0px * 1/6));
-  max-width: calc(99.9% * 1/6 - (0px - 0px * 1/6));
-  width: calc(99.9% * 1/6 - (0px - 0px * 1/6));
- }
-
- .grid-one div:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- .grid-one div:last-child {
-  margin-right: 0;
- }
-
- .grid-one div:nth-child(6n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-three div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/4 - (0px - 0px * 1/4));
-  width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
-  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
- }
-
- .grid-three div:nth-child(1n) {
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0;
- }
-
- .grid-three div:last-child {
-  margin-right: 0;
-  margin-bottom: 0;
- }
-
- .grid-three div:nth-child(4n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- .grid-three div:nth-last-child(-n + 4) {
-  margin-bottom: 0;
- }
-
- .grid-four div {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/4 - (30px - 30px * 1/4));
-  max-width: calc(99.9% * 1/4 - (30px - 30px * 1/4));
-  width: calc(99.9% * 1/4 - (30px - 30px * 1/4));
- }
-
- .grid-four div:nth-child(1n) {
-  margin-right: 30px;
-  margin-left: 0;
- }
-
- .grid-four div:last-child {
-  margin-right: 0;
- }
-
- .grid-four div:nth-child(4n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-}
-
 @media (min-width: 1200px) {
 
  #weather {
-  margin: 3px .5%;
-  width: 280px;
-  min-width: 280px;
-  height: 180px;
+  width: 240px;
+  min-width: 240px;
+  height: 170px;
   background: rgba(0, 0, 0, .35);
-  display: flex;
-  flex-flow: row wrap;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  color: #e0e0f8;
-  border-radius: 5px;
-  margin-right: 1rem;
  }
 
  #weather .location {
-  width: 100%;
-  flex: 0 0 auto;
-  height: calc(99.9% * 1/4 - (0px - 0px * 1/4));
-  margin-bottom: 0px;
-  font-size: 22px;
-  display: flex;
-  margin: 0;
-  padding: 0;
- }
-
- #weather .location:last-child {
-  margin-bottom: 0;
- }
-
- #weather .location {
-  justify-content: center;
-  align-items: center;
- }
-
- #weather .wInfo .currentTemp {
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  max-width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  width: calc(99.9% * 1/2 - (0px - 0px * 1/2));
-  display: flex;
-  width: 50%;
- }
-
- #weather .wInfo .currentTemp:nth-child(1n) {
-  margin-right: 0px;
-  margin-left: 0;
- }
-
- #weather .wInfo .currentTemp:last-child {
-  margin-right: 0;
- }
-
- #weather .wInfo .currentTemp:nth-child(2n) {
-  margin-right: 0;
-  margin-left: auto;
- }
-
- #weather .wInfo .currentTemp {
-  justify-content: center;
-  align-items: center;
+  font-size: 19px;
  }
 
  #weather .wInfo .currentTemp p {
   font-size: 4rem;
-  margin: 0;
-  cursor: pointer;
- }
-
- #weather .wInfo .currentTemp .unit {
-  font-size: 1.4rem;
  }
 
  #daily {
@@ -5896,15 +5445,6 @@ we can specify global variable to use flexbox as default instead of floats
  #daily .daily_info {
   height: 150px;
   width: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  display: flex;
-  flex-flow: row wrap;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
  }
 
  #daily .daily_info .daily_header h4 {
@@ -5971,6 +5511,20 @@ we can specify global variable to use flexbox as default instead of floats
  }
 }
 
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
 @media (max-width: 767px) {
   .fullscreen-bg {
     background: #282628 url('../images/videoframe.png') center center / cover no-repeat;
@@ -5979,6 +5533,10 @@ we can specify global variable to use flexbox as default instead of floats
   .fullscreen-bg__video {
     display: none;
   }
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
 }
 
 @media print {
@@ -6053,24 +5611,6 @@ we can specify global variable to use flexbox as default instead of floats
     h3 {
         page-break-after: avoid;
     }
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    height: 300%;
-    top: -100%;
-  }
-}
-
-@media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
-
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 300%;
-    left: -100%;
-  }
 }
 
 /*# sourceMappingURL=main.css.map */

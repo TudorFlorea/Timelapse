@@ -1,6 +1,7 @@
 @lost flexbox flex;
 @lost gutter 0px;
 #daily {
+    lost-row: 1/2;
     height: 150px;
     width: 300px;
     display: flex;
@@ -23,8 +24,6 @@
         @media (--viewport-extralarge) {
             height: 150px;
             width: 100%;
-            flex-flow: column;
-            lost-center: 100% .5rem;
         }
         & .daily_header {
             lost-row: 1/5;
@@ -169,6 +168,10 @@
     }
     .no-margin {
         margin: 0px !important;
+    }
+
+    &:hover {
+        background: color(black alpha(55%));        
     }
 }
 

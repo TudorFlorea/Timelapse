@@ -1,14 +1,15 @@
-'use strict';
 
 import $ from './vendor/jquery-3.2.1.min';
 import func from './modules/_weather';
 import quoteGenerator from './modules/_quotes';
 import todoFunc from './modules/_todolist';
-import links from "./modules/_links";
-import mainFocusFeat from "./modules/_mainFocus";
+import links from './modules/_links';
+import mainFocusFeat from './modules/_mainFocus';
+import videoFunc from './modules/_timelapse';
 
 
-$(document).ready(function () {
+$(document).ready(() => {
+    videoFunc();
     func.weatherReport();
     func.eventListeners();
     quoteGenerator();
@@ -16,9 +17,3 @@ $(document).ready(function () {
     links.init();
     mainFocusFeat();
 });
-
-// Returns width of browser viewport
-console.log($( window ).width()); 
-
-// Returns width of HTML document
-console.log($( document ).width()); 

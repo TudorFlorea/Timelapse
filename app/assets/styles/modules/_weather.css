@@ -1,39 +1,31 @@
 @lost flexbox flex;
 @lost gutter 0px;
 #weather {
+    lost-row: 1/2;
     margin: 3px .5rem;
     width: 200px;
     min-width: 200px;
     height: 150px;
     background: rgba(0, 0, 0, .35);
-    lost-center: 100% .5rem;
     color: #e0e0f8;
     border-radius: 5px;
-    margin-right: 1rem;
     text-align: center;
+    transition: background .5s linear;
+
     @media (--viewport-extralarge) {
-        margin: 3px .5%;
-        width: 280px;
-        min-width: 280px;
-        height: 180px;
+        width: 240px;
+        min-width: 240px;
+        height: 170px;
         background: rgba(0, 0, 0, .35);
-        lost-center: 100% .5rem;
-        color: #e0e0f8;
-        border-radius: 5px;
-        margin-right: 1rem;
     }
     & .location {
         lost-row: 1/4;
-        font-size: 16px;
+        font-size: 15px;
         lost-align: center;
         margin: 0;
         padding: 0;
         @media (--viewport-extralarge) {
-            lost-row: 1/4;
-            font-size: 22px;
-            lost-align: center;
-            margin: 0;
-            padding: 0;
+            font-size: 19px;
         }
     }
     /* ! location */
@@ -49,8 +41,7 @@
             & #icon {
                 cursor: pointer;
             }
-        }
-        /* ! currIcon */
+        } /* ! currIcon */
         & .currentTemp {
             lost-column: 1/2;
             lost-align: center;
@@ -59,28 +50,19 @@
                 lost-align: center;                
                 font-size: 3rem;
                 margin: 0;
-                cursor: pointer;
-                margin-bottom: 15px;
-            }
-            & .unit {
-                font-size: 1.1rem;
             }
             @media (--viewport-extralarge) {
-                lost-column: 1/2;
-                lost-align: center;
-                width: 50%;
                 & p {
                     font-size: 4rem;
-                    margin: 0;
-                    cursor: pointer;
                 }
-                & .unit {
-                    font-size: 1.4rem;
-                }
-            }
+            } /* !media */
         }
         /*! currentTemp*/
     }
     /* ! wInfo */
+
+    &:hover {
+        background: rgba(0, 0, 0, .55);
+    }
 }
 /*! weather*/
