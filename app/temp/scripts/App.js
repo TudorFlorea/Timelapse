@@ -2428,7 +2428,11 @@ var _links = __webpack_require__(8);
 
 var _links2 = _interopRequireDefault(_links);
 
-var _timelapse = __webpack_require__(9);
+var _mainFocus = __webpack_require__(9);
+
+var _mainFocus2 = _interopRequireDefault(_mainFocus);
+
+var _timelapse = __webpack_require__(10);
 
 var _timelapse2 = _interopRequireDefault(_timelapse);
 
@@ -2441,6 +2445,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _quotes2.default)();
     (0, _todolist2.default)();
     _links2.default.init();
+    (0, _mainFocus2.default)();
 });
 
 /***/ }),
@@ -3233,6 +3238,99 @@ exports.default = links;
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function mainFocusFeat() {
+
+    var arrayQuotes = ['Way to go!', 'You did it!', 'You rock!'];
+    var mFocus;
+    loadMainFocus();
+
+    // Checks if there is a Main Focus and triggers function if there is
+    function loadMainFocus() {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            mFocus = mainFocusStorage.mainFocus;
+            if (mFocus.length > 0) {
+                showMainFocus();
+            } else {
+                (0, _jquery2.default)(".mainFocusInput").show();
+                (0, _jquery2.default)("#mainFocusList").hide();
+                (0, _jquery2.default)(".mainFocusInput").val('');
+            }
+        });
+    }
+
+    // Add Main Focus for the day
+    (0, _jquery2.default)(".mainFocusInput").on("keyup", function (e) {
+        var mainFText = (0, _jquery2.default)(".mainFocusInput").val();
+        if (e.which == 13 && mainFText.length != 0) {
+            chrome.storage.sync.get({ mainFocus: [] }, function (mainFocusStorage) {
+                mFocus = mainFocusStorage.mainFocus;
+                mFocus = [];
+                mFocus.push({
+                    'taskForToday': mainFText
+                });
+                chrome.storage.sync.set({
+                    mainFocus: mFocus
+                });
+                showMainFocus();
+            });
+        }
+    });
+
+    // Display MainFocus
+    function showMainFocus() {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            mFocus = mainFocusStorage.mainFocus;
+        });
+        if (mFocus.length > 0) {
+            (0, _jquery2.default)(".mainFocusInput").hide();
+            (0, _jquery2.default)("#mainFocusList").html("<li><input class='mFocusStyle' name='checkbox2' type='checkbox'><span>" + mFocus[0].taskForToday + "</span><button id='deleteMainFocus' class='deleteBtnMainFocus'>Delete</button>");
+            (0, _jquery2.default)("#mainFocusList").show();
+        }
+    }
+
+    // Function to delete main focus
+    (0, _jquery2.default)("#mainFocusList").on("click", "button", function () {
+        chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
+            chrome.storage.sync.set({ 'mainFocus': [] });
+            loadMainFocus();
+        });
+    });
+
+    // Function to mark main focus as done
+    (0, _jquery2.default)(document).on('change', 'input[name="checkbox2"]', function () {
+        var input = (0, _jquery2.default)(this).next('span');
+        if (this.checked) {
+            (0, _jquery2.default)(input).toggleClass('mainFocusDone');
+            chrome.storage.sync.set({ 'mainFocus': [] });
+            (0, _jquery2.default)('#mainFocusList').fadeOut(2000, function () {
+                (0, _jquery2.default)(this).hide();
+            });
+            setTimeout(function () {
+                loadMainFocus();
+            }, 2000);
+        }
+    });
+}
+
+exports.default = mainFocusFeat;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

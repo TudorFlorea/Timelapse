@@ -48,12 +48,12 @@ we can specify global variable to use flexbox as default instead of floats
 	lost-align: bottom;	
 
 	& .quotes_column {
-		lost-column: 1/2;
+		lost-column: 1/3;
 		lost-align:  middle-left;
 	}
 
 	& .todo_column {
-		lost-column: 1/2;
+		lost-column: 1/3;
 		lost-align: right;
 	}
 }

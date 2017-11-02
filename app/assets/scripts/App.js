@@ -4,6 +4,7 @@ import func from './modules/_weather';
 import quoteGenerator from './modules/_quotes';
 import todoFunc from './modules/_todolist';
 import links from './modules/_links';
+import mainFocusFeat from './modules/_mainFocus';
 import videoFunc from './modules/_timelapse';
 
 
@@ -14,4 +15,5 @@ $(document).ready(() => {
     quoteGenerator();
     todoFunc();
     links.init();
+    mainFocusFeat();
 });
