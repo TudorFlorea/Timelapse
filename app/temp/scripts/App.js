@@ -3199,6 +3199,7 @@ function mainFocusFeat() {
     var mFocus;
     loadMainFocus();
 
+    // Checks if there is a Main Focus and triggers function if there is
     function loadMainFocus() {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
             mFocus = mainFocusStorage.mainFocus;
@@ -3212,6 +3213,7 @@ function mainFocusFeat() {
         });
     }
 
+    // Add Main Focus for the day
     (0, _jquery2.default)(".mainFocusInput").on("keyup", function (e) {
         var mainFText = (0, _jquery2.default)(".mainFocusInput").val();
         if (e.which == 13 && mainFText.length != 0) {
@@ -3229,6 +3231,7 @@ function mainFocusFeat() {
         }
     });
 
+    // Display MainFocus
     function showMainFocus() {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
             mFocus = mainFocusStorage.mainFocus;
@@ -3240,6 +3243,7 @@ function mainFocusFeat() {
         }
     }
 
+    // Function to delete main focus
     (0, _jquery2.default)("#mainFocusList").on("click", "button", function () {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
             chrome.storage.sync.set({ 'mainFocus': [] });
@@ -3247,13 +3251,14 @@ function mainFocusFeat() {
         });
     });
 
+    // Function to mark main focus as done
     (0, _jquery2.default)(document).on('change', 'input[name="checkbox2"]', function () {
         var input = (0, _jquery2.default)(this).next('span');
         if (this.checked) {
             (0, _jquery2.default)(input).toggleClass('mainFocusDone');
             chrome.storage.sync.set({ 'mainFocus': [] });
             (0, _jquery2.default)('#mainFocusList').fadeOut(2000, function () {
-                (0, _jquery2.default)(this).remove();
+                (0, _jquery2.default)(this).hide();
             });
             setTimeout(function () {
                 loadMainFocus();
