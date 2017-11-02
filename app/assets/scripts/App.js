@@ -6,7 +6,7 @@ import todoFunc from './modules/_todolist';
 import links from './modules/_links';
 import mainFocusFeat from './modules/_mainFocus';
 import videoFunc from './modules/_timelapse';
-
+import displayCurrentTime from './modules/_time'
 
 $(document).ready(() => {
     videoFunc();
@@ -16,4 +16,5 @@ $(document).ready(() => {
     todoFunc();
     links.init();
     mainFocusFeat();
+    displayCurrentTime();
 });
