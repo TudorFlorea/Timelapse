@@ -2570,7 +2570,7 @@ function populateDailyInfo(arr, index, data) {
     (0, _jquery2.default)('.wi-sunset').text(' ' + sunDown);
     (0, _jquery2.default)('.daily_summary').text(data[index].summary);
 
-    (0, _jquery2.default)('.daily_icon').html('<canvas id="dailyIcon" width="90" height="90"></canvas>');
+    (0, _jquery2.default)('.daily_icon').html('<canvas id="dailyIcon" width="80" height="80"></canvas>');
 }
 
 /**
@@ -2643,9 +2643,9 @@ function weatherAPI(latitude, longitude) {
     // latitude and longitude are accepted arguments and passed once a user has submitted the form.
     var lat = parseFloat(latitude);
     var lng = parseFloat(longitude);
-    var api_call = url + apiKey + '/' + lat + ',' + lng + '/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?';
+    var apiCall = url + apiKey + '/' + lat + ',' + lng + '/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?';
 
-    return _jquery2.default.getJSON(api_call, function (forecast) {});
+    return _jquery2.default.getJSON(apiCall, function (forecast) {});
 }
 
 // get User's current location(city, state)
@@ -3255,7 +3255,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function mainFocusFeat() {
 
-    var customMsg = ['Way to go!', 'You did it!', 'You rock!'];
     var mFocus;
     loadMainFocus();
 
@@ -3369,7 +3368,7 @@ function videoFunc() {
         video.paused ? video.play() : video.pause();
         /* eslint-enable */
     });
-    // Set timer to fadeout content if mouse is inactive for 6 seconds
+    // Set timer to fadeout content if mouse is inactive for 10 seconds
     var timer = void 0;
     (0, _jquery2.default)(document).mousemove(function () {
         if (timer) {
@@ -3379,7 +3378,7 @@ function videoFunc() {
         (0, _jquery2.default)('.main_grid').fadeIn('slow', 'linear');
         timer = setTimeout(function () {
             (0, _jquery2.default)('.main_grid').fadeOut('slow', 'linear');
-        }, 6000);
+        }, 10000);
     });
 }
 

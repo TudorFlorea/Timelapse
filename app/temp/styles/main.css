@@ -1,3 +1,24 @@
+@font-face {
+ font-family: "Open Sans";
+ font-style: 400;
+ font-weight: normal;
+ src: local("Open Sans Regular"),local(OpenSans-Regular);
+}
+
+@font-face {
+ font-family: "Open Sans";
+ font-style: 700;
+ font-weight: normal;
+ src: local("Open Sans Bold"),local(OpenSans-Bold);
+}
+
+@font-face {
+ font-family: "Open Sans";
+ font-style: 700;
+ font-weight: italic;
+ src: local("Open Sans Bold Italic"),local(OpenSans-BoldItalic);
+}
+
 /*Variables*/
 
 :root {
@@ -11,7 +32,7 @@
 /* Fonts */
 
 body {
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-family: 'Open Sans', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 @font-face {
@@ -174,6 +195,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid__top {
 	position: relative;
+	background: rgba(0, 0, 0, 0.3);	
 	z-index: 2;	
 	width: 100%;
 	height: 100%;
@@ -262,6 +284,7 @@ we can specify global variable to use flexbox as default instead of floats
 
 .grid__bottom {
 	position: relative;
+	background: rgba(0, 0, 0, 0.3);
 	z-index: 2;
 	width: 100%;
 	width: 100%;
@@ -3400,7 +3423,6 @@ we can specify global variable to use flexbox as default instead of floats
     width: 200px;
     min-width: 200px;
     height: 150px;
-    background: rgba(0, 0, 0, .35);
     color: #e0e0f8;
     border-radius: 5px;
     text-align: center;
@@ -3432,7 +3454,9 @@ we can specify global variable to use flexbox as default instead of floats
  align-items: center;
 }
 
-#weather {/*! location*/
+#weather {
+
+ /*! location*/
 }
 
 #weather .wInfo {
@@ -3487,7 +3511,9 @@ we can specify global variable to use flexbox as default instead of floats
  cursor: pointer;
 }
 
-#weather .wInfo {/*! currIcon*/
+#weather .wInfo {
+
+ /*! currIcon*/
 }
 
 #weather .wInfo .currentTemp {
@@ -3531,13 +3557,19 @@ we can specify global variable to use flexbox as default instead of floats
  align-items: center;
 }
 
-#weather .wInfo .currentTemp {/*!media*/
+#weather .wInfo .currentTemp {
+
+ /*!media*/
 }
 
-#weather .wInfo {/*! currentTemp*/
+#weather .wInfo {
+
+ /*! currentTemp*/
 }
 
-#weather {/*! wInfo*/
+#weather {
+
+ /*! wInfo*/
 }
 
 #weather:hover {
@@ -3560,7 +3592,7 @@ we can specify global variable to use flexbox as default instead of floats
     -webkit-box-direction: normal;
         -ms-flex-flow: column nowrap;
             flex-flow: column nowrap;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     color: #e0e0f8;
     -webkit-transform: translateX(100%);
@@ -3644,6 +3676,7 @@ we can specify global variable to use flexbox as default instead of floats
  flex-basis: calc(99.9% * 1/4 - (0px - 0px * 1/4));
  max-width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
  width: calc(99.9% * 1/4 - (0px - 0px * 1/4));
+ display: flex;
 }
 
 #daily .daily_info .daily_body .daily_icon:nth-child(1n) {
@@ -3658,6 +3691,11 @@ we can specify global variable to use flexbox as default instead of floats
 #daily .daily_info .daily_body .daily_icon:nth-child(4n) {
  margin-right: 0;
  margin-left: auto;
+}
+
+#daily .daily_info .daily_body .daily_icon {
+ justify-content: center;
+ align-items: center;
 }
 
 #daily .daily_info .daily_body .daily_details {
@@ -3757,7 +3795,9 @@ we can specify global variable to use flexbox as default instead of floats
  margin-bottom: 0;
 }
 
-#daily {/*! Daily info*/
+#daily {
+
+ /*! Daily info*/
 }
 
 #daily ul {
@@ -3805,7 +3845,9 @@ we can specify global variable to use flexbox as default instead of floats
  top: 5px;
 }
 
-#daily ul li {/*!icon_*/
+#daily ul li {
+
+ /*!icon_*/
 }
 
 #daily ul li [class*="daily_"] {
@@ -3819,17 +3861,23 @@ we can specify global variable to use flexbox as default instead of floats
  margin: 0;
 }
 
-#daily ul li {/*! .daily*/
+#daily ul li {
+
+ /*! .daily*/
 }
 
-#daily ul {/*! li*/
+#daily ul {
+
+ /*! li*/
 }
 
 #daily ul li:hover {
  background: rgba(0, 0, 0, 0.45);
 }
 
-#daily {/*! ul*/
+#daily {
+
+ /*! ul*/
 
  .inline {
         display: inline !important;
@@ -3849,7 +3897,7 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 #daily:hover {
- background: rgba(0, 0, 0, 0.55);
+ background: rgba(0, 0, 0, 0.35);
 }
 
 /*!
@@ -4788,11 +4836,10 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox {
-    width: 60%;
+    width: 70%;
     padding: 1em;
     margin: 8px;
     margin: .5rem;
-    background: rgba(0, 0, 0, .4);
     border-radius: 10px;
     color: aliceblue;
     display: -webkit-box;
@@ -4850,7 +4897,7 @@ we can specify global variable to use flexbox as default instead of floats
     margin: 1rem;
     font-size: 15px;
     border-radius: 3px;
-    background-color:rgba(0, 0, 0, .35)
+    background-color:rgba(0, 0, 0, .25)
 
 }
 
@@ -5022,13 +5069,19 @@ we can specify global variable to use flexbox as default instead of floats
  font-size: 10px;
 }
 
-#links #links_wrapper #top_links_wrapper #links_list {/*! li*/
+#links #links_wrapper #top_links_wrapper #links_list {
+
+ /*! li*/
 }
 
-#links #links_wrapper #top_links_wrapper {/*! links_list*/
+#links #links_wrapper #top_links_wrapper {
+
+ /*! links_list*/
 }
 
-#links #links_wrapper {/*! top_links_wrapper*/
+#links #links_wrapper {
+
+ /*! top_links_wrapper*/
 }
 
 #links #links_wrapper #custom_links_wrapper {
@@ -5104,7 +5157,9 @@ we can specify global variable to use flexbox as default instead of floats
  width: 140px;
 }
 
-#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links {/*Change the link color on hover*/
+#links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links {
+
+ /*Change the link color on hover*/
 }
 
 #links #links_wrapper #custom_links_wrapper #hide_wrapper #custom_links li:hover {
@@ -5187,7 +5242,9 @@ we can specify global variable to use flexbox as default instead of floats
  cursor: pointer;
 }
 
-#links #links_wrapper #custom_links_wrapper #hide_wrapper {/*! save_links*/
+#links #links_wrapper #custom_links_wrapper #hide_wrapper {
+
+ /*! save_links*/
 }
 
 #links a {
@@ -5195,7 +5252,9 @@ we can specify global variable to use flexbox as default instead of floats
  text-decoration: none;
 }
 
-#links {/*! a*/
+#links {
+
+ /*! a*/
 }
 
 #links .link_icon:hover {
@@ -5231,7 +5290,6 @@ we can specify global variable to use flexbox as default instead of floats
     margin: 0 auto;
     font-size: 30px;
     bottom:125px;
-    background-color:rgba(0, 0, 0, .35);
     border-radius: 3px
 }
 
@@ -5264,6 +5322,7 @@ we can specify global variable to use flexbox as default instead of floats
  margin: 0px auto 3% auto;
  width: 300px;
  font-size: 24px;
+ text-align: center;
 }
 
 #mainFocus .mainFocusInput:last-child {
@@ -5426,7 +5485,6 @@ we can specify global variable to use flexbox as default instead of floats
   width: 240px;
   min-width: 240px;
   height: 170px;
-  background: rgba(0, 0, 0, .35);
  }
 
  #weather .location {
@@ -5482,7 +5540,9 @@ we can specify global variable to use flexbox as default instead of floats
   top: 5px;
  }
 
- #daily ul li {/*!icon_*/
+ #daily ul li {
+
+  /*!icon_*/
  }
 
  #daily ul li [class*="daily_"] {

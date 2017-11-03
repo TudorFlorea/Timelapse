@@ -1,8 +1,7 @@
 .quotesBox {
-    width: 60%;
+    width: 70%;
     padding: 1em;
     margin: .5rem;
-    background: rgba(0, 0, 0, .4);
     border-radius: 10px;
     color: aliceblue;
     display: flex;

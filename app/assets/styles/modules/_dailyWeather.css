@@ -6,7 +6,7 @@
     width: 300px;
     display: flex;
     flex-flow: column nowrap;
-    background: color(black alpha(35%));
+    background: color(black alpha(25%));
     border-radius: 5px;
     color: #e0e0f8;
     transform: translateX(100%);
@@ -47,6 +47,7 @@
             & .daily_icon {
                 height: 100%;
                 lost-column: 1/4;
+                lost-align: center;
             }
             & .daily_details {
                 height: 100%;
@@ -171,7 +172,7 @@
     }
 
     &:hover {
-        background: color(black alpha(55%));        
+        background: color(black alpha(35%));        
     }
 }
 

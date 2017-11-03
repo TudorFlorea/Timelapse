@@ -21,7 +21,7 @@ function videoFunc() {
         video.paused ? video.play() : video.pause();
         /* eslint-enable */
     });
-    // Set timer to fadeout content if mouse is inactive for 6 seconds
+    // Set timer to fadeout content if mouse is inactive for 10 seconds
     let timer;
     $(document).mousemove(() => {
         if (timer) {
@@ -31,7 +31,7 @@ function videoFunc() {
         $('.main_grid').fadeIn('slow', 'linear');
         timer = setTimeout(() => {
             $('.main_grid').fadeOut('slow', 'linear');
-        }, 6000);
+        }, 10000);
     });
 }
 

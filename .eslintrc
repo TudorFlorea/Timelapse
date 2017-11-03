@@ -24,7 +24,6 @@
     "no-unused-vars": [1, {"argsIgnorePattern":
         "res|next|^err"
     }]
-  },
-  "plugins": ["html", "markdown"]
+  }
 }
 

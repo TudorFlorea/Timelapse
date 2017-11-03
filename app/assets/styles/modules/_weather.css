@@ -6,7 +6,6 @@
     width: 200px;
     min-width: 200px;
     height: 150px;
-    background: rgba(0, 0, 0, .35);
     color: #e0e0f8;
     border-radius: 5px;
     text-align: center;
@@ -16,7 +15,6 @@
         width: 240px;
         min-width: 240px;
         height: 170px;
-        background: rgba(0, 0, 0, .35);
     }
     & .location {
         lost-row: 1/4;

@@ -89,7 +89,7 @@ function populateDailyInfo(arr, index, data) {
     $('.wi-sunset').text(` ${sunDown}`);
     $('.daily_summary').text(data[index].summary);
 
-    $('.daily_icon').html('<canvas id="dailyIcon" width="90" height="90"></canvas>');
+    $('.daily_icon').html('<canvas id="dailyIcon" width="80" height="80"></canvas>');
 }
 
 /**
@@ -159,9 +159,9 @@ function weatherAPI(latitude, longitude) {
     // latitude and longitude are accepted arguments and passed once a user has submitted the form.
     const lat = parseFloat(latitude);
     const lng = parseFloat(longitude);
-    const api_call = `${url + apiKey}/${lat},${lng}/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?`;
+    const apiCall = `${url + apiKey}/${lat},${lng}/?exclude=alerts,flags,hourly&units=auto&Accept-Encoding:gzip&callback=?`;
 
-    return $.getJSON(api_call, (forecast) => {});
+    return $.getJSON(apiCall, (forecast) => {});
 }
 
 // get User's current location(city, state)
