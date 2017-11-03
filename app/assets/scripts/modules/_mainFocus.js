@@ -2,7 +2,6 @@ import $ from '../vendor/jquery-3.2.1.min';
 
 function mainFocusFeat() {
 
-    var customMsg = ['Way to go!', 'You did it!', 'You rock!'];
     var mFocus;
     loadMainFocus();
 
