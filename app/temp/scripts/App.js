@@ -3255,20 +3255,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function mainFocusFeat() {
 
-    var arrayQuotes = ['Way to go!', 'You did it!', 'You rock!'];
+    var customMsg = ['Way to go!', 'You did it!', 'You rock!'];
     var mFocus;
     loadMainFocus();
 
     // Checks if there is a Main Focus and triggers function if there is
     function loadMainFocus() {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
-            mFocus = mainFocusStorage.mainFocus;
-            if (mFocus.length > 0) {
-                showMainFocus();
-            } else {
-                (0, _jquery2.default)(".mainFocusInput").show();
-                (0, _jquery2.default)("#mainFocusList").hide();
-                (0, _jquery2.default)(".mainFocusInput").val('');
+            if (mainFocusStorage.mainFocus != undefined) {
+                mFocus = mainFocusStorage.mainFocus;
+                if (mFocus.length > 0) {
+                    showMainFocus();
+                } else {
+                    (0, _jquery2.default)(".mainFocusInput").show();
+                    (0, _jquery2.default)("#mainFocusList").hide();
+                    (0, _jquery2.default)(".mainFocusInput").val('');
+                }
             }
         });
     }

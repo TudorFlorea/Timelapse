@@ -2,20 +2,21 @@ import $ from '../vendor/jquery-3.2.1.min';
 
 function mainFocusFeat() {
 
-    var arrayQuotes = ['Way to go!', 'You did it!', 'You rock!']
     var mFocus;
     loadMainFocus();
 
     // Checks if there is a Main Focus and triggers function if there is
     function loadMainFocus() {
         chrome.storage.sync.get('mainFocus', function (mainFocusStorage) {
-            mFocus = mainFocusStorage.mainFocus;
-            if (mFocus.length > 0) {
-                showMainFocus();
-            } else {
-                $(".mainFocusInput").show();
-                $("#mainFocusList").hide();
-                $(".mainFocusInput").val('');
+            if (mainFocusStorage.mainFocus != undefined) {
+                mFocus = mainFocusStorage.mainFocus;
+                if (mFocus.length > 0) {
+                    showMainFocus();
+                } else {
+                    $(".mainFocusInput").show();
+                    $("#mainFocusList").hide();
+                    $(".mainFocusInput").val('');
+                }
             }
         });
     }
