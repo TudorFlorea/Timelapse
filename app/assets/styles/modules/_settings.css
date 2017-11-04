@@ -1,0 +1,21 @@
+#js-settings {
+    background: color(black alpha(30%));	
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: absolute;
+    bottom: 150px;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 25px;
+    lost-align: center;
+    border-radius: 5px; 
+
+    & > *{
+        padding: 0;
+        margin: 0;
+    }
+}

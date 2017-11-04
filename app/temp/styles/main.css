@@ -12,13 +12,6 @@
  src: local("Open Sans Bold"),local(OpenSans-Bold);
 }
 
-@font-face {
- font-family: "Open Sans";
- font-style: 700;
- font-weight: italic;
- src: local("Open Sans Bold Italic"),local(OpenSans-BoldItalic);
-}
-
 /*Variables*/
 
 :root {
@@ -5395,6 +5388,34 @@ we can specify global variable to use flexbox as default instead of floats
 #mainFocus .mainFocusDone {
  text-decoration: line-through;
  color: grey;
+}
+
+#js-settings {
+    background: rgba(0, 0, 0, 0.3);	
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: absolute;
+    bottom: 150px;
+    right: 16px;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 25px;
+    display: flex;
+    border-radius: 5px
+}
+
+#js-settings {
+    justify-content: center;
+    align-items: center
+}
+
+#js-settings > * {
+ padding: 0;
+ margin: 0;
 }
 
 /* ==========================================================================

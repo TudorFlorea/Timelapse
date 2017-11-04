@@ -11,5 +11,6 @@
 @import "modules/todolist";
 @import "modules/links";
 @import "modules/mainFocus";
+@import "modules/settings";
 
 @import "base/basebottom";
