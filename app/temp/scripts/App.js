@@ -3363,7 +3363,7 @@ function videoFunc() {
         video.play();
     });
     // pause video on click
-    (0, _jquery2.default)('.grid__bottom').on('click', function () {
+    (0, _jquery2.default)('#js-settings').on('click', function () {
         /*eslint-disable */
         video.paused ? video.play() : video.pause();
         /* eslint-enable */

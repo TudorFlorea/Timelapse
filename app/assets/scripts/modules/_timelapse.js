@@ -16,7 +16,7 @@ function videoFunc() {
         video.play();
     });
     // pause video on click
-    $('.grid__bottom').on('click', () => {
+    $('#js-settings').on('click', () => {
     /*eslint-disable */
         video.paused ? video.play() : video.pause();
         /* eslint-enable */
