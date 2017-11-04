@@ -3157,6 +3157,7 @@ function renderCustomLinks() {
         var links = storage.customLinks;
         if (links != undefined) {
             for (var i = 0; i < links.length; i++) {
+                console.log(links[i].url);
                 html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
             }
             (0, _jquery2.default)("#custom_links").html(html);
@@ -3170,7 +3171,7 @@ function renderCustomLinks() {
 
 function addProtocol(url) {
     var newUrl = url.split(":");
-    if (newUrl[0] == 'http' || url[0] == "https") {
+    if (newUrl[0] == 'http' || newUrl[0] == "https") {
         return url;
     } else {
         return "http://" + url;
