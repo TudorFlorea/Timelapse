@@ -1,22 +1,15 @@
 @font-face {
  font-family: "Open Sans";
- font-style: 400;
- font-weight: normal;
+ font-style: normal;
+ font-weight: 400;
  src: local("Open Sans Regular"),local(OpenSans-Regular);
 }
 
 @font-face {
  font-family: "Open Sans";
- font-style: 700;
- font-weight: normal;
+ font-style: normal;
+ font-weight: 700;
  src: local("Open Sans Bold"),local(OpenSans-Bold);
-}
-
-@font-face {
- font-family: "Open Sans";
- font-style: 700;
- font-weight: italic;
- src: local("Open Sans Bold Italic"),local(OpenSans-BoldItalic);
 }
 
 /*Variables*/
