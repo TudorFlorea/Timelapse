@@ -4842,18 +4842,19 @@ we can specify global variable to use flexbox as default instead of floats
     -webkit-box-direction: normal;
         -ms-flex-flow: column wrap;
             flex-flow: column wrap;
-    font-size: .9em;
+    font-size: 1em;
     -webkit-transition: all 0.5s linear;
-    transition: all 0.5s linear
+    transition: all 0.5s linear;
+    text-align: center
 }
 
 .quotesBox .quoteInfo {
- margin: 10px;
+ margin: 0.6em;
  margin-bottom: 0;
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
- // height: 50px;
+ // height: 3.1em;
 }
 
 .quotesBox #quoteText:hover {
@@ -4861,9 +4862,9 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox #quoteAuthor {
- margin: 0.5em;
- margin-right: 1em;
+ margin: 0 auto;
  font-size: 1em;
+ text-align: center;
 }
 
 .quotesBox #quoteAuthor:hover {
@@ -4871,7 +4872,7 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox #tweetButton {
- margin-bottom: 1em;
+ margin-bottom: 0.5em;
  cursor: pointer;
 }
 
