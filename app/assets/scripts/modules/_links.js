@@ -34,9 +34,7 @@ function getStorage() {
 function setStorage(name, value) {
     let setName = name;
     let setValue = value;
-    chrome.storage.sync.set({setName: setValue}, function () {
-        console.log("storage ",links);
-    });
+    chrome.storage.sync.set({setName: setValue}, function () {});
 }
 
 function saveLink(name, url) {
@@ -58,27 +56,23 @@ function saveLink(name, url) {
 
 function printStorage() {
     getStorage().then(function (storage) {
-        console.log(storage);
     });
 }
 
 function printBookmarks() {
     getBookmarks().then(function(data) {
-        console.log(data);
     });
 }
 
 function printHistory() {
 
     getHistory().then(function (data) {
-        console.log(data);
         let html = "<ul>";
         for(var i = 0; i < data.length; i++) {
             html += "<li>" + data[i]["title"] + "</li>";
 
         }
         html += "</ul>";
-        console.log(html);
         $("#history").html(html);
     });
 
@@ -138,12 +132,10 @@ function renderCustomLinks() {
         let links = storage.customLinks;
         if(links != undefined) {
             for(let i = 0; i < links.length; i++) {
-                console.log(links[i].url);
                 html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
             }
             $("#custom_links").html(html);
             $(".delete-link").on('click', function() {
-                console.log("aa" + $(this).parent().attr('data-id'));
                 removeLink($(this).parent().attr('data-id'));
             });
         }
@@ -184,7 +176,6 @@ function getTopSites() {
 
 function renderTopSites() {
     getTopSites().then(function(topSites) {
-        console.log(topSites);
         let html = "";
 
         if (topSites.length) {

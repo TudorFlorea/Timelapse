@@ -104,7 +104,7 @@ function todoFunc() {
     });
     // When there is no tasks, display image and some text
     function noTodo() {
-        $('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
+        $('#todoList').append('<img src="assets/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
     }
 
 }

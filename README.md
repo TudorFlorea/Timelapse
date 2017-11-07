@@ -1,6 +1,6 @@
-![Logo of the project](./app/icons/icon_128.png)
+# Timelapse
 
-# New tab evolution
+![Logo of the project](./app/icons/icon_128.png)
 
 > Chrome extension that enchances new tab with weather, todo list and quotes to inspire you every day.
 

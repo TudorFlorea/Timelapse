@@ -22,7 +22,7 @@
     "radix": 0,
     "no-console": 0,
     "no-unused-vars": [1, {"argsIgnorePattern":
-        "res|next|^err"
+        "chrome|res|next|^err"
     }]
   }
 }

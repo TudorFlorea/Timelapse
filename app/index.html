@@ -16,6 +16,11 @@
 
 <body>
     <div class="main_grid">
+        <div id="start__msg" class="invisible">
+            <p id="js-greet">Hello there! What's your name?</p>
+            <input class='start__input' type="text" autofocus>
+            <input type="submit" class="start__button" value="Continue">
+        </div>
         <section class="grid__top">
             <div class="links_column">
                 <!-- Links  -->
@@ -104,6 +109,9 @@
             </div>
         </section>
         <section class="grid__bottom">
+            <div id="js-settings">
+                <i class="fa fa-pause" aria-hidden="true" title="Pause video"></i>
+            </div>
             <div class="quotes_column">
                 <!-- Inspiring quotes -->
                 <section class="quotesBox">
@@ -117,6 +125,10 @@
             </div>
             <!-- Main Focus -->
             <section id='mainFocus'>
+                <div id="time">
+                    <div class="js-clock"></div>
+                    <div class="greet"><span id="js-daytimeGreet"></span> <span id="js-user"></span>.</div>
+                </div>
                 <p class='mainFocusText'>What do you want to get done today?</p>
                 <input class='mainFocusInput' type="text">
                 <ul id='mainFocusList'></ul>
@@ -144,7 +156,7 @@
         <!-- add loop to video for looping -->
         <video id="js-video" muted autoplay class="fullscreen-bg__video">
             <!-- <source src="#.webm" type="video/webm"> -->
-            <source >
+            <source>
             <!-- <source src="#.ogv" type="video/ogg"> -->
         </video>
     </div>

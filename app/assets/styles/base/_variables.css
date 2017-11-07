@@ -41,7 +41,8 @@
   }
 /*Custom media*/
   @custom-media --viewport-small (width >= 576px);
-  @custom-media --viewport-medium (width >= 768px);
+  @custom-media --viewport-medium (width >= 769px);
+  @custom-media --viewport-medium-height (height <= 769px);
   @custom-media --viewport-large (width >= 992px);
   @custom-media --viewport-extralarge (width >= 1200px);  
 

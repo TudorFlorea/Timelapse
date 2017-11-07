@@ -1,14 +1,14 @@
 @font-face {
  font-family: "Open Sans";
- font-style: normal;
- font-weight: 400;
+ font-style: 400;
+ font-weight: normal;
  src: local("Open Sans Regular"),local(OpenSans-Regular);
 }
 
 @font-face {
  font-family: "Open Sans";
- font-style: normal;
- font-weight: 700;
+ font-style: 700;
+ font-weight: normal;
  src: local("Open Sans Bold"),local(OpenSans-Bold);
 }
 
@@ -184,6 +184,12 @@ we can specify global variable to use flexbox as default instead of floats
 	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	display: flex;
+}
+
+.main_grid{
+	justify-content: center;
+	align-items: center;
 }
 
 .grid__top {
@@ -3555,6 +3561,11 @@ we can specify global variable to use flexbox as default instead of floats
  /*!media*/
 }
 
+#weather .wInfo .currentTemp {
+
+ /*!media*/
+}
+
 #weather .wInfo {
 
  /*! currentTemp*/
@@ -4842,18 +4853,19 @@ we can specify global variable to use flexbox as default instead of floats
     -webkit-box-direction: normal;
         -ms-flex-flow: column wrap;
             flex-flow: column wrap;
-    font-size: .9em;
+    font-size: 1em;
     -webkit-transition: all 0.5s linear;
-    transition: all 0.5s linear
+    transition: all 0.5s linear;
+    text-align: center
 }
 
 .quotesBox .quoteInfo {
- margin: 10px;
+ margin: 0.6em;
  margin-bottom: 0;
  display: -webkit-box;
  display: -ms-flexbox;
  display: flex;
- // height: 50px;
+ // height: 3.1em;
 }
 
 .quotesBox #quoteText:hover {
@@ -4861,9 +4873,9 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox #quoteAuthor {
- margin: 0.5em;
- margin-right: 1em;
+ margin: 0 auto;
  font-size: 1em;
+ text-align: center;
 }
 
 .quotesBox #quoteAuthor:hover {
@@ -4871,7 +4883,7 @@ we can specify global variable to use flexbox as default instead of floats
 }
 
 .quotesBox #tweetButton {
- margin-bottom: 1em;
+ margin-bottom: 0.5em;
  cursor: pointer;
 }
 
@@ -5281,23 +5293,23 @@ we can specify global variable to use flexbox as default instead of floats
     color:#e0e0f8;
     position: relative;
     margin: 0 auto;
-    font-size: 30px;
-    bottom:125px;
-    border-radius: 3px
+    bottom: 55px;            
+    font-size: 20px;
+    border-radius: 3px;
 }
 
 #mainFocus:nth-child(1n) {
     margin-right: 0px;
-    margin-left: 0
+    margin-left: 0;
 }
 
 #mainFocus:last-child {
-    margin-right: 0
+    margin-right: 0;
 }
 
 #mainFocus:nth-child(3n) {
     margin-right: 0;
-    margin-left: auto
+    margin-left: auto;
 }
 
 #mainFocus .mainFocusInput {
@@ -5388,6 +5400,115 @@ we can specify global variable to use flexbox as default instead of floats
 #mainFocus .mainFocusDone {
  text-decoration: line-through;
  color: grey;
+}
+
+#time {
+    text-align: center
+
+    
+}
+
+#time .js-clock {
+ font-size: 80px;
+ margin: 0;
+}
+
+#time .js-clock > * {
+ margin: 0;
+}
+
+#time .js-clock span {
+ font-size: 30px;
+}
+
+#time .js-clock {
+
+ /*! span*/
+}
+
+#time .js-clock .date {
+ font-size: 20px;
+}
+
+#time {
+
+ /*! clock*/
+}
+
+#time .greet {
+ font-size: 35px;
+}
+
+#time > * {
+ margin: 0;
+ padding: 0;
+}
+
+/*! Time */
+
+#start__msg {
+    width: 50%;
+    height: 350px;
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    font-size: 40px;
+    color: aliceblue
+}
+
+#start__msg .start__input {
+ background-color:transparent;
+ border-style: solid;
+ border-width: 0px 0px 1px 0px;
+ border-color: #e0e0f8;
+ color: #e0e0f8;
+ font-size: 15px;
+ display: block;
+ margin: 0px auto 3% auto;
+ width: 300px;
+ font-size: 24px;
+ text-align: center;
+ outline: none;
+}
+
+#start__msg .start__button {
+ width: 120px;
+ height: 40px;
+ background: rgba(240, 248, 255, 0.5);
+ outline: none;
+ margin: 0 auto;
+ border: none;
+ margin-bottom: 25px;
+ cursor: pointer;
+}
+
+#js-settings {
+    background: rgba(0, 0, 0, 0.3);
+    opacity: .6;
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: absolute;
+    bottom: 150px;
+    right: 16px;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: aliceblue;
+    font-size: 25px;
+    display: flex;
+    border-radius: 5px
+}
+
+#js-settings {
+    justify-content: center;
+    align-items: center
+}
+
+#js-settings > * {
+ padding: 0;
+ margin: 0;
 }
 
 /* ==========================================================================
@@ -5586,6 +5707,30 @@ we can specify global variable to use flexbox as default instead of floats
   .fullscreen-bg__video {
     display: none;
   }
+}
+
+@media (max-height: 769px) {
+
+ #weather .location {
+  font-size: 15px;
+ }
+
+ #weather .wInfo .currentTemp p {
+  font-size: 3rem;
+ }
+
+ #mainFocus {
+  bottom:125px;
+  font-size: 25px;
+ }
+
+ #time .js-clock {
+  font-size: 100px;
+ }
+
+ #time .greet {
+  font-size: 50px;
+ }
 }
 
 @media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {

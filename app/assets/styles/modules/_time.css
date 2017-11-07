@@ -1,0 +1,72 @@
+#time {
+    text-align: center;
+
+    & .js-clock {
+        font-size: 80px;
+        margin: 0;
+
+         @media (--viewport-medium-height) {
+            font-size: 100px;             
+         }
+
+        & > * {
+            margin: 0;
+        }
+        & span {
+            font-size: 30px;
+        } /* ! span */
+        & .date {
+            font-size: 20px;
+        }
+    } /* ! clock */
+
+    & .greet {
+        font-size: 35px;
+
+        @media (--viewport-medium-height) {
+            font-size: 50px;            
+        }
+    }
+    & > * {
+        margin: 0;
+        padding: 0;
+    }
+
+    
+} /*! Time */
+
+#start__msg {
+    width: 50%;
+    height: 350px;
+    position: absolute;
+    z-index: 99;
+    text-align: center;
+    font-size: 40px;
+    color: aliceblue;
+
+    & .start__input {
+        background-color:transparent;
+        border-style: solid; 
+        border-width: 0px 0px 1px 0px; 
+        border-color: #e0e0f8;
+        color: #e0e0f8;
+        font-size: 15px;
+        display: block;
+        margin: 0px auto 3% auto;
+        width: 300px;
+        font-size: 24px;
+        text-align: center;
+        outline: none;
+    }
+
+    & .start__button {
+        width: 120px;
+        height: 40px;
+        background: color(aliceblue alpha(50%));
+        outline: none;
+        margin: 0 auto;
+        border: none;
+        margin-bottom: 25px;
+        cursor: pointer;
+    }
+}

@@ -3,9 +3,14 @@
     color:#e0e0f8;
     position: relative;
     margin: 0 auto;
-    font-size: 30px;
-    bottom:125px;
+    bottom: 55px;            
+    font-size: 20px;
     border-radius: 3px;
+
+    @media (--viewport-medium-height) {
+        bottom:125px;        
+        font-size: 25px;        
+    }
 
     & .mainFocusInput {
         lost-row: 1/3;

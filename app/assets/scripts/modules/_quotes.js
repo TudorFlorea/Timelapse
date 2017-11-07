@@ -35,7 +35,6 @@ function evListeners() {
 function loadQuotes() {
     chrome.storage.local.get('quotes', function (quotes) {
         displayQuote(quotes.quotes);
-        console.log('Quotes loaded from cache.');
     })
 }
 
@@ -62,7 +61,6 @@ function storeQuotes(quotes) {
     chrome.storage.local.set({
         quotes: quotes
     }, function () {
-        console.log('Quotes cached.');
     });
 }
 
@@ -77,7 +75,6 @@ function quoteGenerator() {
             evListeners();
         } else {
             // else fetch quotes from github gist and load them
-            console.log('No quotes in cache. Loading quotes from gist.');
             $.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
                 // var to randomize order of array indexes
                 return new Promise(function (resolve, reject) {

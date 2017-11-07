@@ -25,6 +25,9 @@
         @media (--viewport-extralarge) {
             font-size: 19px;
         }
+        @media (--viewport-medium-height) {
+            font-size: 15px;            
+        }
     }
     /* ! location */
     & .wInfo {
@@ -53,6 +56,12 @@
                 & p {
                     font-size: 4rem;
                 }
+            } /* !media */
+
+            @media (--viewport-medium-height) {
+                 & p {
+                    font-size: 3rem;
+                }           
             } /* !media */
         }
         /*! currentTemp*/

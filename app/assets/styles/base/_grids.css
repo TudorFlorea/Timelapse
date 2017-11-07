@@ -16,6 +16,7 @@ we can specify global variable to use flexbox as default instead of floats
 	width: 100%;
 	height: 100%;
 	lost-center: 100% flex;
+	lost-align: center;
 }
 .grid__top {
 	position: relative;

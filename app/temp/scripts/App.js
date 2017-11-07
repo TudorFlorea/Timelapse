@@ -2436,10 +2436,21 @@ var _timelapse = __webpack_require__(10);
 
 var _timelapse2 = _interopRequireDefault(_timelapse);
 
+var _time = __webpack_require__(11);
+
+var _time2 = _interopRequireDefault(_time);
+
+var _start = __webpack_require__(12);
+
+var _start2 = _interopRequireDefault(_start);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
     (0, _timelapse2.default)();
+    _start2.default.start();
+    _start2.default.eventListeners();
+    (0, _time2.default)();
     _weather2.default.weatherReport();
     _weather2.default.eventListeners();
     (0, _quotes2.default)();
@@ -2500,9 +2511,7 @@ var CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
  * clearCache removes cache and cacheTime objects from storage
 / */
 function clearCache() {
-    storage.remove(['cache', 'cacheTime'], function () {
-        console.log('Cache cleaned');
-    });
+    storage.remove(['cache', 'cacheTime'], function () {});
 }
 /**
  * cacheCheck, checks if there is weather cache in storage and returns boolean value.
@@ -2512,7 +2521,6 @@ function cacheCheck() {
         var status = void 0;
         storage.get(['cache', 'cacheTime'], function (items) {
             // if cache is not older that 1h
-            console.log(items);
             if (items.cache && items.cacheTime && items.cache.length > 1 && items.cacheTime > CACHE_DURATION) {
                 status = true;
             } else {
@@ -2521,10 +2529,8 @@ function cacheCheck() {
             resolve(status);
         });
     }).then(function (value) {
-        console.log('Value: ' + value);
         return value;
     }).catch(function (reason) {
-        console.log('Error: ' + reason);
         return reason;
     });
 }
@@ -2535,9 +2541,7 @@ function storeCache(data) {
     storage.set({
         cache: data,
         cacheTime: Date.now()
-    }, function () {
-        console.log('Cache stored');
-    });
+    }, function () {});
 }
 
 /**
@@ -2584,8 +2588,6 @@ function loadCache() {
         daily = _ref2[1];
         location = _ref2[2];
 
-        console.log(new Date(items.cacheTime));
-        console.log(new Date(Date.now()));
         try {
             // add weather info for current day to module
             (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + items.cache[0].summary + '">\n                    ' + Math.round(items.cache[0].apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
@@ -2676,7 +2678,6 @@ function getAddress(latitude, longitude) {
 function weatherReport() {
     // Check HTML5 geolocation.
     if (!navigator.geolocation) {
-        console.error('Geolocation not enabled');
         (0, _jquery2.default)('.location').append('<p>Geolocation is not enabled.</p>');
     }
 
@@ -2686,11 +2687,9 @@ function weatherReport() {
     }).then(function (value) {
         if (value) {
             // populate from cache
-            console.log('Loading data from cache');
             loadCache();
         } else {
             // fetch data from Dark Sky and Google location API
-            console.log('Cache error. Fetching data from APIs');
             clearCache(); // clear old cache
             return new Promise(function (resolve, reject) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -2704,9 +2703,7 @@ function weatherReport() {
                     var promised = Promise.all([currentTemp, userAddress]);
 
                     if (promised) {
-                        console.log(promised);
                         resolve(promised);
-                        console.log('resolved');
                     } else {
                         reject(Error('Error Happened: ' + reject.reason));
                     }
@@ -2720,9 +2717,7 @@ function weatherReport() {
                 today = _ref4[1];
                 location = _ref4[2];
                 storeCache(wForecast);
-                storage.get(['cache', 'cacheTime'], function (items) {
-                    console.log(items);
-                });
+                storage.get(['cache', 'cacheTime'], function (items) {});
 
                 // appending basic data ( current temp, animated icon, and location) to weather section
                 (0, _jquery2.default)('.currentTemp').append('<p class="temp" title="' + result[0].currently.summary + '">\n                 ' + Math.round(result[0].currently.apparentTemperature) + '<i class="wi wi-degrees"></i></p>');
@@ -2745,7 +2740,6 @@ function weatherReport() {
                 populateDailyInfo(dailyArr, 0, daily);
                 skycons.add(document.getElementById('dailyIcon'), daily[0].icon);
             }).catch(function (reason) {
-                console.log('Error while fetching data from APIs: ' + reason);
                 throw new Error(reason);
             });
         }
@@ -2811,7 +2805,6 @@ function evListeners() {
 function loadQuotes() {
     chrome.storage.local.get('quotes', function (quotes) {
         displayQuote(quotes.quotes);
-        console.log('Quotes loaded from cache.');
     });
 }
 
@@ -2839,9 +2832,7 @@ function displayQuote() {
 function storeQuotes(quotes) {
     chrome.storage.local.set({
         quotes: quotes
-    }, function () {
-        console.log('Quotes cached.');
-    });
+    }, function () {});
 }
 
 // function to load random quotes from json file
@@ -2855,7 +2846,6 @@ function quoteGenerator() {
             evListeners();
         } else {
             // else fetch quotes from github gist and load them
-            console.log('No quotes in cache. Loading quotes from gist.');
             _jquery2.default.getJSON("https://gist.githubusercontent.com/dmakk767/9375ff01aff76f1788aead1df9a66338/raw/491f8c2e91b7d3b8f1c8230e32d9c9bc1a1adfa6/Quotes.json%2520", function (inspiringQuotes) {
                 // var to randomize order of array indexes
                 return new Promise(function (resolve, reject) {
@@ -2997,7 +2987,7 @@ function todoFunc() {
     });
     // When there is no tasks, display image and some text
     function noTodo() {
-        (0, _jquery2.default)('#todoList').append('<img src="../temp/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
+        (0, _jquery2.default)('#todoList').append('<img src="assets/images/smilyFace.png" id="noTodoImg" alt="smilyFace"> <p id="noTodoText">Woohoo, nothing to do!</p>');
     }
 }
 
@@ -3056,9 +3046,7 @@ function getStorage() {
 function setStorage(name, value) {
     var setName = name;
     var setValue = value;
-    chrome.storage.sync.set({ setName: setValue }, function () {
-        console.log("storage ", links);
-    });
+    chrome.storage.sync.set({ setName: setValue }, function () {});
 }
 
 function saveLink(name, url) {
@@ -3078,27 +3066,21 @@ function saveLink(name, url) {
 }
 
 function printStorage() {
-    getStorage().then(function (storage) {
-        console.log(storage);
-    });
+    getStorage().then(function (storage) {});
 }
 
 function printBookmarks() {
-    getBookmarks().then(function (data) {
-        console.log(data);
-    });
+    getBookmarks().then(function (data) {});
 }
 
 function printHistory() {
 
     getHistory().then(function (data) {
-        console.log(data);
         var html = "<ul>";
         for (var i = 0; i < data.length; i++) {
             html += "<li>" + data[i]["title"] + "</li>";
         }
         html += "</ul>";
-        console.log(html);
         (0, _jquery2.default)("#history").html(html);
     });
 }
@@ -3157,12 +3139,10 @@ function renderCustomLinks() {
         var links = storage.customLinks;
         if (links != undefined) {
             for (var i = 0; i < links.length; i++) {
-                console.log(links[i].url);
                 html += "<li data-id='" + links[i].id + "'>" + "<a href='" + addProtocol(links[i].url) + "'><span class='link-name'>" + substr(links[i].name, 20) + "</span> </a>" + "<span class='delete-link'> <i class='fa fa-trash-o' aria-hidden='true'></i></span>" + "</li>";
             }
             (0, _jquery2.default)("#custom_links").html(html);
             (0, _jquery2.default)(".delete-link").on('click', function () {
-                console.log("aa" + (0, _jquery2.default)(this).parent().attr('data-id'));
                 removeLink((0, _jquery2.default)(this).parent().attr('data-id'));
             });
         }
@@ -3202,7 +3182,6 @@ function getTopSites() {
 
 function renderTopSites() {
     getTopSites().then(function (topSites) {
-        console.log(topSites);
         var html = "";
 
         if (topSites.length) {
@@ -3364,7 +3343,7 @@ function videoFunc() {
         video.play();
     });
     // pause video on click
-    (0, _jquery2.default)('.grid__bottom').on('click', function () {
+    (0, _jquery2.default)('#js-settings').on('click', function () {
         /*eslint-disable */
         video.paused ? video.play() : video.pause();
         /* eslint-enable */
@@ -3384,6 +3363,101 @@ function videoFunc() {
 }
 
 exports.default = videoFunc;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function timeFunc() {
+    var d = new Date();
+    var minutes = d.getMinutes().toString().length == 1 ? '0' + d.getMinutes() : d.getMinutes();
+    var hours = d.getHours().toString().length == 1 ? '0' + d.getHours() : d.getHours();
+    var ampm = d.getHours() >= 12 ? 'pm' : 'am';
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    (0, _jquery2.default)('.js-clock').html('<p>' + hours + ':' + minutes + '<span>' + ampm + '</span></p>\n    <p class="date">' + days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear() + '</p>');
+}
+
+exports.default = timeFunc;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var morGreets = ['Rise and shine ', 'Greet the day ', 'Wake up ', 'Good morning, it is, '];
+
+function start() {
+    return new Promise(function (resolve) {
+        var d = new Date();
+        chrome.storage.local.get('userID', function (data) {
+            if (data.userID) {
+                (0, _jquery2.default)('#js-user').text(data.userID);
+                if (d.getHours() >= 5 && d.getHours() < 12) {
+                    (0, _jquery2.default)('#js-daytimeGreet').text(morGreets[Math.floor(Math.random() * 102)]);
+                } else if (d.getHours() >= 12 && d.getHours() < 18) {
+                    (0, _jquery2.default)('#js-daytimeGreet').text('Good afternoon, ');
+                } else {
+                    (0, _jquery2.default)('#js-daytimeGreet').text('Good evening, ');
+                }
+            } else {
+                console.log('No ID!');
+                (0, _jquery2.default)('.grid__top').hide();
+                (0, _jquery2.default)('.grid__bottom').hide();
+                (0, _jquery2.default)('#start__msg').removeClass('invisible');
+                (0, _jquery2.default)('.start__input').focus();
+                // show start msg and set userID
+            }
+        });
+    });
+}
+
+function eventListeners() {
+    (0, _jquery2.default)('.start__button').on('click', function () {
+        var name = (0, _jquery2.default)('.start__input').val();
+        if (name.length >= 2 && name.length <= 16) {
+            chrome.storage.local.set({ userID: name });
+            window.location.reload();
+        } else {
+            // TODO
+            console.log('Invalid name format');
+            window.location.reload();
+        }
+    });
+}
+
+var startFunc = {
+    start: start,
+    eventListeners: eventListeners
+};
+
+exports.default = startFunc;
 
 /***/ })
 /******/ ]);

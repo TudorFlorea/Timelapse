@@ -21,7 +21,6 @@ const CACHE_DURATION = Date.now() - 3600 * 1000; // 1 hour
 / */
 function clearCache() {
     storage.remove(['cache', 'cacheTime'], () => {
-        console.log('Cache cleaned');
     });
 }
 /**
@@ -31,7 +30,6 @@ function cacheCheck() {
     return new Promise(((resolve) => {
         let status;
         storage.get(['cache', 'cacheTime'], (items) => { // if cache is not older that 1h
-            console.log(items);
             if (items.cache && items.cacheTime && (items.cache.length > 1) && (items.cacheTime > CACHE_DURATION)) {
                 status = true;
             } else {
@@ -40,10 +38,8 @@ function cacheCheck() {
             resolve(status);
         });
     })).then((value) => {
-        console.log(`Value: ${value}`);
         return value;
     }).catch((reason) => {
-        console.log(`Error: ${reason}`);
         return reason;
     });
 }
@@ -55,7 +51,6 @@ function storeCache(data) {
         cache: data,
         cacheTime: Date.now(),
     }, () => {
-        console.log('Cache stored');
     });
 }
 
@@ -99,8 +94,6 @@ function populateDailyInfo(arr, index, data) {
 function loadCache() {
     storage.get(['cache', 'cacheTime'], (items) => {
         [today, daily, location] = [items.cache[0], items.cache[1].data, items.cache[2]];
-        console.log(new Date(items.cacheTime));
-        console.log(new Date(Date.now()));
         try {
             // add weather info for current day to module
             $('.currentTemp').append(`<p class="temp" title="${items.cache[0].summary}">
@@ -192,7 +185,6 @@ function getAddress(latitude, longitude) {
 function weatherReport() {
     // Check HTML5 geolocation.
     if (!navigator.geolocation) {
-        console.error('Geolocation not enabled');
         $('.location').append('<p>Geolocation is not enabled.</p>');
     }
 
@@ -202,11 +194,9 @@ function weatherReport() {
     })).then((value) => {
         if (value) {
             // populate from cache
-            console.log('Loading data from cache');
             loadCache();
         } else {
             // fetch data from Dark Sky and Google location API
-            console.log('Cache error. Fetching data from APIs');
             clearCache(); // clear old cache
             return new Promise(((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -217,9 +207,7 @@ function weatherReport() {
                     const promised = Promise.all([currentTemp, userAddress]);
 
                     if (promised) {
-                        console.log(promised);
                         resolve(promised);
-                        console.log('resolved');
                     } else {
                         reject(Error(`Error Happened: ${reject.reason}`));
                     }
@@ -229,9 +217,7 @@ function weatherReport() {
                 [daily, today, location] = [wForecast[1].data, wForecast[0], wForecast[2]];
                 // store new data to cache
                 storeCache(wForecast);
-                storage.get(['cache', 'cacheTime'], (items) => {
-                    console.log(items);
-                });
+                storage.get(['cache', 'cacheTime'], (items) => {});
 
                 // appending basic data ( current temp, animated icon, and location) to weather section
                 $('.currentTemp').append(`<p class="temp" title="${result[0].currently.summary}">
@@ -255,7 +241,6 @@ function weatherReport() {
                 populateDailyInfo(dailyArr, 0, daily);
                 skycons.add(document.getElementById('dailyIcon'), daily[0].icon);
             }).catch((reason) => {
-                console.log(`Error while fetching data from APIs: ${reason}`);
                 throw new Error(reason);
             });
         }
