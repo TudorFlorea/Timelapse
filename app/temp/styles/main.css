@@ -5593,6 +5593,14 @@ we can specify global variable to use flexbox as default instead of floats
     /* Style adjustments for viewports that meet the condition */
 }
 
+@media (min-width: 769px) {
+
+ #mainFocus {
+  bottom:170px;
+  font-size: 25px;
+ }
+}
+
 @media (min-width: 1200px) {
 
  #weather {
@@ -5678,27 +5686,6 @@ we can specify global variable to use flexbox as default instead of floats
  }
 }
 
-@media screen and (max-width: 420px) {
-
- .responsive {
-  font-size: 16px;
- }
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    height: 300%;
-    top: -100%;
-  }
-}
-
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 300%;
-    left: -100%;
-  }
-}
-
 @media (max-width: 767px) {
   .fullscreen-bg {
     background: #282628 url('../images/videoframe.png') center center / cover no-repeat;
@@ -5707,6 +5694,13 @@ we can specify global variable to use flexbox as default instead of floats
   .fullscreen-bg__video {
     display: none;
   }
+}
+
+@media screen and (max-width: 420px) {
+
+ .responsive {
+  font-size: 16px;
+ }
 }
 
 @media (max-height: 769px) {
@@ -5731,6 +5725,20 @@ we can specify global variable to use flexbox as default instead of floats
  #time .greet {
   font-size: 50px;
  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
 }
 
 @media print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi) {

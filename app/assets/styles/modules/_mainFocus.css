@@ -11,6 +11,10 @@
         bottom:125px;        
         font-size: 25px;        
     }
+    @media (--viewport-medium) {
+        bottom:170px;        
+        font-size: 25px;        
+    }
 
     & .mainFocusInput {
         lost-row: 1/3;
