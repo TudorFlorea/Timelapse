@@ -25,8 +25,9 @@ yarn-error.log*
 .env.*
 
 #Build generated
-dist/
 build/
+dist/
+*.zip
 
 #Keys and secrets
 _config.js
