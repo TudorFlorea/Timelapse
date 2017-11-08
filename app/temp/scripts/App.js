@@ -3411,7 +3411,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var morGreets = ['Rise and shine ', 'Greet the day ', 'Wake up ', 'Good morning, it is, '];
+var morGreets = ['Rise and shine ', 'Greet the day ', 'Good morning, it is, '];
 
 function start() {
     return new Promise(function (resolve) {
@@ -3420,7 +3420,7 @@ function start() {
             if (data.userID) {
                 (0, _jquery2.default)('#js-user').text(data.userID);
                 if (d.getHours() >= 5 && d.getHours() < 12) {
-                    (0, _jquery2.default)('#js-daytimeGreet').text(morGreets[Math.floor(Math.random() * 102)]);
+                    (0, _jquery2.default)('#js-daytimeGreet').text(morGreets[Math.floor(Math.random() * 3)]);
                 } else if (d.getHours() >= 12 && d.getHours() < 18) {
                     (0, _jquery2.default)('#js-daytimeGreet').text('Good afternoon, ');
                 } else {

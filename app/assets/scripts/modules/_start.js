@@ -1,6 +1,6 @@
 import $ from '../vendor/jquery-3.2.1.min';
 
-const morGreets = ['Rise and shine ', 'Greet the day ', 'Wake up ', 'Good morning, it is, '];
+const morGreets = ['Rise and shine ', 'Greet the day ', 'Good morning, it is, '];
 
 function start() {
     return new Promise((resolve) => {
@@ -9,7 +9,7 @@ function start() {
             if (data.userID) {
                 $('#js-user').text(data.userID);
                 if (d.getHours() >= 5 && d.getHours() < 12) {
-                    $('#js-daytimeGreet').text(morGreets[Math.floor(Math.random() * 102)]);
+                    $('#js-daytimeGreet').text(morGreets[Math.floor(Math.random() * 3)]);
                 } else if (d.getHours() >= 12 && d.getHours() < 18) {
                     $('#js-daytimeGreet').text('Good afternoon, ');
                 } else {
