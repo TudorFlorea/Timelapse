@@ -6,9 +6,12 @@
 
 ## Installing / Getting started
 
-Go to [Chrome Store](#), and click on Add to Chrome.
+Go to [Chrome Store](https://chrome.google.com/webstore/detail/timelapse/iacofhadddjkdledbjepchdolhamnjfl), and click on Add to Chrome.
 
 Thats it, once installed extension will be ready to use.
+
+## Screenshots
+
 
 ### Built With
 
@@ -26,10 +29,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Authors
 
-* **Darko Tasevski** - *Project Manager* - [Puritanic](https://github.com/Puritanic)
-* **Tudor Florea**   - *Initial work*    - [TudorFlorea](https://github.com/TudorFlorea)
-* **Filipe Rainho**  - *Initial work*    - [ncoder92](https://github.com/ncoder92)
-* **Osania**         - *Initial work*    - [san00](https://github.com/san00)
+* **Darko Tasevski** - *Project Manager - Weather widget* - [Puritanic](https://github.com/Puritanic)
+* **Tudor Florea**   - *Team member - Links widget*    - [TudorFlorea](https://github.com/TudorFlorea)
+* **Filipe Rainho**  - *Team member - Todo widget*    - [ncoder92](https://github.com/ncoder92)
+* **Osania**         - *Team member - Quotes widget*    - [san00](https://github.com/san00)
 
 ## Acknowledgments
 
