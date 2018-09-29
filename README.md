@@ -12,9 +12,9 @@ Thats it, once installed extension will be ready to use.
 
 ## Screenshots
 
-<img src"app/assets/images/screenshot_1.png" width="500px">
-<img src"app/assets/images/screenshot_2.png" width="500px">
-<img src"app/assets/images/screenshot_3.png" width="500px">
+<img src="./app/assets/images/screenshot_1.PNG" width="800px">
+<img src="./app/assets/images/screenshot_2.PNG" width="800px">
+<img src="./app/assets/images/screenshot_3.PNG" width="800px">
 
 ### Built With
 
